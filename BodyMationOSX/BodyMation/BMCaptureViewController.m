@@ -15,33 +15,33 @@
 #import "BMWindowController.h"
 #import "BMBrowserViewController.h"
 #import "BMBorderView.h"
+#import "BMVideoView.h"
 
 //#import <ImageIO/ImageIO.h>
 
 @interface BMCaptureViewController ()
-- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection;
 - (void)closeCapture:(NSTimer *)timer;
 - (void)countDown:(NSTimer *)timer;
+- (void)createCaptureSession;
 - (void)flashOff:(NSTimer *)timer;
 - (void)imageWasCaptured;
-- (void)setupCapture;
+- (void)createCaptureViews;
 - (void)toggleBeforeImage:(NSTimer *)timer;
 @end
 
 @implementation BMCaptureViewController
 
+@synthesize windowController;
+
 // View-related properties
-@synthesize beforeImage;
 @synthesize beforeImageView;
 @synthesize captureView;
 @synthesize capturedImage;
 @synthesize countDownLabel;
 @synthesize flashView;
 @synthesize overlayView;
-@synthesize windowController;
 
 // Capture session properties
-@synthesize previewLayer;
 @synthesize captureSession;
 @synthesize imageOutput;
 @synthesize videoOutput;
@@ -59,15 +59,15 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Initialization code here.
-        [self setupCapture];
+        [self createCaptureSession];
+        [self createCaptureViews];
         [self startCapture];
     }
     
     return self;
 }
 
-- (void)setupCapture {
-    // Setup capture session
+- (void)createCaptureSession {
     // Prepare inputs/outputs
     NSError *error;
     AVCaptureDevice *videoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
@@ -82,61 +82,10 @@
                                     nil];
     [imageOutput setOutputSettings:outputSettings];
     
-    // Create capture view
-    [self setCaptureView:[[NSView alloc] initWithFrame:[[self view] bounds]]];
-    [[self captureView] setAutoresizingMask:(NSViewWidthSizable|NSViewHeightSizable)];
-    CALayer *backgroundLayer = [CALayer layer];
-    [backgroundLayer setBackgroundColor:CGColorCreateGenericGray(0.2, 1.0)];
-    [[self captureView] setLayer:backgroundLayer];
-    [[self captureView] setWantsLayer:YES];
-    [self setPreviewLayer:[BMPreviewLayer layer]];
-    [[self previewLayer] setFrame:[[self captureView] bounds]];
-    [[[self captureView] layer] addSublayer:[self previewLayer]];
-
-
-    //    // Setup video layer
-    //    [self setCapturePreviewLayer:[[AVCaptureVideoPreviewLayer alloc] initWithSession:captureSession]];
-    //    [self setCaptureView:[[NSView alloc] initWithFrame:[[self view] bounds]]];
-    //    [[self captureView] setAutoresizingMask:(NSViewWidthSizable|NSViewHeightSizable)];
-    //
-    //    // Order of setLayer and setWantsLayer here is important
-    //    [[self captureView] setLayer:capturePreviewLayer];
-    //    [[self captureView] setWantsLayer:YES];
-    [[self overlayView] setWantsLayer:YES];
-    [[self view] addSubview:[self captureView] positioned:NSWindowBelow relativeTo:[self overlayView]];
+    // Create capture session
+    [self setCaptureSession:[[AVCaptureSession alloc] init]];
     
-    // Add capture border
-    BMBorderView *borderView = [[BMBorderView alloc] initWithFrame:[[self captureView] bounds]];
-    [borderView setBorderSize:CGSizeMake(640.0, 480.0)];
-    [borderView setAutoresizingMask:18];
-    [[self captureView] addSubview:borderView];
-    
-    // Setup before image view
-    [self setBeforeImage:[[NSImage alloc] initWithContentsOfFile:@"/Users/Kevin/Desktop/file.jpg"]];
-    [self setBeforeImageView:[[BMBeforeImageView alloc] initWithFrame:[[self view] bounds]]];
-    [[self beforeImageView] setAutoresizingMask:(NSViewWidthSizable|NSViewHeightSizable)];
-    [[self beforeImageView] setBeforeImage:[self beforeImage]];
-    [[self captureView] addSubview:[self beforeImageView]];
-    
-    // Setup flash view
-    [self setFlashView:[[NSView alloc] initWithFrame:[[self captureView] frame]]];
-    [[self flashView] setAutoresizingMask:(NSViewWidthSizable|NSViewHeightSizable)];
-    CALayer *whiteLayer = [[CALayer alloc] init];
-    [whiteLayer setBackgroundColor:CGColorCreateGenericGray(1.0, 1.0)];
-    [[self flashView] setLayer:whiteLayer];
-    [[self flashView] setWantsLayer:YES];
-    [[self flashView] setHidden:YES];
-    [[self view] addSubview:flashView];
-    
-    // Add a video output for preview
-    videoOutput = [[AVCaptureVideoDataOutput alloc] init];
-    dispatch_queue_t queue;
-	queue = dispatch_queue_create("cameraQueue", NULL);
-    [videoOutput setSampleBufferDelegate:[self previewLayer] queue:queue];
-    
-    // Create session and attach
-    captureSession = [[AVCaptureSession alloc] init];
-    
+    // Attach input/output to session
     if ([captureSession canAddInput:videoInput]) {
         [captureSession addInput:videoInput];
     }
@@ -149,15 +98,45 @@
     else {
         NSLog(@"ERROR: Unable to add image output to AVCaptureSession");
     }
-    if ([captureSession canAddOutput:videoOutput]) {
-        [captureSession addOutput:videoOutput];
-    }
-    else {
-        NSLog(@"ERROR: Unable to add image output to AVCaptureSession");
-    }
 }
 
-- (void) startCapture {
+- (void)createCaptureViews {
+    // Add background
+    CALayer *backgroundLayer = [CALayer layer];
+    [backgroundLayer setBackgroundColor:CGColorCreateGenericGray(0.2, 1.0)];
+    [[self view] setWantsLayer:YES];
+    [[self view] setLayer:backgroundLayer];
+    
+    // Make an extra-wide frame rect so that video will always be as tall as possible with "aspect" video gravity
+    float paddedWidth = 2000.0;
+    CGRect boundsRect = [[self view] bounds];
+    CGRect paddedRect = CGRectMake(-paddedWidth / 2 + boundsRect.size.width / 2.0,
+                                   boundsRect.origin.y,
+                                   paddedWidth,
+                                   boundsRect.size.height);
+    
+    // Create video view and add under overlay view
+    [self setCaptureView:[[BMVideoView alloc] initWithFrame:paddedRect andSession:[self captureSession] andBorderColor:[NSColor colorWithCalibratedRed:1.0 green:0.0 blue:0.0 alpha:0.5]]];
+    [[self overlayView] setWantsLayer:YES];
+    [[self view] addSubview:[self captureView] positioned:NSWindowBelow relativeTo:[self overlayView]];
+    
+    // Create before image view
+    [self setBeforeImageView:[[BMBeforeImageView alloc] initWithFrame:paddedRect andBorderColor:[NSColor colorWithCalibratedRed:0.0 green:1.0 blue:0.0 alpha:0.5]]];
+    [[self beforeImageView] setAutoresizingMask:(NSViewWidthSizable|NSViewHeightSizable)];
+    [[self view] addSubview:[self beforeImageView] positioned:NSWindowBelow relativeTo:[self overlayView]];
+    
+    // Create flash view
+    [self setFlashView:[[NSView alloc] initWithFrame:[[self captureView] frame]]];
+    [[self flashView] setAutoresizingMask:(NSViewWidthSizable|NSViewHeightSizable)];
+    CALayer *whiteLayer = [[CALayer alloc] init];
+    [whiteLayer setBackgroundColor:CGColorCreateGenericGray(1.0, 1.0)];
+    [[self flashView] setLayer:whiteLayer];
+    [[self flashView] setWantsLayer:YES];
+    [[self flashView] setHidden:YES];
+    [[self view] addSubview:flashView];
+}
+
+- (void)startCapture {
     // Apply capture settings
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [self setCountDownLength:[defaults integerForKey:@"CountDownLength"]];
@@ -193,7 +172,7 @@
 }
 
 - (void)toggleBeforeImage:(NSTimer *)timer {
-    if ([[self beforeImageView] isHidden] && [[self previewLayer] isCapturing]) {
+    if ([[self beforeImageView] isHidden] /*&& [[self previewLayer] isCapturing*/) {
         // Turn on
         [[self beforeImageView] setHidden:NO];
         // Schedule to turn back off
@@ -204,26 +183,14 @@
     }
 }
 
-//- (void)captureOutput:(AVCaptureOutput *)captureOutput didDropSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {;}
-
-//- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
-//    [self setIsCapturing:YES];
-//}
-
 - (void) captureStillImage
 {
-    NSLog(@"Capturing Still Image");
     AVCaptureConnection *stillImageConnection = [BMUtilities connectionWithMediaType:AVMediaTypeVideo fromConnections:[imageOutput connections]];
 
     [imageOutput captureStillImageAsynchronouslyFromConnection:stillImageConnection
                                                   completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error)
      {
-         NSLog(@"Getting photo data");
          NSData *imgData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
-         NSLog(@"Saving image");
-         //[imgData writeToFile: @"/Users/Kevin/Desktop/file.jpg" atomically: NO];
-         // TODO: switch above to using imageWithRawBufferYpCbCr. Need to set
-         // photo capture options correctly for this.
          
          // Save core data object
          BMImage *newImage = [BMImage imageInDefaultContext];
@@ -232,12 +199,8 @@
          
          // Hang onto the image for display
          [self setCapturedImage:[[NSImage alloc] initWithData:imgData]];
-         //[[self beforeImageView] setBeforeImage:[self capturedImage]];
-         //[[self beforeImageView] setHidden:NO];
          [self performSelectorOnMainThread:@selector(imageWasCaptured) withObject:nil waitUntilDone:NO];
      }];
-    // Perform post-capture actions
-
 }
 
 - (void)imageWasCaptured {

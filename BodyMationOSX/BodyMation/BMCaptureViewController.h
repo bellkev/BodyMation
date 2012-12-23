@@ -11,13 +11,11 @@
 #import <AVFoundation/AVFoundation.h>
 
 @class BMBeforeImageView;
-@class BMPreviewLayer;
 @class BMWindowController;
 
 @interface BMCaptureViewController : NSViewController
 
 // View-related properties
-@property NSImage *beforeImage;
 @property BMBeforeImageView *beforeImageView;
 @property NSView *captureView;
 @property NSImage *capturedImage;
@@ -27,7 +25,6 @@
 @property BMWindowController *windowController;
 
 // Capture session properties
-@property BMPreviewLayer *previewLayer;
 @property AVCaptureStillImageOutput *imageOutput;
 @property AVCaptureVideoDataOutput *videoOutput;
 @property AVCaptureSession *captureSession;

@@ -13,4 +13,6 @@
 @property NSSize borderSize;
 @property NSColor *borderColor;
 
+- (id)initWithFrame:(NSRect)frameRect;
+
 @end

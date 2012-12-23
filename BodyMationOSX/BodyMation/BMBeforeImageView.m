@@ -8,31 +8,73 @@
 
 #import "BMBeforeImageView.h"
 #import "BMUtilities.h"
+#import "BMBorderView.h"
+#import "BMImage.h"
 
 @implementation BMBeforeImageView
 
 @synthesize beforeImage;
+@synthesize beforeImageLayer;
+@synthesize borderView;
+@synthesize borderColor;
 
-- (id)initWithFrame:(NSRect)frame
+- (id)initWithFrame:(NSRect)frame andBorderColor:(NSColor *)color
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code here.
+        // Set before image to most recent image
+        
+        // Add before image layer
+        [self setWantsLayer:YES];
+        [self setLayer:[CALayer layer]];
+        [self setBeforeImageLayer:[CALayer layer]];
+        [[self beforeImageLayer] setAutoresizingMask:(kCALayerHeightSizable | kCALayerWidthSizable)];
+        [[self beforeImageLayer] setContentsGravity:kCAGravityResizeAspect];
+        [[self beforeImageLayer] setFrame:[self bounds]];
+        // Flip to match the preview video
+        CATransform3D flipTransform = CATransform3DScale(CATransform3DIdentity, -1.0, 1.0, 1.0);
+        [[self beforeImageLayer] setTransform:flipTransform];
+        [[self layer] addSublayer:[self beforeImageLayer]];
+        
+        // Set layer content to before image
+        [self updateBeforeImage];
+        [[self beforeImageLayer] setContents:[BMUtilities CGImageFromNSImage:[self beforeImage]]];
+        
+        // Add border view
+        [self setBorderColor:color];
+        [self setBorderView:[[BMBorderView alloc] initWithFrame:[self bounds]]];
+        [[self borderView] setBorderColor:[self borderColor]];
+        [[self borderView] setBorderSize:CGSizeMake(640.0, 480.0)];
+        [self addSubview:[self borderView]];
+        
+        // Hide for now
         [self setHidden:YES];
     }
     
     return self;
 }
 
+- (void)updateBeforeImage {
+    NSManagedObjectContext *context = [[NSApp delegate] managedObjectContext];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Image"];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
+                                        initWithKey:@"dateTaken" ascending:NO];
+    [request setSortDescriptors:@[sortDescriptor]];
+    [request setFetchLimit:1];
+    NSError *error = nil;
+    NSArray *fetchedArray = [context executeFetchRequest:request error:&error];
+    if (fetchedArray == nil)
+    {
+        NSLog(@"Error while fetching\n%@",
+              ([error localizedDescription] != nil) ? [error localizedDescription] : @"Unknown Error");
+    }
+    BMImage *latestImageObject = [fetchedArray objectAtIndex:0];
+    [self setBeforeImage:[[NSImage alloc] initWithData:[latestImageObject imageData]]];
+}
+
 - (void)drawRect:(NSRect)dirtyRect
 {
     // Drawing code here.
-    // Follow same scaling as previewLayer
-    NSRect destinationRect = [BMUtilities rectWithPreservedAspectRatioForSourceSize:[[self beforeImage] size] andBoundingRect:[self bounds]];
-    [[self beforeImage] drawInRect:destinationRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
-    
-    [[NSColor colorWithCalibratedRed:0.0 green:1.0 blue:0.0 alpha:0.5] setFill];
-    NSFrameRectWithWidth(destinationRect, 10);
 }
 
 @end

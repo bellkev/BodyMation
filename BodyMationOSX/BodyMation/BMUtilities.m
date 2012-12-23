@@ -53,6 +53,15 @@
     completionBlock();
 }
 
++ (CGImageRef)CGImageFromNSImage:(NSImage *)image {
+        NSData * imageData = [image TIFFRepresentation];
+        CGImageRef imageRef;
+        if(!imageData) return nil;
+        CGImageSourceRef imageSource = CGImageSourceCreateWithData((__bridge CFDataRef)imageData, NULL);
+        imageRef = CGImageSourceCreateImageAtIndex(imageSource, 0, NULL);
+        return imageRef;
+}
+
 + (NSRect)rectWithPreservedAspectRatioForSourceSize:(NSSize)source andBoundingRect:(NSRect)bounds {
     NSRect destinationRect;
     int padding;
