@@ -17,6 +17,8 @@
 		0A51D3791680389C00F471DF /* BMKeyChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A51D3781680389C00F471DF /* BMKeyChecker.m */; };
 		0A51D37D168043E100F471DF /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A51D37C168043E100F471DF /* libcrypto.dylib */; };
 		0A6099B6168677F300371707 /* BMVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6099B5168677F300371707 /* BMVideoView.m */; };
+		0A6099C41686DD9100371707 /* BMSeriesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6099C21686DD9100371707 /* BMSeriesWindowController.m */; };
+		0A6099C51686DD9100371707 /* BMSeriesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A6099C31686DD9100371707 /* BMSeriesWindowController.xib */; };
 		0AA2969D1640C27600B2F4FB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA2969C1640C27500B2F4FB /* Cocoa.framework */; };
 		0AA296A71640C27600B2F4FB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0AA296A51640C27600B2F4FB /* InfoPlist.strings */; };
 		0AA296A91640C27600B2F4FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA296A81640C27600B2F4FB /* main.m */; };
@@ -67,6 +69,9 @@
 		0A51D37C168043E100F471DF /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/lib/libcrypto.dylib; sourceTree = DEVELOPER_DIR; };
 		0A6099B4168677F300371707 /* BMVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMVideoView.h; sourceTree = "<group>"; };
 		0A6099B5168677F300371707 /* BMVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMVideoView.m; sourceTree = "<group>"; };
+		0A6099C11686DD9100371707 /* BMSeriesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMSeriesWindowController.h; sourceTree = "<group>"; };
+		0A6099C21686DD9100371707 /* BMSeriesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMSeriesWindowController.m; sourceTree = "<group>"; };
+		0A6099C31686DD9100371707 /* BMSeriesWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BMSeriesWindowController.xib; sourceTree = "<group>"; };
 		0AA296981640C27500B2F4FB /* BodyMation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BodyMation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AA2969C1640C27500B2F4FB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		0AA2969F1640C27600B2F4FB /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -187,6 +192,8 @@
 				0AA5EE021650539E009A7AFA /* BMPreferenceWindowController.m */,
 				0A104308168184F500A63E1F /* BMRegisterWindowController.h */,
 				0A104309168184F500A63E1F /* BMRegisterWindowController.m */,
+				0A6099C11686DD9100371707 /* BMSeriesWindowController.h */,
+				0A6099C21686DD9100371707 /* BMSeriesWindowController.m */,
 				0AA88537164CD51100D0DDDA /* View Controllers */,
 				0AA88538164CD55800D0DDDA /* Nibs */,
 				0AA88536164CD4D800D0DDDA /* Managed Objects */,
@@ -254,6 +261,7 @@
 				0AA5EDF4164F4EFB009A7AFA /* BMPlayViewController.xib */,
 				0AA5EE031650539E009A7AFA /* BMPreferenceWindowController.xib */,
 				0A10430A168184F500A63E1F /* BMRegisterWindowController.xib */,
+				0A6099C31686DD9100371707 /* BMSeriesWindowController.xib */,
 			);
 			name = Nibs;
 			sourceTree = "<group>";
@@ -342,6 +350,7 @@
 				0ADF4E2716866B2F0019DCBD /* browser-gray.png in Resources */,
 				0ADF4E2816866B2F0019DCBD /* background.png in Resources */,
 				0ADF4E2916866B2F0019DCBD /* icon.icns in Resources */,
+				0A6099C51686DD9100371707 /* BMSeriesWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,6 +378,7 @@
 				0ADF4E3016866B880019DCBD /* BMSeries.m in Sources */,
 				0ADF4E3316866BCE0019DCBD /* BMPreviewLayer.m in Sources */,
 				0A6099B6168677F300371707 /* BMVideoView.m in Sources */,
+				0A6099C41686DD9100371707 /* BMSeriesWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

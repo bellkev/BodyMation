@@ -218,8 +218,8 @@
     [NSTimer scheduledTimerWithTimeInterval:0.7f target:self selector:@selector(closeCapture:) userInfo:nil repeats:NO];
     // Indicate that movie is out of date
     [[[self windowController] playViewController] setMovieNeedsRefresh:YES];
-    NSManagedObjectContext *context = [[NSApp delegate] managedObjectContext];
     // Force notification about core data updates so browser view is updated
+    NSManagedObjectContext *context = [[NSApp delegate] managedObjectContext];
     [context processPendingChanges];
     // Should scroll to latest image
     [[self windowController] setShouldScrollToNewestImage:YES];

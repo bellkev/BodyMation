@@ -11,12 +11,14 @@
 @class BMWindowController;
 @class BMPreferenceWindowController;
 @class BMRegisterWindowController;
+@class BMSeriesWindowController;
 
 @interface BMAppDelegate : NSObject <NSApplicationDelegate>
 
 @property BMWindowController *windowController;
 @property BMPreferenceWindowController *preferenceWindowController;
 @property BMRegisterWindowController *registerWindowController;
+@property BMSeriesWindowController *seriesWindowController;
 
 // Provided by template
 @property (assign) IBOutlet NSWindow *window;
@@ -32,5 +34,6 @@
 - (IBAction)saveAction:(id)sender;
 
 - (void)openPreferenceWindowController;
+- (void)openSeriesWindowController;
 
 @end

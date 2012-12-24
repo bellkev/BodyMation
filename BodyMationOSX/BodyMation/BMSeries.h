@@ -19,6 +19,9 @@
 
 @interface BMSeries (CoreDataGeneratedAccessors)
 
++ (id)seriesInDefaultContext;
++ (BOOL)checkIfSeriesExistsWithName:(NSString *)name;
+
 - (void)addImagesObject:(BMImage *)value;
 - (void)removeImagesObject:(BMImage *)value;
 - (void)addImages:(NSSet *)values;

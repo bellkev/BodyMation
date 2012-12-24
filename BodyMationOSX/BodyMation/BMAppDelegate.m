@@ -11,6 +11,7 @@
 #import "BMPreferenceWindowController.h"
 #import "BMRegisterWindowController.h"
 #import "BMKeyChecker.h"
+#import "BMSeriesWindowController.h"
 
 @implementation BMAppDelegate
 
@@ -29,8 +30,6 @@
     windowController = [[BMWindowController alloc] initWithWindowNibName:@"BMWindowController"];
     [windowController showWindow:nil];
     [self setupPreferences];
-    BOOL licensed = [BMKeyChecker verifyKey:@"dpobv/IbsbThWDjfJVZqJx2AE1qpXardfkvAv2nDUq/AYLbr2y10KaAMSLLSHtVyN5AZWphJxMBUTFzoirCbXJhc3fg7rf5s0i0oS+mtc8spoS1fEbdYnkESzvyjMhiZuOpeIu8QExv7Jb+3/mD1DmovjdP2AtHlYiTS4J74/WQ=" andEmail:@"kevin.a.bell@gmail.com"];
-    NSLog(@"%@", licensed ? @"YES" : @"NO");
 }
 
 // Preference window controller
@@ -57,6 +56,14 @@
     [self openRegisterWindowController];
 }
 
+// Series window controller
+- (void)openSeriesWindowController {
+    if (![self seriesWindowController]) {
+        [self setSeriesWindowController:[[BMSeriesWindowController alloc] initWithWindowNibName:@"BMSeriesWindowController"]];
+    }
+    [[self seriesWindowController] showWindow:nil];
+}
+
 - (void)setupPreferences {
     NSMutableDictionary* defaultSettings = [[NSMutableDictionary alloc] init];
     // (Add everything as top level objects so they can be bound to
@@ -69,6 +76,9 @@
     
     // Playback settings
     [defaultSettings setObject:[NSNumber numberWithInt:10] forKey:@"FrameRate"];
+    
+    // Other settings
+    [defaultSettings setObject:@"" forKey:@"DefaultSeriesName"];
     // Register
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaultSettings];
 }
@@ -194,6 +204,9 @@
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
+    // Save default series
+    NSLog(@"Current series at quit: %@", [[self windowController] currentSeriesName]);
+    [[NSUserDefaults standardUserDefaults] setValue:[[self windowController] currentSeriesName] forKey:@"DefaultSeriesName"];
     // Save changes in the application's managed object context before the application terminates.
     
     if (!_managedObjectContext) {

@@ -14,11 +14,17 @@
 
 @interface BMWindowController : NSWindowController
 
+
 @property BMBrowserViewController *browserViewController;
 @property BMCaptureViewController *captureViewController;
 @property BMPlayViewController *playViewController;
 @property NSViewController *currentViewController;
 @property BOOL shouldScrollToNewestImage;
+@property NSArray *seriesSortDescriptors;
+@property NSString *currentSeriesName;
+@property (unsafe_unretained) IBOutlet NSPopUpButton *seriesPopupButton;
+@property (strong) IBOutlet NSArrayController *seriesArrayController;
+
 - (void)openBrowserViewController;
 - (void)openCaptureViewController;
 - (void)openPlayViewController;
@@ -27,5 +33,9 @@
 - (IBAction)captureButtonPressed:(id)sender;
 - (IBAction)playButtonPressed:(id)sender;
 - (IBAction)preferencesButtonPressed:(id)sender;
+- (IBAction)chooseSeriesSelected:(id)sender;
+- (IBAction)newSeriesMenuItemSelected:(id)sender;
+- (IBAction)seriesNameMenuItemSelected:(id)sender;
+- (IBAction)manageSeriesMenuItemSelected:(id)sender;
 
 @end

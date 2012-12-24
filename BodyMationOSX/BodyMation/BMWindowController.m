@@ -12,9 +12,11 @@
 #import "BMCaptureViewController.h"
 #import "BMPlayViewController.h"
 #import "BMPreferenceWindowController.h"
+#import "BMSeries.h"
 
 @interface BMWindowController ()
 - (void)openViewController:(NSViewController *)viewController;
+- (void)setDefaultSeries:(NSNotification *)note;
 @end
 
 @implementation BMWindowController
@@ -26,6 +28,10 @@
 @synthesize browserViewController;
 @synthesize captureViewController;
 @synthesize playViewController;
+@synthesize seriesSortDescriptors;
+@synthesize seriesPopupButton;
+@synthesize currentSeriesName;
+@synthesize seriesArrayController;
 
 - (id)initWithWindow:(NSWindow *)window
 {
@@ -33,6 +39,13 @@
     if (self) {
         // Initialization code here.
         [self setShouldScrollToNewestImage:YES];
+        // Set sort type for series array controller
+        NSSortDescriptor *sort;
+        sort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
+        [self setSeriesSortDescriptors:[NSArray arrayWithObject:sort]];
+        NSString *seriesName = [[NSUserDefaults standardUserDefaults] valueForKey:@"DefaultSeriesName"];
+        [self setCurrentSeriesName:seriesName];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setDefaultSeries:) name:NSWindowDidBecomeMainNotification object:[self window]];
     }
     
     return self;
@@ -46,6 +59,53 @@
     [self openBrowserViewController];
 }
 
+- (void)setDefaultSeries:(NSNotification *)note {
+    //NSLog(@"Notification: %@", note);
+    [[self seriesPopupButton] selectItemWithTitle:[self currentSeriesName]];
+}
+
+- (void)createNewSeriesAfterInvalidName:(NSString *)invalidName {
+    // Creates new series OPTIONALLY with prompt asking to choose a unique name
+    // Workaround to make "New series..." behave like menu item
+    [[self seriesPopupButton] selectItemWithTitle:[self currentSeriesName]];
+    NSAlert *alert = [NSAlert alertWithMessageText: @"Create Series"
+                                     defaultButton:@"Create"
+                                   alternateButton:@"Cancel"
+                                       otherButton:nil
+                         informativeTextWithFormat:@"Please choose a name for the new series"];
+    if (invalidName) {
+        [alert setInformativeText:[NSString stringWithFormat:@"Sorry, but there is already picture series named %@. Please choose another name for the new series.", invalidName]];
+    }
+    NSTextField *input = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 200, 24)];
+    [alert setAccessoryView:input];
+    NSInteger button = [alert runModal];
+    if (button == NSAlertDefaultReturn) {
+        [input validateEditing];
+        NSString *newName = [input stringValue];
+        // Check that the series name doesn't already exist
+        if (![BMSeries checkIfSeriesExistsWithName:newName]) {
+            // Save core data object
+            BMSeries *newSeries = [BMSeries seriesInDefaultContext];
+            [newSeries setName:newName];
+            // Force notification about core data updates so popup button is updated
+            NSManagedObjectContext *context = [[NSApp delegate] managedObjectContext];
+            [context processPendingChanges];
+            [[self seriesPopupButton] selectItemWithTitle:newName];
+            [self updateSeriesName];
+        }
+        else {
+            [self createNewSeriesAfterInvalidName:newName];
+        }
+    }
+    else {
+        [[self seriesPopupButton] selectItemWithTitle:[self currentSeriesName]];
+    }
+}
+
+- (void)updateSeriesName {
+    // TODO: validate this
+    [self setCurrentSeriesName:[[[self seriesPopupButton] selectedItem] title]];
+}
 // View controller methods
 
 - (void)openBrowserViewController {
@@ -112,6 +172,27 @@
 - (IBAction)preferencesButtonPressed:(id)sender {
     BMAppDelegate *delegate = [NSApp delegate];
     [delegate openPreferenceWindowController];
+}
+
+- (IBAction)chooseSeriesSelected:(id)sender {
+    NSLog(@"Selected: %@", [[[self seriesPopupButton] selectedItem] title]);
+    [self updateSeriesName];
+}
+
+- (IBAction)seriesNameMenuItemSelected:(id)sender {
+    NSLog(@"Selected: %@", [[[self seriesPopupButton] selectedItem] title]);
+    [self updateSeriesName];
+}
+
+- (IBAction)manageSeriesMenuItemSelected:(id)sender {
+    // Workaround to make "Manage series..." behave like menu item
+    NSLog(@"CurrentSeriesName before manage: %@", [self currentSeriesName]);
+    [[self seriesPopupButton] selectItemWithTitle:[self currentSeriesName]];
+    [[NSApp delegate] openSeriesWindowController];
+}
+
+- (IBAction)newSeriesMenuItemSelected:(id)sender {
+    [self createNewSeriesAfterInvalidName:nil];
 }
 
 @end
