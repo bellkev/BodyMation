@@ -81,6 +81,7 @@
 		0A6099C11686DD9100371707 /* BMSeriesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMSeriesWindowController.h; sourceTree = "<group>"; };
 		0A6099C21686DD9100371707 /* BMSeriesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMSeriesWindowController.m; sourceTree = "<group>"; };
 		0A6099C31686DD9100371707 /* BMSeriesWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BMSeriesWindowController.xib; sourceTree = "<group>"; };
+		0A6124891690033600101647 /* BodyMation 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BodyMation 2.xcdatamodel"; sourceTree = "<group>"; };
 		0A63F468168FB6AB004C72E2 /* CFobError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFobError.h; sourceTree = "<group>"; };
 		0A63F469168FB6AB004C72E2 /* CFobError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFobError.m; sourceTree = "<group>"; };
 		0A63F46A168FB6AB004C72E2 /* CFobLicVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFobLicVerifier.h; sourceTree = "<group>"; };
@@ -582,6 +583,7 @@
 		0AA296B41640C27600B2F4FB /* BodyMation.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				0A6124891690033600101647 /* BodyMation 2.xcdatamodel */,
 				0AA296B51640C27600B2F4FB /* BodyMation.xcdatamodel */,
 			);
 			currentVersion = 0AA296B51640C27600B2F4FB /* BodyMation.xcdatamodel */;

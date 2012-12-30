@@ -14,6 +14,7 @@
 #import "BMSeriesWindowController.h"
 #import "BMUtilities.h"
 #import "CFobLicVerifier.h"
+#import "BMSeries.h"
 
 @implementation BMAppDelegate
 
@@ -239,8 +240,8 @@
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
     // Save default series
-    NSLog(@"Current series at quit: %@", [[self windowController] currentSeriesName]);
-    [[NSUserDefaults standardUserDefaults] setValue:[[self windowController] currentSeriesName] forKey:@"DefaultSeriesName"];
+    NSLog(@"Current series at quit: %@", [[[self windowController] currentSeries] name]);
+    [[NSUserDefaults standardUserDefaults] setValue:[[[self windowController] currentSeries] name] forKey:@"DefaultSeriesName"];
     // Save changes in the application's managed object context before the application terminates.
     
     if (!_managedObjectContext) {
