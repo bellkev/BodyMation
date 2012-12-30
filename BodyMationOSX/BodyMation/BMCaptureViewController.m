@@ -196,6 +196,7 @@
          BMImage *newImage = [BMImage imageInDefaultContext];
          [newImage setDateTaken:[NSDate date]];
          [newImage setImageData:imgData];
+         [newImage setSeries:[[self windowController] currentSeries]];
          
          // Hang onto the image for display
          [self setCapturedImage:[[NSImage alloc] initWithData:imgData]];

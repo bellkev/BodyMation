@@ -40,6 +40,27 @@
     return (BOOL)[fetchedArray count];
 }
 
++ (BMSeries *)seriesForName:(NSString *)name {
+    NSManagedObjectContext *context = [[NSApp delegate] managedObjectContext];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Series"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name = %@", name];
+    [request setPredicate:predicate];
+    [request setFetchLimit:1];
+    NSError *error = nil;
+    NSArray *fetchedArray = [context executeFetchRequest:request error:&error];
+    if (fetchedArray == nil)
+    {
+        NSLog(@"Error while fetching\n%@",
+              ([error localizedDescription] != nil) ? [error localizedDescription] : @"Unknown Error");
+        return nil;
+    }
+    else if ([fetchedArray count] == 0) {
+        return nil;
+    }
+    BMSeries *series = [fetchedArray objectAtIndex:0];
+    return series;
+}
+
 - (void)setName:(NSString *)newName {
     // Check for a duplicate
     if (![BMSeries checkIfSeriesExistsWithName:newName]) {

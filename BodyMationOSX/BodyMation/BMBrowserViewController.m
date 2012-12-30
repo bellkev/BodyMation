@@ -40,7 +40,7 @@
     //[[self imageBrowserView] setCellSize:CGSizeMake(450.0, 300.0)];
     //[[self imageBrowserView] setCellsStyleMask:(IKCellsStyleTitled|IKCellsStyleShadowed)];
     CALayer* backgroundLayer = [CALayer layer];
-    [backgroundLayer setBackgroundColor:CGColorCreateGenericGray(0.2, 1.0)];
+    [backgroundLayer setBackgroundColor:CGColorCreateGenericGray(0.0, 1.0)];
     [[self view] setWantsLayer:YES];
     [[self view] setLayer:backgroundLayer];
     NSColor* background = [NSColor colorWithCalibratedWhite:0.2 alpha:1.0];

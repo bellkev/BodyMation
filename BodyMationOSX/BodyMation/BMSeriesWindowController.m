@@ -67,12 +67,12 @@
     // Don't do anything if nothing was selected on close
     if ([selectedSeries count]) {
         BMSeries *selected = [selectedSeries objectAtIndex:0];
-        [controller setCurrentSeriesName:[selected name]];
-        [[controller seriesPopupButton] selectItemWithTitle:[controller currentSeriesName]];
+        [controller setCurrentSeries:[BMSeries seriesForName:[selected name]]];
+        [[controller seriesPopupButton] selectItemWithTitle:[[controller currentSeries] name]];
     }
     // Handle the case of no series left
     else if (![fetchedArray count]) {
-        [controller setCurrentSeriesName:@""];
+        [controller setCurrentSeries:nil];
     }
 }
 

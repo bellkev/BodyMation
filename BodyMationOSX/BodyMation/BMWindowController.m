@@ -17,6 +17,7 @@
 @interface BMWindowController ()
 - (void)openViewController:(NSViewController *)viewController;
 - (void)setDefaultSeries:(NSNotification *)note;
+- (void)updateSeries;
 @end
 
 @implementation BMWindowController
@@ -28,10 +29,18 @@
 @synthesize browserViewController;
 @synthesize captureViewController;
 @synthesize playViewController;
+
+// Other ivars
 @synthesize seriesSortDescriptors;
-@synthesize seriesPopupButton;
+@synthesize currentSeries;
 @synthesize currentSeriesName;
 @synthesize seriesArrayController;
+
+// Buttons
+@synthesize seriesPopupButton;
+@synthesize browseButton;
+@synthesize captureButton;
+@synthesize playButton;
 
 - (id)initWithWindow:(NSWindow *)window
 {
@@ -44,6 +53,7 @@
         sort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
         [self setSeriesSortDescriptors:[NSArray arrayWithObject:sort]];
         NSString *seriesName = [[NSUserDefaults standardUserDefaults] valueForKey:@"DefaultSeriesName"];
+        [self setCurrentSeries:[BMSeries seriesForName:seriesName]];
         [self setCurrentSeriesName:seriesName];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setDefaultSeries:) name:NSWindowDidBecomeMainNotification object:[self window]];
     }
@@ -56,6 +66,7 @@
     [super windowDidLoad];
 
     // THIS WAS DUMB!!!://[[self window] setBackgroundColor:[NSColor colorWithCalibratedWhite:0.2 alpha:0]];
+    [self setButtons:[NSArray arrayWithObjects:browseButton, captureButton, playButton, nil]];
     [self openBrowserViewController];
 }
 
@@ -92,7 +103,7 @@
             NSManagedObjectContext *context = [[NSApp delegate] managedObjectContext];
             [context processPendingChanges];
             [[self seriesPopupButton] selectItemWithTitle:newName];
-            [self updateSeriesName];
+            [self updateSeries];
         }
         else {
             [self createNewSeriesAfterInvalidName:newName];
@@ -103,13 +114,14 @@
     }
 }
 
-- (void)updateSeriesName {
+- (void)updateSeries {
     // TODO: validate this
-    [self setCurrentSeriesName:[[[self seriesPopupButton] selectedItem] title]];
+    [self setCurrentSeries:[BMSeries seriesForName:[[[self seriesPopupButton] selectedItem] title]]];
 }
-// View controller methods
 
+// View controller methods
 - (void)openBrowserViewController {
+    [self setActiveButton:[self browseButton]];
     if (![[self currentViewController] isKindOfClass:[BMBrowserViewController class]]) {
         if (![self browserViewController]) {
             [self setBrowserViewController:[[BMBrowserViewController alloc] initWithNibName:@"BMBrowserViewController" bundle:nil]];
@@ -119,6 +131,7 @@
 }
 
 - (void)openCaptureViewController {
+    [self setActiveButton:[self captureButton]];
     if (![[self currentViewController] isKindOfClass:[BMCaptureViewController class]]) {
         if (![self captureViewController]) {
             [self setCaptureViewController:[[BMCaptureViewController alloc] initWithNibName:@"BMCaptureViewController" bundle:nil]];
@@ -131,6 +144,7 @@
 }
 
 - (void)openPlayViewController {
+    [self setActiveButton:[self playButton]];
     if (![[self currentViewController] isKindOfClass:[BMPlayViewController class]]) {
         if (![self playViewController]) {
             [self setPlayViewController:[[BMPlayViewController alloc] initWithNibName:@"BMPlayViewController" bundle:nil]];
@@ -177,12 +191,12 @@
 
 - (IBAction)chooseSeriesSelected:(id)sender {
     NSLog(@"Selected: %@", [[[self seriesPopupButton] selectedItem] title]);
-    [self updateSeriesName];
+    [self updateSeries];
 }
 
 - (IBAction)seriesNameMenuItemSelected:(id)sender {
     NSLog(@"Selected: %@", [[[self seriesPopupButton] selectedItem] title]);
-    [self updateSeriesName];
+    [self updateSeries];
 }
 
 - (IBAction)manageSeriesMenuItemSelected:(id)sender {
@@ -196,4 +210,11 @@
     [self createNewSeriesAfterInvalidName:nil];
 }
 
+// Other
+- (void)setActiveButton:(NSButton *)activeButton {
+    for (NSButton *button in [self buttons]) {
+        [button setState:NSOffState];
+    }
+    [activeButton setState:NSOnState];
+}
 @end

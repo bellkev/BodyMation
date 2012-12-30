@@ -521,6 +521,22 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
+						<string key="label">contentSet: windowController.currentSeries.images</string>
+						<reference key="source" ref="170812909"/>
+						<reference key="destination" ref="1001"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="170812909"/>
+							<reference key="NSDestination" ref="1001"/>
+							<string key="NSLabel">contentSet: windowController.currentSeries.images</string>
+							<string key="NSBinding">contentSet</string>
+							<string key="NSKeyPath">windowController.currentSeries.images</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">120</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
 						<string key="label">content: arrangedObjects</string>
 						<reference key="source" ref="463647611"/>
 						<reference key="destination" ref="170812909"/>
@@ -708,7 +724,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">117</int>
+			<int key="maxID">120</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

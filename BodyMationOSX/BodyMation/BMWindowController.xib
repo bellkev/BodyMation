@@ -254,7 +254,7 @@
 									<reference key="NSSupport" ref="380659187"/>
 									<string key="NSCellIdentifier">_NS:9</string>
 									<reference key="NSControlView" ref="101513268"/>
-									<int key="NSButtonFlags">-937672704</int>
+									<int key="NSButtonFlags">1209815040</int>
 									<int key="NSButtonFlags2">160</int>
 									<object class="NSCustomResource" key="NSNormalImage" id="848907496">
 										<string key="NSClassName">NSImage</string>
@@ -305,7 +305,7 @@
 									<reference key="NSSupport" ref="380659187"/>
 									<string key="NSCellIdentifier">_NS:9</string>
 									<reference key="NSControlView" ref="1055566903"/>
-									<int key="NSButtonFlags">-934526976</int>
+									<int key="NSButtonFlags">1212960768</int>
 									<int key="NSButtonFlags2">160</int>
 									<object class="NSCustomResource" key="NSNormalImage" id="147571353">
 										<string key="NSClassName">NSImage</string>
@@ -357,7 +357,7 @@
 									<reference key="NSSupport" ref="380659187"/>
 									<string key="NSCellIdentifier">_NS:9</string>
 									<reference key="NSControlView" ref="902399050"/>
-									<int key="NSButtonFlags">-937672704</int>
+									<int key="NSButtonFlags">1209815040</int>
 									<int key="NSButtonFlags2">160</int>
 									<object class="NSCustomResource" key="NSNormalImage" id="438435977">
 										<string key="NSClassName">NSImage</string>
@@ -544,14 +544,6 @@
 					<int key="connectionID">3</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">captureButton</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="1055566903"/>
-					</object>
-					<int key="connectionID">87</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">captureButtonPressed:</string>
 						<reference key="source" ref="1001"/>
@@ -633,27 +625,35 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
+						<string key="label">browseButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="101513268"/>
+					</object>
+					<int key="connectionID">273</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">captureButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="1055566903"/>
+					</object>
+					<int key="connectionID">274</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">playButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="902399050"/>
+					</object>
+					<int key="connectionID">275</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="1005"/>
 						<reference key="destination" ref="1001"/>
 					</object>
 					<int key="connectionID">4</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">enabled: self.window.isMainWindow</string>
-						<reference key="source" ref="101513268"/>
-						<reference key="destination" ref="1001"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="101513268"/>
-							<reference key="NSDestination" ref="1001"/>
-							<string key="NSLabel">enabled: self.window.isMainWindow</string>
-							<string key="NSBinding">enabled</string>
-							<string key="NSKeyPath">self.window.isMainWindow</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">272</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -991,7 +991,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">272</int>
+			<int key="maxID">275</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1043,10 +1043,25 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="browseButton">NSButton</string>
+						<string key="captureButton">NSButton</string>
+						<string key="playButton">NSButton</string>
 						<string key="seriesArrayController">NSArrayController</string>
 						<string key="seriesPopupButton">NSPopUpButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="browseButton">
+							<string key="name">browseButton</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="captureButton">
+							<string key="name">captureButton</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="playButton">
+							<string key="name">playButton</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="seriesArrayController">
 							<string key="name">seriesArrayController</string>
 							<string key="candidateClassName">NSArrayController</string>

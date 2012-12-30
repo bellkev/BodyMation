@@ -21,6 +21,7 @@
 
 + (id)seriesInDefaultContext;
 + (BOOL)checkIfSeriesExistsWithName:(NSString *)name;
++ (BMSeries *)seriesForName:(NSString *)name;
 
 - (void)addImagesObject:(BMImage *)value;
 - (void)removeImagesObject:(BMImage *)value;
