@@ -13,6 +13,7 @@
 @property /*(weak)*/ IBOutlet NSTextField *keyField;
 @property /*(weak)*/ IBOutlet NSView *licensedView;
 @property /*(weak)*/ IBOutlet NSView *trialView;
+- (IBAction)buyButtonPushed:(id)sender;
 
 - (IBAction)cancelButtonPushed:(id)sender;
 - (IBAction)registerButtonPushed:(id)sender;

@@ -25,4 +25,6 @@
 
 + (CGImageRef)CGImageFromNSImage:(NSImage *)image;
 
++ (void)buyNow;
+
 @end

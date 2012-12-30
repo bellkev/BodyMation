@@ -8,6 +8,7 @@
 
 #import "BMBrowserViewController.h"
 #import "BMWindowController.h"
+#import "BMUtilities.h"
 
 @interface BMBrowserViewController ()
 - (void)updateZoomValue:(NSNotification *)notification;
@@ -38,6 +39,10 @@
     [imageBrowserView setContentResizingMask:NSViewWidthSizable];
     //[[self imageBrowserView] setCellSize:CGSizeMake(450.0, 300.0)];
     //[[self imageBrowserView] setCellsStyleMask:(IKCellsStyleTitled|IKCellsStyleShadowed)];
+    CALayer* backgroundLayer = [CALayer layer];
+    [backgroundLayer setBackgroundColor:CGColorCreateGenericGray(0.2, 1.0)];
+    [[self view] setWantsLayer:YES];
+    [[self view] setLayer:backgroundLayer];
     NSColor* background = [NSColor colorWithCalibratedWhite:0.2 alpha:1.0];
     [imageBrowserView setValue:background forKey:IKImageBrowserBackgroundColorKey];
     NSDictionary *titleAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -56,7 +61,11 @@
     //[NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(scrollUpdate:) userInfo:nil repeats:YES];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollUpdate:) name:@"IKImageBrowserDidStabilize" object:imageBrowserView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateZoomValue:) name:NSWindowDidResizeNotification object:[self windowController]];
-    [[self imageBrowserView] setZoomValue:0.9f];
+    [[self imageBrowserView] setZoomValue:0.95f];
+    
+    // Set buy button properties
+    //NSFont *buyButtonFont = [NSFont font]
+    //[self buyButton]
 }
 
 - (void)scrollUpdate:(id)sender {
@@ -68,9 +77,15 @@
     }
 }
 
+- (IBAction)buyButtonWasClicked:(id)sender {
+    [BMUtilities buyNow];
+    NSLog(@"Clicked");
+    [[self buyButton] setState:NSOffState];
+}
+
 - (void)updateZoomValue:(NSNotification *)notification {
     // Workaround to keep imageBrowserView zoom set to desired value
-    if ([[self imageBrowserView] zoomValue] != 0.95f) {
+    if ([[self imageBrowserView] zoomValue] != 0.95) {
         [[self imageBrowserView] setZoomValue:0.95f];
     }
 }

@@ -19,6 +19,11 @@
 		0A6099B6168677F300371707 /* BMVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6099B5168677F300371707 /* BMVideoView.m */; };
 		0A6099C41686DD9100371707 /* BMSeriesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6099C21686DD9100371707 /* BMSeriesWindowController.m */; };
 		0A6099C51686DD9100371707 /* BMSeriesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A6099C31686DD9100371707 /* BMSeriesWindowController.xib */; };
+		0A63F472168FB6AB004C72E2 /* CFobError.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A63F469168FB6AB004C72E2 /* CFobError.m */; };
+		0A63F473168FB6AB004C72E2 /* CFobLicVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A63F46B168FB6AB004C72E2 /* CFobLicVerifier.m */; };
+		0A63F474168FB6AB004C72E2 /* decoder.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A63F46C168FB6AB004C72E2 /* decoder.c */; };
+		0A63F475168FB6AB004C72E2 /* NSString-Base64Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A63F46F168FB6AB004C72E2 /* NSString-Base64Extensions.m */; };
+		0A63F476168FB6AB004C72E2 /* NSString+PECrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A63F471168FB6AB004C72E2 /* NSString+PECrypt.m */; };
 		0AA2969D1640C27600B2F4FB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA2969C1640C27500B2F4FB /* Cocoa.framework */; };
 		0AA296A71640C27600B2F4FB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0AA296A51640C27600B2F4FB /* InfoPlist.strings */; };
 		0AA296A91640C27600B2F4FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA296A81640C27600B2F4FB /* main.m */; };
@@ -39,6 +44,10 @@
 		0AA8852C164B814400D0DDDA /* BMBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA8852A164B814400D0DDDA /* BMBrowserViewController.m */; };
 		0AA8852D164B814400D0DDDA /* BMBrowserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AA8852B164B814400D0DDDA /* BMBrowserViewController.xib */; };
 		0AA88535164B86FB00D0DDDA /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA88534164B86FB00D0DDDA /* Quartz.framework */; };
+		0AB404A316898EAD00C62EF8 /* play-push.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB4049F16898EAD00C62EF8 /* play-push.png */; };
+		0AB404A416898EAD00C62EF8 /* pause-push.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB404A016898EAD00C62EF8 /* pause-push.png */; };
+		0AB404A516898EAD00C62EF8 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB404A116898EAD00C62EF8 /* pause.png */; };
+		0AB404A616898EAD00C62EF8 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB404A216898EAD00C62EF8 /* play.png */; };
 		0ADF4E2216866B2F0019DCBD /* play-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ADF4E1A16866B2F0019DCBD /* play-blue.png */; };
 		0ADF4E2316866B2F0019DCBD /* camera-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ADF4E1B16866B2F0019DCBD /* camera-blue.png */; };
 		0ADF4E2416866B2F0019DCBD /* browser-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ADF4E1C16866B2F0019DCBD /* browser-blue.png */; };
@@ -72,6 +81,16 @@
 		0A6099C11686DD9100371707 /* BMSeriesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMSeriesWindowController.h; sourceTree = "<group>"; };
 		0A6099C21686DD9100371707 /* BMSeriesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMSeriesWindowController.m; sourceTree = "<group>"; };
 		0A6099C31686DD9100371707 /* BMSeriesWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BMSeriesWindowController.xib; sourceTree = "<group>"; };
+		0A63F468168FB6AB004C72E2 /* CFobError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFobError.h; sourceTree = "<group>"; };
+		0A63F469168FB6AB004C72E2 /* CFobError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFobError.m; sourceTree = "<group>"; };
+		0A63F46A168FB6AB004C72E2 /* CFobLicVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFobLicVerifier.h; sourceTree = "<group>"; };
+		0A63F46B168FB6AB004C72E2 /* CFobLicVerifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFobLicVerifier.m; sourceTree = "<group>"; };
+		0A63F46C168FB6AB004C72E2 /* decoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = decoder.c; sourceTree = "<group>"; };
+		0A63F46D168FB6AB004C72E2 /* decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = decoder.h; sourceTree = "<group>"; };
+		0A63F46E168FB6AB004C72E2 /* NSString-Base64Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString-Base64Extensions.h"; sourceTree = "<group>"; };
+		0A63F46F168FB6AB004C72E2 /* NSString-Base64Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString-Base64Extensions.m"; sourceTree = "<group>"; };
+		0A63F470168FB6AB004C72E2 /* NSString+PECrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PECrypt.h"; sourceTree = "<group>"; };
+		0A63F471168FB6AB004C72E2 /* NSString+PECrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PECrypt.m"; sourceTree = "<group>"; };
 		0AA296981640C27500B2F4FB /* BodyMation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BodyMation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AA2969C1640C27500B2F4FB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		0AA2969F1640C27600B2F4FB /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -104,6 +123,10 @@
 		0AA8852A164B814400D0DDDA /* BMBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMBrowserViewController.m; sourceTree = "<group>"; };
 		0AA8852B164B814400D0DDDA /* BMBrowserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BMBrowserViewController.xib; sourceTree = "<group>"; };
 		0AA88534164B86FB00D0DDDA /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		0AB4049F16898EAD00C62EF8 /* play-push.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-push.png"; sourceTree = "<group>"; };
+		0AB404A016898EAD00C62EF8 /* pause-push.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause-push.png"; sourceTree = "<group>"; };
+		0AB404A116898EAD00C62EF8 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
+		0AB404A216898EAD00C62EF8 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		0ADF4E1A16866B2F0019DCBD /* play-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "play-blue.png"; path = "Resources/play-blue.png"; sourceTree = "<group>"; };
 		0ADF4E1B16866B2F0019DCBD /* camera-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera-blue.png"; path = "Resources/camera-blue.png"; sourceTree = "<group>"; };
 		0ADF4E1C16866B2F0019DCBD /* browser-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "browser-blue.png"; path = "Resources/browser-blue.png"; sourceTree = "<group>"; };
@@ -196,6 +219,7 @@
 				0A6099C21686DD9100371707 /* BMSeriesWindowController.m */,
 				0AA88537164CD51100D0DDDA /* View Controllers */,
 				0AA88538164CD55800D0DDDA /* Nibs */,
+				0AB4048E1688415C00C62EF8 /* CocoaFob */,
 				0AA88536164CD4D800D0DDDA /* Managed Objects */,
 				0AA296A31640C27600B2F4FB /* Supporting Files */,
 			);
@@ -266,9 +290,30 @@
 			name = Nibs;
 			sourceTree = "<group>";
 		};
+		0AB4048E1688415C00C62EF8 /* CocoaFob */ = {
+			isa = PBXGroup;
+			children = (
+				0A63F468168FB6AB004C72E2 /* CFobError.h */,
+				0A63F469168FB6AB004C72E2 /* CFobError.m */,
+				0A63F46A168FB6AB004C72E2 /* CFobLicVerifier.h */,
+				0A63F46B168FB6AB004C72E2 /* CFobLicVerifier.m */,
+				0A63F46C168FB6AB004C72E2 /* decoder.c */,
+				0A63F46D168FB6AB004C72E2 /* decoder.h */,
+				0A63F46E168FB6AB004C72E2 /* NSString-Base64Extensions.h */,
+				0A63F46F168FB6AB004C72E2 /* NSString-Base64Extensions.m */,
+				0A63F470168FB6AB004C72E2 /* NSString+PECrypt.h */,
+				0A63F471168FB6AB004C72E2 /* NSString+PECrypt.m */,
+			);
+			name = CocoaFob;
+			sourceTree = "<group>";
+		};
 		0ADF4E2A16866B560019DCBD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0AB4049F16898EAD00C62EF8 /* play-push.png */,
+				0AB404A016898EAD00C62EF8 /* pause-push.png */,
+				0AB404A116898EAD00C62EF8 /* pause.png */,
+				0AB404A216898EAD00C62EF8 /* play.png */,
 				0ADF4E1A16866B2F0019DCBD /* play-blue.png */,
 				0ADF4E1B16866B2F0019DCBD /* camera-blue.png */,
 				0ADF4E1C16866B2F0019DCBD /* browser-blue.png */,
@@ -351,6 +396,10 @@
 				0ADF4E2816866B2F0019DCBD /* background.png in Resources */,
 				0ADF4E2916866B2F0019DCBD /* icon.icns in Resources */,
 				0A6099C51686DD9100371707 /* BMSeriesWindowController.xib in Resources */,
+				0AB404A316898EAD00C62EF8 /* play-push.png in Resources */,
+				0AB404A416898EAD00C62EF8 /* pause-push.png in Resources */,
+				0AB404A516898EAD00C62EF8 /* pause.png in Resources */,
+				0AB404A616898EAD00C62EF8 /* play.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,6 +428,11 @@
 				0ADF4E3316866BCE0019DCBD /* BMPreviewLayer.m in Sources */,
 				0A6099B6168677F300371707 /* BMVideoView.m in Sources */,
 				0A6099C41686DD9100371707 /* BMSeriesWindowController.m in Sources */,
+				0A63F472168FB6AB004C72E2 /* CFobError.m in Sources */,
+				0A63F473168FB6AB004C72E2 /* CFobLicVerifier.m in Sources */,
+				0A63F474168FB6AB004C72E2 /* decoder.c in Sources */,
+				0A63F475168FB6AB004C72E2 /* NSString-Base64Extensions.m in Sources */,
+				0A63F476168FB6AB004C72E2 /* NSString+PECrypt.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

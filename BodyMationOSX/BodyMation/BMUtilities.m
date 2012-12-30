@@ -97,4 +97,9 @@
     return destinationRect;
 }
 
++ (void)buyNow
+{
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.google.com/"]];
+}
+
 @end

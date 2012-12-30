@@ -59,6 +59,7 @@
     [self openBrowserViewController];
 }
 
+
 - (void)setDefaultSeries:(NSNotification *)note {
     //NSLog(@"Notification: %@", note);
     [[self seriesPopupButton] selectItemWithTitle:[self currentSeriesName]];

@@ -12,6 +12,7 @@
 @class BMPreferenceWindowController;
 @class BMRegisterWindowController;
 @class BMSeriesWindowController;
+@class CFobLicVerifier;
 
 @interface BMAppDelegate : NSObject <NSApplicationDelegate>
 
@@ -19,6 +20,7 @@
 @property BMPreferenceWindowController *preferenceWindowController;
 @property BMRegisterWindowController *registerWindowController;
 @property BMSeriesWindowController *seriesWindowController;
+@property CFobLicVerifier *licenseVerifier;
 
 // Provided by template
 @property (assign) IBOutlet NSWindow *window;
@@ -27,6 +29,7 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
+- (IBAction)buyMenuItemSelected:(id)sender;
 - (IBAction)registerMenuItemSelected:(id)sender;
 - (IBAction)buyNowMenuItemSelected:(id)sender;
 

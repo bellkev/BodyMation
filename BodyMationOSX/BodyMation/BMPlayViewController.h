@@ -18,9 +18,13 @@
 @property BOOL movieNeedsRefresh;
 @property /*(weak)*/ IBOutlet NSProgressIndicator *progressIndicator;
 @property /*(weak)*/ IBOutlet NSTextField *renderText;
+@property (unsafe_unretained) IBOutlet NSButton *playButton;
+@property (unsafe_unretained) IBOutlet NSButton *pauseButton;
 
 
 - (void)createVideo;
 - (void)renderVideo;
+- (IBAction)playButtonWasPushed:(id)sender;
+- (IBAction)pauseButtonWasPushed:(id)sender;
 
 @end

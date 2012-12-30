@@ -61,6 +61,9 @@
     [backgroundLayer setBackgroundColor:CGColorCreateGenericGray(0.2, 1.0)];
     [[self view] setLayer:backgroundLayer];
     [[self view] setWantsLayer:YES];
+    // Hide play/pause buttons to start
+    [[self playButton] setHidden:YES];
+    [[self pauseButton] setHidden:YES];
     // Set up movie
     [self createVideo];
 }
@@ -78,10 +81,12 @@
 }
 
 - (void)showVideo {
+    [[self movie] setAttribute:[NSNumber numberWithBool:YES] forKey:QTMovieLoopsAttribute];
     [[self movieView] setMovie:[self movie]];
     [[self progressIndicator] stopAnimation:nil];
     [[self renderText] setHidden:YES];
     [[self movieView] setHidden:NO];
+    [[self playButton] setHidden:NO];
 }
 
 - (NSOperation*)renderVideoOperation {
@@ -159,6 +164,18 @@
     // Indicate that movie is up to date
     [self setMovieNeedsRefresh:NO];
     NSLog(@"Done rendering...");
+}
+
+- (IBAction)playButtonWasPushed:(id)sender {
+    [[self movieView] play:nil];
+    [[self playButton] setHidden:YES];
+    [[self pauseButton] setHidden:NO];
+}
+
+- (IBAction)pauseButtonWasPushed:(id)sender {
+    [[self movieView] pause:nil];
+    [[self pauseButton] setHidden:YES];
+    [[self playButton] setHidden:NO];
 }
 
 - (CVPixelBufferRef)bufferFromImageObject:(BMImage *)imageObject {

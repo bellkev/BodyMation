@@ -7,7 +7,9 @@
 //
 
 #import "BMRegisterWindowController.h"
-#import "BMKeyChecker.h"
+#import "CFobLicVerifier.h"
+#import "BMUtilities.h"
+#import "BMAppDelegate.h"
 
 @interface BMRegisterWindowController ()
 
@@ -37,6 +39,10 @@
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
 
+- (IBAction)buyButtonPushed:(id)sender {
+    [BMUtilities buyNow];
+}
+
 - (IBAction)cancelButtonPushed:(id)sender {
     [self close];
 }
@@ -58,7 +64,7 @@
     // Remove anything in key string but base64 characters
     NSMutableString *keyCleaned = [NSMutableString stringWithCapacity:[key length]];
     NSScanner *keyScanner = [NSScanner scannerWithString:key];
-    NSCharacterSet *base64Set = [NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="];
+    NSCharacterSet *base64Set = [NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=-"];
     while (![keyScanner isAtEnd]) {
         NSString *newCharacters;
         if ([keyScanner scanCharactersFromSet:base64Set intoString:&newCharacters]) {
@@ -69,7 +75,9 @@
     }
     
     // Verify key and email
-    BOOL valid = [BMKeyChecker verifyKey:keyCleaned andEmail:emailTrimmed];
+    BMAppDelegate *delegate = [NSApp delegate];
+    NSError *error;
+    BOOL valid = [[delegate licenseVerifier] verifyRegCode:keyCleaned forName:emailTrimmed error:&error];
     NSString *alertMessage = @"Sorry, unable to verify key.";
     if (valid) {
         alertMessage = @"You have successfully registered BodyMation! Thank you!";

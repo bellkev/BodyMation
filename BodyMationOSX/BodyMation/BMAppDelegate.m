@@ -12,6 +12,8 @@
 #import "BMRegisterWindowController.h"
 #import "BMKeyChecker.h"
 #import "BMSeriesWindowController.h"
+#import "BMUtilities.h"
+#import "CFobLicVerifier.h"
 
 @implementation BMAppDelegate
 
@@ -30,6 +32,30 @@
     windowController = [[BMWindowController alloc] initWithWindowNibName:@"BMWindowController"];
     [windowController showWindow:nil];
     [self setupPreferences];
+    [self setLicenseVerifier:[[CFobLicVerifier alloc]init]];
+    NSError *error;
+    NSString *publicKey = [NSString stringWithFormat:@"-----BEGIN PUBLIC KEY-----\n"
+                           "MIIBtjCCASsGByqGSM44BAEwggEeAoGBAJiFLSHcXoZdhjKmPB6Lronx/mlIurNz\n"
+                           "S4M3A5AXhR6d9+e01XmtM4OeuIGlD6XgrcrKWlzppwcSm1FZUj5+Nzk3Hzt/ilx6\n"
+                           "S6n9eeu4rh8WXme6kV4+lxUSH3yQ742hxOcj2FKLJb8CZ1z7uTMHxpKqgu/NbgPn\n"
+                           "6mDBdWkgkYaFAhUAiDmGvK9+ddM3PKqylXLTuo8wVaECgYAFFI0X4uvpP9RxeLra\n"
+                           "UPqQzHqHOsVzeTKsbAHXMD/BOCMmDb54fqTyMe3bztF/gjQ4xNMxEbWpqQ7rFniW\n"
+                           "ts0ivVGv3NBa1FULuWWWih3BKHyHyS4i79IjDMJGBldaBuPSceYBg73B/bV/zrzQ\n"
+                           "7iKxr3WbXSczqXjRBPQbgVGVLgOBhAACgYA3I0CvURVwMEHOUx+lQY2V1eELbNQ6\n"
+                           "HcEfdWz8J2s3xNBR3sYLbYN3R5+a0UTQ4nRzLC745nhF+jzJRObtJoqyfUgG2pX5\n"
+                           "mrNesuX9JkgcemqAF58TYxzFlOMt/GymzkfI4LPmU4wrfNHqGDe1WRQtCXEwtnTv\n"
+                           "qb2eHV5JhC14/A==\n"
+                           "-----END PUBLIC KEY-----"];
+//    NSString *publicKey = [NSString stringWithContentsOfFile:@"/Users/Kevin/dsapublic.pem" encoding:NSASCIIStringEncoding error:&error];
+    if (error)
+    {
+        NSLog(@"%@", error);
+    }
+    NSLog(@"Key: %@", publicKey);
+    [[self licenseVerifier] setPublicKey:publicKey error:&error];
+    if (error) {
+        NSLog(@"%@", error);
+    }
 }
 
 // Preference window controller
@@ -177,6 +203,10 @@
     [_managedObjectContext setPersistentStoreCoordinator:coordinator];
 
     return _managedObjectContext;
+}
+
+- (IBAction)buyMenuItemSelected:(id)sender {
+    [BMUtilities buyNow];
 }
 
 - (IBAction)buyNowMenuItemSelected:(id)sender {

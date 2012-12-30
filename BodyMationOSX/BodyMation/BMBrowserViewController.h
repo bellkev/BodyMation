@@ -18,6 +18,8 @@
 @property /*(weak)*/ IBOutlet IKImageBrowserView *imageBrowserView;
 @property /*(weak)*/ IBOutlet NSScrollView *scrollView;
 @property BMWindowController *windowController;
+@property (unsafe_unretained) IBOutlet NSButton *buyButton;
 - (void)scrollUpdate:(id)sender;
+- (IBAction)buyButtonWasClicked:(id)sender;
 
 @end

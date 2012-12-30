@@ -134,7 +134,7 @@
 							</object>
 							<string key="NSToolbarItemLabel">Choose Series</string>
 							<string key="NSToolbarItemPaletteLabel">Choose Series</string>
-							<nil key="NSToolbarItemToolTip"/>
+							<string key="NSToolbarItemToolTip">Choose a picture series</string>
 							<object class="NSPopUpButton" key="NSToolbarItemView" id="484161303">
 								<reference key="NSNextResponder"/>
 								<int key="NSvFlags">268</int>
@@ -156,28 +156,28 @@
 									<string key="NSKeyEquivalent"/>
 									<int key="NSPeriodicDelay">400</int>
 									<int key="NSPeriodicInterval">75</int>
-									<nil key="NSMenuItem"/>
+									<object class="NSMenuItem" key="NSMenuItem" id="646956214">
+										<reference key="NSMenu" ref="515953401"/>
+										<string key="NSTitle">Series Names</string>
+										<string key="NSKeyEquiv"/>
+										<int key="NSMnemonicLoc">2147483647</int>
+										<object class="NSCustomResource" key="NSOnImage" id="152013919">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">NSMenuCheckmark</string>
+										</object>
+										<object class="NSCustomResource" key="NSMixedImage" id="352527009">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">NSMenuMixedState</string>
+										</object>
+										<string key="NSAction">_popUpItemAction:</string>
+										<int key="NSTag">1</int>
+										<reference key="NSTarget" ref="515246673"/>
+									</object>
 									<bool key="NSMenuItemRespectAlignment">YES</bool>
 									<object class="NSMenu" key="NSMenu" id="515953401">
 										<string key="NSTitle">OtherViews</string>
 										<array class="NSMutableArray" key="NSMenuItems">
-											<object class="NSMenuItem" id="646956214">
-												<reference key="NSMenu" ref="515953401"/>
-												<string key="NSTitle">Series Names</string>
-												<string key="NSKeyEquiv"/>
-												<int key="NSMnemonicLoc">2147483647</int>
-												<object class="NSCustomResource" key="NSOnImage" id="152013919">
-													<string key="NSClassName">NSImage</string>
-													<string key="NSResourceName">NSMenuCheckmark</string>
-												</object>
-												<object class="NSCustomResource" key="NSMixedImage" id="352527009">
-													<string key="NSClassName">NSImage</string>
-													<string key="NSResourceName">NSMenuMixedState</string>
-												</object>
-												<string key="NSAction">_popUpItemAction:</string>
-												<int key="NSTag">1</int>
-												<reference key="NSTarget" ref="515246673"/>
-											</object>
+											<reference ref="646956214"/>
 											<object class="NSMenuItem" id="180279361">
 												<reference key="NSMenu" ref="515953401"/>
 												<bool key="NSIsDisabled">YES</bool>
@@ -641,6 +641,22 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: self.window.isMainWindow</string>
+						<reference key="source" ref="101513268"/>
+						<reference key="destination" ref="1001"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="101513268"/>
+							<reference key="NSDestination" ref="1001"/>
+							<string key="NSLabel">enabled: self.window.isMainWindow</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">self.window.isMainWindow</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">272</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
 						<string key="label">content: arrangedObjects.name</string>
 						<reference key="source" ref="515246673"/>
 						<reference key="destination" ref="347666421"/>
@@ -975,7 +991,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">252</int>
+			<int key="maxID">272</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

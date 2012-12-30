@@ -31,6 +31,7 @@
         [[self beforeImageLayer] setAutoresizingMask:(kCALayerHeightSizable | kCALayerWidthSizable)];
         [[self beforeImageLayer] setContentsGravity:kCAGravityResizeAspect];
         [[self beforeImageLayer] setFrame:[self bounds]];
+        
         // Flip to match the preview video
         CATransform3D flipTransform = CATransform3DScale(CATransform3DIdentity, -1.0, 1.0, 1.0);
         [[self beforeImageLayer] setTransform:flipTransform];
@@ -67,6 +68,11 @@
     {
         NSLog(@"Error while fetching\n%@",
               ([error localizedDescription] != nil) ? [error localizedDescription] : @"Unknown Error");
+        return;
+    }
+    else if ([fetchedArray count] == 0) {
+        [self setBeforeImage:nil];
+        return;
     }
     BMImage *latestImageObject = [fetchedArray objectAtIndex:0];
     [self setBeforeImage:[[NSImage alloc] initWithData:[latestImageObject imageData]]];
