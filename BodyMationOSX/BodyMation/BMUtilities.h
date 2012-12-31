@@ -29,4 +29,6 @@
 
 + (NSURL *)getUniqueURLFromBaseURL:(NSURL *)baseURL withManager:(NSFileManager *)manager;
 
++ (NSImage*)rotateImage:(NSImage *)image byDegrees:(CGFloat)degrees;
+
 @end

@@ -70,8 +70,6 @@
     // Start by flipping accross the y-axis
     CATransform3D transform = CATransform3DScale(CATransform3DIdentity, -1.0, 1.0, 1.0);
     // Then rotate to left or right
-    NSLog(@"Index as NSNumber: %@", [self cameraRotationIndex]);
-    NSLog(@"Index as int: %d", [[self cameraRotationIndex] integerValue]);
     switch ([[self cameraRotationIndex] integerValue]) {
         case 1:
             transform = CATransform3DRotate(transform, pi / 2, 0.0, 0.0, 1.0);

@@ -196,16 +196,34 @@
     [imageOutput captureStillImageAsynchronouslyFromConnection:stillImageConnection
                                                   completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error)
      {
-         NSData *imgData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
-         
+         NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
+         NSImage *image = [[NSImage alloc] initWithData:imageData];
+         NSInteger cameraRotationIndex = [[[NSUserDefaults standardUserDefaults] valueForKey:@"CameraRotationIndex"] integerValue];
+         NSImage *imageFinal;
+         switch (cameraRotationIndex) {
+             case 1:
+                 imageFinal = [BMUtilities rotateImage:image byDegrees:-90.0];
+                 break;
+             case 2:
+                 imageFinal = [BMUtilities rotateImage:image byDegrees:90.0];
+             default:
+                 imageFinal = image;
+                 break;
+         }
+         NSData *imageDataFinal = [imageFinal TIFFRepresentation];
+         NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imageDataFinal];
+         NSDictionary *imageProps = [NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:1.0] forKey:NSImageCompressionFactor];
+         imageData = [imageRep representationUsingType:NSJPEGFileType properties:imageProps];
+
          // Save core data object
          BMImage *newImage = [BMImage imageInDefaultContext];
          [newImage setDateTaken:[NSDate date]];
-         [newImage setImageData:imgData];
+         [newImage setImageData:imageData];
          [newImage setSeries:[[self windowController] currentSeries]];
          
+         
          // Hang onto the image for display
-         [self setCapturedImage:[[NSImage alloc] initWithData:imgData]];
+         [self setCapturedImage:imageFinal];
          [self performSelectorOnMainThread:@selector(imageWasCaptured) withObject:nil waitUntilDone:NO];
      }];
 }
