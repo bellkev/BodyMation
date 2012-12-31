@@ -12,7 +12,7 @@
 #import "BMAppDelegate.h"
 
 @interface BMRegisterWindowController ()
-
+- (void)saveEmail:(NSString *)email andKey:(NSString *)key;
 @end
 
 @implementation BMRegisterWindowController
@@ -81,11 +81,16 @@
     NSString *alertMessage = @"Sorry, unable to verify key.";
     if (valid) {
         alertMessage = @"You have successfully registered BodyMation! Thank you!";
-        [[self trialView] setHidden:YES];
-        [[self licensedView] setHidden:NO];
+        [delegate setIsFullVersion:YES];
+        [self saveEmail:emailTrimmed andKey:keyCleaned];
     }
     NSAlert *keyAlert = [NSAlert alertWithMessageText:@"Registration Results" defaultButton:@"Okay" alternateButton:nil otherButton:nil informativeTextWithFormat:@"%@", alertMessage];
     [keyAlert runModal];
+}
+
+- (void)saveEmail:(NSString *)email andKey:(NSString *)key {
+    [[NSUserDefaults standardUserDefaults] setValue:email forKey:@"email"];
+    [[NSUserDefaults standardUserDefaults] setValue:key forKey:@"license"];
 }
 
 @end

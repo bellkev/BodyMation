@@ -31,6 +31,7 @@
 @synthesize videoDevices;
 @synthesize currentVideoDevice;
 @synthesize cameraMenu;
+@synthesize isFullVersion;
 
 // Generated
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
@@ -64,6 +65,14 @@
     if (error) {
         NSLog(@"%@", error);
     }
+    // Check stored license
+    NSString *email = [[NSUserDefaults standardUserDefaults] valueForKey:@"email"];
+    NSString *license = [[NSUserDefaults standardUserDefaults] valueForKey:@"license"];
+    [self setIsFullVersion:[[self licenseVerifier] verifyRegCode:license forName:email error:&error]];
+    if (error)
+    {
+        NSLog(@"%@", error);
+    }
     // Setup capture controller
     [self setCaptureController:[[BMCaptureController alloc] init]];
     [self setCurrentVideoDevice:[AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo]];
@@ -74,6 +83,7 @@
     // Launch main window
     windowController = [[BMWindowController alloc] initWithWindowNibName:@"BMWindowController"];
     [windowController showWindow:nil];
+    NSLog(@"IS FULL VERSION: %@", [self isFullVersion] ? @"YES" : @"NO");
 }
 
 - (void)updateCameras:(NSNotification *)notification {
@@ -156,8 +166,12 @@
     
     // Other settings
     [defaultSettings setObject:@"" forKey:@"DefaultSeriesName"];
+    [defaultSettings setObject:@"" forKey:@"email"];
+    [defaultSettings setObject:@"" forKey:@"license"];
     // Register
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaultSettings];
+    // RESET FOR TEST PURPOSES:
+    //[[NSUserDefaults standardUserDefaults] setValuesForKeysWithDictionary:defaultSettings];
 }
 
 

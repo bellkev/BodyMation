@@ -27,6 +27,7 @@
 @property NSArray *videoDevices;
 @property AVCaptureDevice *currentVideoDevice;
 @property (weak) IBOutlet NSMenu *cameraMenu;
+@property BOOL isFullVersion;
 
 // Provided by template
 @property (assign) IBOutlet NSWindow *window;
@@ -44,6 +45,7 @@
 
 - (void)openPreferenceWindowController;
 - (void)openSeriesWindowController;
+- (void)openRegisterWindowController;
 - (void)updateCameras:(NSNotification *)notification;
 - (void)cameraMenuItemSelected:(id)sender;
 

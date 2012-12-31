@@ -181,7 +181,21 @@
 }
 
 - (IBAction)captureButtonPressed:(id)sender {
-    [self openCaptureViewController];
+    BMAppDelegate *delegate = [NSApp delegate];
+    if ([delegate isFullVersion] || [[[self currentSeries] images] count] < 30) {
+        [self openCaptureViewController];
+    }
+    else {
+        [[self captureButton] setState:NSOffState];
+        NSAlert *upgradeAlert = [NSAlert alertWithMessageText:@"Upgrade to Full Version" defaultButton:@"Upgrade" alternateButton:@"Cancel" otherButton:@"Register" informativeTextWithFormat:@"Sorry, but you have reached the limit of 30 pictures in this series. Click \"Upgrade\" to get the full version now, or click \"Register\" to use a license key you already have."];
+        NSInteger button = [upgradeAlert runModal];
+        if (button == NSAlertDefaultReturn) {
+            [BMUtilities buyNow];
+        }
+        else if (button == NSAlertOtherReturn) {
+            [delegate openRegisterWindowController];
+        }
+    }
 }
 
 - (IBAction)playButtonPressed:(id)sender {
@@ -211,7 +225,20 @@
 }
 
 - (IBAction)exportButtonPressed:(id)sender {
-    [self exportPicturesOrMovie];
+    BMAppDelegate *delegate = [NSApp delegate];
+    if ([delegate isFullVersion]) {
+        [self exportPicturesOrMovie];
+    }
+    else {
+        NSAlert *upgradeAlert = [NSAlert alertWithMessageText:@"Upgrade to Full Version" defaultButton:@"Upgrade" alternateButton:@"Cancel" otherButton:@"Register" informativeTextWithFormat:@"Sorry, but you need to upgrade to the full version to be able to export your pictures or movies. Click \"Upgrade\" to get the full version now, or click \"Register\" to use a license key you already have."];
+        NSInteger button = [upgradeAlert runModal];
+        if (button == NSAlertDefaultReturn) {
+            [BMUtilities buyNow];
+        }
+        else if (button == NSAlertOtherReturn) {
+            [delegate openRegisterWindowController];
+        }
+    }
 }
 
 - (IBAction)newSeriesMenuItemSelected:(id)sender {
