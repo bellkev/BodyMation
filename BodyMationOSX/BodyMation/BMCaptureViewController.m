@@ -16,6 +16,8 @@
 #import "BMBrowserViewController.h"
 #import "BMBorderView.h"
 #import "BMVideoView.h"
+#import "BMAppDelegate.h"
+#import "BMCaptureController.h"
 
 //#import <ImageIO/ImageIO.h>
 
@@ -70,28 +72,32 @@
 - (void)createCaptureSession {
     // Prepare inputs/outputs
     NSError *error;
-    AVCaptureDevice *videoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    AVCaptureDeviceInput *videoInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice
-                                                                             error:&error];
-    if (!videoInput) {
-        NSLog(@"%@", error);
-    }
+//    AVCaptureDevice *videoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+//    AVCaptureDeviceInput *videoInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice
+//                                                                             error:&error];
+//    if (!videoInput) {
+//        NSLog(@"%@", error);
+//    }
     imageOutput = [[AVCaptureStillImageOutput alloc] init];
     NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys:
                                     AVVideoCodecJPEG, AVVideoCodecKey,
                                     nil];
     [imageOutput setOutputSettings:outputSettings];
     
-    // Create capture session
-    [self setCaptureSession:[[AVCaptureSession alloc] init]];
+//    // Create capture session
+//    [self setCaptureSession:[[AVCaptureSession alloc] init]];
+//
     
+    // Attach capture session
+    BMAppDelegate *delegate = [NSApp delegate];
+    [self setCaptureSession:[[delegate captureController] captureSession]];
     // Attach input/output to session
-    if ([captureSession canAddInput:videoInput]) {
-        [captureSession addInput:videoInput];
-    }
-    else {
-        NSLog(@"ERROR: Unable to add video input to AVCaptureSession");
-    }
+//    if ([captureSession canAddInput:videoInput]) {
+//        [captureSession addInput:videoInput];
+//    }
+//    else {
+//        NSLog(@"ERROR: Unable to add video input to AVCaptureSession");
+//    }
     if ([captureSession canAddOutput:imageOutput]) {
         [captureSession addOutput:imageOutput];
     }

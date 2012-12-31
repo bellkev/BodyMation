@@ -33,6 +33,13 @@
     return dateString;
 }
 
+- (NSString *)imageTitleNoSlashes {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateString = [formatter stringFromDate:[self dateTaken]];
+    return dateString;
+}
+
 - (NSString *)imageRepresentationType {
     return IKImageBrowserNSDataRepresentationType;
 }

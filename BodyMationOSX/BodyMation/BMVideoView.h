@@ -16,7 +16,10 @@
 @property AVCaptureVideoPreviewLayer *previewLayer;
 @property BMBorderView *borderView;
 @property NSColor *borderColor;
+@property NSNumber *cameraRotationIndex;
 
 - (id)initWithFrame:(NSRect)frame andSession:(AVCaptureSession *)session andBorderColor:(NSColor *)color;
+- (void)refreshLayout:(NSNotification *)notification;
+- (void)updateRotation:(NSNotification *)notification;
 
 @end

@@ -45,6 +45,7 @@
 - (IBAction)newSeriesMenuItemSelected:(id)sender;
 - (IBAction)seriesNameMenuItemSelected:(id)sender;
 - (IBAction)manageSeriesMenuItemSelected:(id)sender;
+- (IBAction)exportButtonPressed:(id)sender;
 
 // Other
 - (void)setActiveButton:(NSButton *)activeButton;

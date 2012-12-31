@@ -27,4 +27,6 @@
 
 + (void)buyNow;
 
++ (NSURL *)getUniqueURLFromBaseURL:(NSURL *)baseURL withManager:(NSFileManager *)manager;
+
 @end

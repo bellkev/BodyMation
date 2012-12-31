@@ -15,11 +15,22 @@
 #import "BMUtilities.h"
 #import "CFobLicVerifier.h"
 #import "BMSeries.h"
+#import "BMCaptureController.h"
+#import <AVFoundation/AVFoundation.h>
+
+@interface BMAppDelegate ()
+- (void)setActiveCameraMenuItem:(NSMenuItem *)item;
+@end
 
 @implementation BMAppDelegate
 
 @synthesize windowController;
 @synthesize preferenceWindowController;
+@synthesize licenseVerifier;
+@synthesize captureController;
+@synthesize videoDevices;
+@synthesize currentVideoDevice;
+@synthesize cameraMenu;
 
 // Generated
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
@@ -28,11 +39,9 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // Insert code here to initialize your application
     // Register user defaults
-    windowController = [[BMWindowController alloc] initWithWindowNibName:@"BMWindowController"];
-    [windowController showWindow:nil];
     [self setupPreferences];
+    // Setup license verification
     [self setLicenseVerifier:[[CFobLicVerifier alloc]init]];
     NSError *error;
     NSString *publicKey = [NSString stringWithFormat:@"-----BEGIN PUBLIC KEY-----\n"
@@ -47,16 +56,57 @@
                            "mrNesuX9JkgcemqAF58TYxzFlOMt/GymzkfI4LPmU4wrfNHqGDe1WRQtCXEwtnTv\n"
                            "qb2eHV5JhC14/A==\n"
                            "-----END PUBLIC KEY-----"];
-//    NSString *publicKey = [NSString stringWithContentsOfFile:@"/Users/Kevin/dsapublic.pem" encoding:NSASCIIStringEncoding error:&error];
     if (error)
     {
         NSLog(@"%@", error);
     }
-    NSLog(@"Key: %@", publicKey);
     [[self licenseVerifier] setPublicKey:publicKey error:&error];
     if (error) {
         NSLog(@"%@", error);
     }
+    // Setup capture controller
+    [self setCaptureController:[[BMCaptureController alloc] init]];
+    [self setCurrentVideoDevice:[AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo]];
+    [[self captureController] setInputDevice:[self currentVideoDevice]];
+    [self updateCameras:[NSNotification notificationWithName:@"note" object:nil]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCameras:) name:AVCaptureDeviceWasConnectedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCameras:) name:AVCaptureDeviceWasDisconnectedNotification object:nil];
+    // Launch main window
+    windowController = [[BMWindowController alloc] initWithWindowNibName:@"BMWindowController"];
+    [windowController showWindow:nil];
+}
+
+- (void)updateCameras:(NSNotification *)notification {
+    [self setVideoDevices:[AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo]];
+    if (![[self videoDevices] containsObject:[self currentVideoDevice]]) {
+        [self setCurrentVideoDevice:[AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo]];
+        [[self captureController] setInputDevice:[self currentVideoDevice]];
+    }
+    // TODO: Handle the case where there is no video device
+    [[self cameraMenu] removeAllItems];
+    for (AVCaptureDevice *device in [self videoDevices]) {
+        NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:[device localizedName] action:@selector(cameraMenuItemSelected:) keyEquivalent:@""];
+        [item setRepresentedObject:device];
+        if (device == [self currentVideoDevice] ) {
+            [item setState:NSOnState];
+        }
+        [[self cameraMenu] addItem:item];
+    }
+}
+
+- (void)cameraMenuItemSelected:(id)sender {
+    NSMenuItem *item = sender;
+    [self setActiveCameraMenuItem:item];
+    AVCaptureDevice *device = [item representedObject];
+    [self setCurrentVideoDevice:device];
+    [[self captureController] setInputDevice:[self currentVideoDevice]];
+}
+
+- (void)setActiveCameraMenuItem:(NSMenuItem *)item {
+    for (NSMenuItem *currentItem in [[self cameraMenu] itemArray]) {
+        [currentItem setState:NSOffState];
+    }
+    [item setState:NSOnState];
 }
 
 // Preference window controller
@@ -100,7 +150,7 @@
     [defaultSettings setObject:[NSNumber numberWithInt:20] forKey:@"CountDownLengthInitial"];
     [defaultSettings setObject:[NSNumber numberWithFloat:1.0] forKey:@"ComparePeriod"];
     [defaultSettings setObject:[NSNumber numberWithFloat:0.3] forKey:@"CompareTime"];
-    
+    [defaultSettings setObject:[NSNumber numberWithInt:0] forKey:@"CameraRotationIndex"];
     // Playback settings
     [defaultSettings setObject:[NSNumber numberWithInt:10] forKey:@"FrameRate"];
     

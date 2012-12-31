@@ -59,6 +59,7 @@
 		0ADF4E2F16866B880019DCBD /* BMImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ADF4E2C16866B880019DCBD /* BMImage.m */; };
 		0ADF4E3016866B880019DCBD /* BMSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ADF4E2E16866B880019DCBD /* BMSeries.m */; };
 		0ADF4E3316866BCE0019DCBD /* BMPreviewLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ADF4E3116866BCE0019DCBD /* BMPreviewLayer.m */; };
+		0AE403CE1690E08E008A57C2 /* BMCaptureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE403CD1690E08E008A57C2 /* BMCaptureController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,7 +82,7 @@
 		0A6099C11686DD9100371707 /* BMSeriesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMSeriesWindowController.h; sourceTree = "<group>"; };
 		0A6099C21686DD9100371707 /* BMSeriesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMSeriesWindowController.m; sourceTree = "<group>"; };
 		0A6099C31686DD9100371707 /* BMSeriesWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BMSeriesWindowController.xib; sourceTree = "<group>"; };
-		0A6124891690033600101647 /* BodyMation 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BodyMation 2.xcdatamodel"; sourceTree = "<group>"; };
+		0A6124891690033600101647 /* BodyMation 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "BodyMation 2.xcdatamodel"; sourceTree = "<group>"; };
 		0A63F468168FB6AB004C72E2 /* CFobError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFobError.h; sourceTree = "<group>"; };
 		0A63F469168FB6AB004C72E2 /* CFobError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFobError.m; sourceTree = "<group>"; };
 		0A63F46A168FB6AB004C72E2 /* CFobLicVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFobLicVerifier.h; sourceTree = "<group>"; };
@@ -142,6 +143,8 @@
 		0ADF4E2E16866B880019DCBD /* BMSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMSeries.m; sourceTree = "<group>"; };
 		0ADF4E3116866BCE0019DCBD /* BMPreviewLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMPreviewLayer.m; sourceTree = "<group>"; };
 		0ADF4E3216866BCE0019DCBD /* BMPreviewLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMPreviewLayer.h; sourceTree = "<group>"; };
+		0AE403CC1690E08E008A57C2 /* BMCaptureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMCaptureController.h; sourceTree = "<group>"; };
+		0AE403CD1690E08E008A57C2 /* BMCaptureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMCaptureController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +221,8 @@
 				0A104309168184F500A63E1F /* BMRegisterWindowController.m */,
 				0A6099C11686DD9100371707 /* BMSeriesWindowController.h */,
 				0A6099C21686DD9100371707 /* BMSeriesWindowController.m */,
+				0AE403CC1690E08E008A57C2 /* BMCaptureController.h */,
+				0AE403CD1690E08E008A57C2 /* BMCaptureController.m */,
 				0AA88537164CD51100D0DDDA /* View Controllers */,
 				0AA88538164CD55800D0DDDA /* Nibs */,
 				0AB4048E1688415C00C62EF8 /* CocoaFob */,
@@ -434,6 +439,7 @@
 				0A63F474168FB6AB004C72E2 /* decoder.c in Sources */,
 				0A63F475168FB6AB004C72E2 /* NSString-Base64Extensions.m in Sources */,
 				0A63F476168FB6AB004C72E2 /* NSString+PECrypt.m in Sources */,
+				0AE403CE1690E08E008A57C2 /* BMCaptureController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

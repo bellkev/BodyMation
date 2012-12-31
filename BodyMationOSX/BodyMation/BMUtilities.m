@@ -102,4 +102,14 @@
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.google.com/"]];
 }
 
++ (NSURL *)getUniqueURLFromBaseURL:(NSURL *)baseURL withManager:(NSFileManager *)manager {
+    NSInteger repeatNumber = 1;
+    NSString *currentPath = [baseURL path];
+    while ([manager fileExistsAtPath:currentPath]) {
+        currentPath = [NSString stringWithFormat:@"%@-%ld", [baseURL path], repeatNumber];
+        repeatNumber++;
+    }
+    return [NSURL fileURLWithPath:currentPath];
+}
+
 @end

@@ -7,12 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <AVFoundation/AVFoundation.h>
 
 @class BMWindowController;
 @class BMPreferenceWindowController;
 @class BMRegisterWindowController;
 @class BMSeriesWindowController;
 @class CFobLicVerifier;
+@class BMCaptureController;
 
 @interface BMAppDelegate : NSObject <NSApplicationDelegate>
 
@@ -21,6 +23,10 @@
 @property BMRegisterWindowController *registerWindowController;
 @property BMSeriesWindowController *seriesWindowController;
 @property CFobLicVerifier *licenseVerifier;
+@property BMCaptureController *captureController;
+@property NSArray *videoDevices;
+@property AVCaptureDevice *currentVideoDevice;
+@property (weak) IBOutlet NSMenu *cameraMenu;
 
 // Provided by template
 @property (assign) IBOutlet NSWindow *window;
@@ -38,5 +44,7 @@
 
 - (void)openPreferenceWindowController;
 - (void)openSeriesWindowController;
+- (void)updateCameras:(NSNotification *)notification;
+- (void)cameraMenuItemSelected:(id)sender;
 
 @end

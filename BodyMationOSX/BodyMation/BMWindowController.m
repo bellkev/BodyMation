@@ -13,11 +13,16 @@
 #import "BMPlayViewController.h"
 #import "BMPreferenceWindowController.h"
 #import "BMSeries.h"
+#import "BMImage.h"
+#import "BMUtilities.h"
 
 @interface BMWindowController ()
 - (void)openViewController:(NSViewController *)viewController;
 - (void)setDefaultSeries:(NSNotification *)note;
 - (void)updateSeries;
+- (void)exportPicturesOrMovie;
+- (void)exportPictures;
+- (void)exportMovie;
 @end
 
 @implementation BMWindowController
@@ -69,7 +74,6 @@
     [self setButtons:[NSArray arrayWithObjects:browseButton, captureButton, playButton, nil]];
     [self openBrowserViewController];
 }
-
 
 - (void)setDefaultSeries:(NSNotification *)note {
     //NSLog(@"Notification: %@", note);
@@ -206,6 +210,10 @@
     [[NSApp delegate] openSeriesWindowController];
 }
 
+- (IBAction)exportButtonPressed:(id)sender {
+    [self exportPicturesOrMovie];
+}
+
 - (IBAction)newSeriesMenuItemSelected:(id)sender {
     [self createNewSeriesAfterInvalidName:nil];
 }
@@ -216,5 +224,55 @@
         [button setState:NSOffState];
     }
     [activeButton setState:NSOnState];
+}
+
+- (void)exportPicturesOrMovie {
+    NSAlert *exportAlert = [NSAlert alertWithMessageText:@"Export" defaultButton:@"Movie" alternateButton:@"Cancel" otherButton:@"Pictures" informativeTextWithFormat:@"Would you like to export the movie or image files for the series \"%@\"?", [[self currentSeries] name]];
+    NSInteger button = [exportAlert runModal];
+    if (button == NSAlertDefaultReturn) {
+        [self exportMovie];
+    }
+    else if (button == NSAlertOtherReturn) {
+        [self exportPictures];
+    }
+}
+
+- (void)exportPictures {
+    NSOpenPanel *openPanel = [[NSOpenPanel alloc] init];
+    [openPanel setCanChooseDirectories:YES];
+    [openPanel setCanChooseFiles:NO];
+    [openPanel setTitle:@"Export Pictures"];
+    [openPanel setPrompt:@"Export"];
+    NSTextField *prompt = [[NSTextField alloc] init];
+    [prompt setEditable:NO];
+    [prompt setStringValue:@"Choose a name for the folder of exported pictures:"];
+    [prompt setBezeled:NO];
+    [prompt setDrawsBackground:NO];
+    NSTextField *input = [[NSTextField alloc] init];
+    [input setStringValue:[[[self currentSeries] name] stringByAppendingString:@" Pictures"]];
+    NSView *view = [[NSView alloc] initWithFrame:NSMakeRect(0, 0, 520, 24)];
+    [view addSubview:prompt];
+    [view addSubview:input];
+    [prompt setFrame:NSMakeRect(0, 0, 320, 24)];
+    [input setFrame:NSMakeRect(320, 0, 200, 24)];
+    [openPanel setAccessoryView:view];
+    NSInteger button = [openPanel runModal];
+    if (button == NSFileHandlingPanelOKButton) {
+        NSString *exportName = [input stringValue];
+        NSURL *exportURL = [[openPanel URL] URLByAppendingPathComponent:exportName];
+        NSFileManager *fileManager = [[NSFileManager alloc] init];
+        exportURL = [BMUtilities getUniqueURLFromBaseURL:exportURL withManager:fileManager];
+        NSError *error;
+        [fileManager createDirectoryAtURL:exportURL withIntermediateDirectories:NO attributes:nil error:&error];
+        if (error) {
+            NSLog(@"%@", error);
+        }
+        for (BMImage *image in [[self currentSeries] images]) {
+            NSURL *imageURL = [exportURL URLByAppendingPathComponent:[image imageTitleNoSlashes]];
+            imageURL = [BMUtilities getUniqueURLFromBaseURL:imageURL withManager:fileManager];
+            imageURL = [imageURL URLByAppendingPathExtension:@"jpg"];
+            [[image imageData] writeToURL:imageURL atomically:NO];
+        }
+    }
 }
 @end

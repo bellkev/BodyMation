@@ -18,5 +18,7 @@
 @property (nonatomic, retain) BMSeries *series;
 
 + (id)imageInDefaultContext;
+- (NSString *)imageTitle;
+- (NSString *)imageTitleNoSlashes;
 
 @end

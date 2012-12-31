@@ -89,8 +89,6 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{5, 14}, {40, 25}}</string>
 								<reference key="NSSuperview"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="135474457">
@@ -140,8 +138,6 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{0, 14}, {120, 25}}</string>
 								<reference key="NSSuperview"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSPopUpButtonCell" key="NSCell" id="515246673">
@@ -243,8 +239,6 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{3, 14}, {40, 25}}</string>
 								<reference key="NSSuperview"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="80564142">
@@ -294,8 +288,6 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{5, 14}, {40, 25}}</string>
 								<reference key="NSSuperview"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="408047374">
@@ -345,8 +337,6 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{0, 14}, {40, 25}}</string>
 								<reference key="NSSuperview"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<int key="NSTag">3</int>
 								<bool key="NSEnabled">YES</bool>
@@ -397,8 +387,6 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{2, 14}, {40, 25}}</string>
 								<reference key="NSSuperview"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="246248909">
@@ -520,8 +508,6 @@
 					<array class="NSMutableArray" key="NSSubviews"/>
 					<string key="NSFrameSize">{640, 480}</string>
 					<reference key="NSSuperview"/>
-					<reference key="NSWindow"/>
-					<reference key="NSNextKeyView"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMinSize">{640, 551}</string>
@@ -646,6 +632,14 @@
 						<reference key="destination" ref="902399050"/>
 					</object>
 					<int key="connectionID">275</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">exportButtonPressed:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="141932890"/>
+					</object>
+					<int key="connectionID">276</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -991,93 +985,9 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">275</int>
+			<int key="maxID">276</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<object class="IBPartialClassDescription">
-					<string key="className">BMWindowController</string>
-					<string key="superclassName">NSWindowController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="browseButtonPressed:">id</string>
-						<string key="captureButtonPressed:">id</string>
-						<string key="chooseSeriesSelected:">id</string>
-						<string key="manageSeriesMenuItemSelected:">id</string>
-						<string key="newSeriesMenuItemSelected:">id</string>
-						<string key="playButtonPressed:">id</string>
-						<string key="preferencesButtonPressed:">id</string>
-						<string key="seriesNameMenuItemSelected:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="browseButtonPressed:">
-							<string key="name">browseButtonPressed:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="captureButtonPressed:">
-							<string key="name">captureButtonPressed:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="chooseSeriesSelected:">
-							<string key="name">chooseSeriesSelected:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="manageSeriesMenuItemSelected:">
-							<string key="name">manageSeriesMenuItemSelected:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="newSeriesMenuItemSelected:">
-							<string key="name">newSeriesMenuItemSelected:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="playButtonPressed:">
-							<string key="name">playButtonPressed:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="preferencesButtonPressed:">
-							<string key="name">preferencesButtonPressed:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="seriesNameMenuItemSelected:">
-							<string key="name">seriesNameMenuItemSelected:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="browseButton">NSButton</string>
-						<string key="captureButton">NSButton</string>
-						<string key="playButton">NSButton</string>
-						<string key="seriesArrayController">NSArrayController</string>
-						<string key="seriesPopupButton">NSPopUpButton</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="browseButton">
-							<string key="name">browseButton</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="captureButton">
-							<string key="name">captureButton</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="playButton">
-							<string key="name">playButton</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="seriesArrayController">
-							<string key="name">seriesArrayController</string>
-							<string key="candidateClassName">NSArrayController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="seriesPopupButton">
-							<string key="name">seriesPopupButton</string>
-							<string key="candidateClassName">NSPopUpButton</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/BMWindowController.h</string>
-					</object>
-				</object>
-			</array>
-		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
