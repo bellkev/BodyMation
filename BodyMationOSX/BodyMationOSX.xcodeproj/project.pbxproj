@@ -10,6 +10,12 @@
 		0A10430B168184F500A63E1F /* BMRegisterWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A104309168184F500A63E1F /* BMRegisterWindowController.m */; };
 		0A10430C168184F500A63E1F /* BMRegisterWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A10430A168184F500A63E1F /* BMRegisterWindowController.xib */; };
 		0A240D1C1642362B00BAB392 /* BMUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A240D1B1642362B00BAB392 /* BMUtilities.m */; };
+		0A3487671692ABAA00114B0E /* welcome.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3487661692ABAA00114B0E /* welcome.png */; };
+		0A34876A1692B12F00114B0E /* first-picture.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3487691692B12F00114B0E /* first-picture.png */; };
+		0A34876E1692BAE700114B0E /* play-instructions.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A34876D1692BAE700114B0E /* play-instructions.png */; };
+		0A3487701692C09500114B0E /* export-instructions.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A34876F1692C09500114B0E /* export-instructions.png */; };
+		0A3487721692C2E600114B0E /* delete-instructions.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3487711692C2E600114B0E /* delete-instructions.png */; };
+		0A3487791692D52500114B0E /* BMNotOneTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3487781692D52500114B0E /* BMNotOneTransformer.m */; };
 		0A398E9C16438F9700829BF9 /* BMBeforeImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A398E9B16438F9700829BF9 /* BMBeforeImageView.m */; };
 		0A398E9E16439FAA00829BF9 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A398E9D16439FAA00829BF9 /* CoreMedia.framework */; };
 		0A398EA21643A00400829BF9 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A398EA11643A00400829BF9 /* CoreVideo.framework */; };
@@ -29,6 +35,8 @@
 		0A91237A16927863001E878D /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A91237816927863001E878D /* pause.png */; };
 		0A91237B16927863001E878D /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A91237916927863001E878D /* play.png */; };
 		0A91237D169283C7001E878D /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A91237C169283C7001E878D /* trash.png */; };
+		0A91238416929E02001E878D /* BMViewWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A91238316929E02001E878D /* BMViewWithColor.m */; };
+		0A9123861692A0FA001E878D /* vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9123851692A0FA001E878D /* vertical.png */; };
 		0AA2969D1640C27600B2F4FB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA2969C1640C27500B2F4FB /* Cocoa.framework */; };
 		0AA296A71640C27600B2F4FB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0AA296A51640C27600B2F4FB /* InfoPlist.strings */; };
 		0AA296A91640C27600B2F4FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA296A81640C27600B2F4FB /* main.m */; };
@@ -69,6 +77,13 @@
 		0A10430A168184F500A63E1F /* BMRegisterWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BMRegisterWindowController.xib; sourceTree = "<group>"; };
 		0A240D1A1642362B00BAB392 /* BMUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMUtilities.h; sourceTree = "<group>"; };
 		0A240D1B1642362B00BAB392 /* BMUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMUtilities.m; sourceTree = "<group>"; };
+		0A3487661692ABAA00114B0E /* welcome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = welcome.png; path = Resources/welcome.png; sourceTree = "<group>"; };
+		0A3487691692B12F00114B0E /* first-picture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "first-picture.png"; path = "Resources/first-picture.png"; sourceTree = "<group>"; };
+		0A34876D1692BAE700114B0E /* play-instructions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "play-instructions.png"; path = "Resources/play-instructions.png"; sourceTree = "<group>"; };
+		0A34876F1692C09500114B0E /* export-instructions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "export-instructions.png"; path = "Resources/export-instructions.png"; sourceTree = "<group>"; };
+		0A3487711692C2E600114B0E /* delete-instructions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "delete-instructions.png"; path = "Resources/delete-instructions.png"; sourceTree = "<group>"; };
+		0A3487771692D52500114B0E /* BMNotOneTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMNotOneTransformer.h; sourceTree = "<group>"; };
+		0A3487781692D52500114B0E /* BMNotOneTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMNotOneTransformer.m; sourceTree = "<group>"; };
 		0A398E9A16438F9700829BF9 /* BMBeforeImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMBeforeImageView.h; sourceTree = "<group>"; };
 		0A398E9B16438F9700829BF9 /* BMBeforeImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMBeforeImageView.m; sourceTree = "<group>"; };
 		0A398E9D16439FAA00829BF9 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -99,6 +114,9 @@
 		0A91237816927863001E878D /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pause.png; path = Resources/pause.png; sourceTree = "<group>"; };
 		0A91237916927863001E878D /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = play.png; path = Resources/play.png; sourceTree = "<group>"; };
 		0A91237C169283C7001E878D /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = trash.png; path = Resources/trash.png; sourceTree = "<group>"; };
+		0A91238216929E02001E878D /* BMViewWithColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMViewWithColor.h; sourceTree = "<group>"; };
+		0A91238316929E02001E878D /* BMViewWithColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMViewWithColor.m; sourceTree = "<group>"; };
+		0A9123851692A0FA001E878D /* vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = vertical.png; path = Resources/vertical.png; sourceTree = "<group>"; };
 		0AA296981640C27500B2F4FB /* BodyMation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BodyMation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AA2969C1640C27500B2F4FB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		0AA2969F1640C27600B2F4FB /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -254,6 +272,10 @@
 				0AA296A81640C27600B2F4FB /* main.m */,
 				0AA296AA1640C27600B2F4FB /* BodyMation-Prefix.pch */,
 				0AA296AB1640C27600B2F4FB /* Credits.rtf */,
+				0A91238216929E02001E878D /* BMViewWithColor.h */,
+				0A91238316929E02001E878D /* BMViewWithColor.m */,
+				0A3487771692D52500114B0E /* BMNotOneTransformer.h */,
+				0A3487781692D52500114B0E /* BMNotOneTransformer.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -318,6 +340,12 @@
 		0ADF4E2A16866B560019DCBD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0A3487711692C2E600114B0E /* delete-instructions.png */,
+				0A34876F1692C09500114B0E /* export-instructions.png */,
+				0A34876D1692BAE700114B0E /* play-instructions.png */,
+				0A3487691692B12F00114B0E /* first-picture.png */,
+				0A3487661692ABAA00114B0E /* welcome.png */,
+				0A9123851692A0FA001E878D /* vertical.png */,
 				0A91237C169283C7001E878D /* trash.png */,
 				0A91237816927863001E878D /* pause.png */,
 				0A91237916927863001E878D /* play.png */,
@@ -410,6 +438,12 @@
 				0A91237A16927863001E878D /* pause.png in Resources */,
 				0A91237B16927863001E878D /* play.png in Resources */,
 				0A91237D169283C7001E878D /* trash.png in Resources */,
+				0A9123861692A0FA001E878D /* vertical.png in Resources */,
+				0A3487671692ABAA00114B0E /* welcome.png in Resources */,
+				0A34876A1692B12F00114B0E /* first-picture.png in Resources */,
+				0A34876E1692BAE700114B0E /* play-instructions.png in Resources */,
+				0A3487701692C09500114B0E /* export-instructions.png in Resources */,
+				0A3487721692C2E600114B0E /* delete-instructions.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,6 +478,8 @@
 				0A63F475168FB6AB004C72E2 /* NSString-Base64Extensions.m in Sources */,
 				0A63F476168FB6AB004C72E2 /* NSString+PECrypt.m in Sources */,
 				0AE403CE1690E08E008A57C2 /* BMCaptureController.m in Sources */,
+				0A91238416929E02001E878D /* BMViewWithColor.m in Sources */,
+				0A3487791692D52500114B0E /* BMNotOneTransformer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

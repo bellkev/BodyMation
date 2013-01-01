@@ -10,16 +10,18 @@
 #import <Quartz/Quartz.h>
 
 @class BMWindowController;
+@class BMViewWithColor;
 
 @interface BMBrowserViewController : NSViewController
 
 @property NSArray *imagesSortDescriptors;
 @property (strong) IBOutlet NSArrayController *arrayController;
-@property /*(weak)*/ IBOutlet IKImageBrowserView *imageBrowserView;
-@property /*(weak)*/ IBOutlet NSScrollView *scrollView;
+@property (weak) IBOutlet IKImageBrowserView *imageBrowserView;
+@property (weak) IBOutlet NSScrollView *scrollView;
 @property BMWindowController *windowController;
 @property (unsafe_unretained) IBOutlet NSButton *buyButton;
 @property (strong) IBOutlet NSArrayController *imageArrayController;
+@property (weak) IBOutlet BMViewWithColor *startView;
 - (void)scrollUpdate:(id)sender;
 - (IBAction)buyButtonWasClicked:(id)sender;
 - (IBAction)deleteButtonWasClicked:(id)sender;

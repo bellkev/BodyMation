@@ -10,6 +10,7 @@
 #import "BMWindowController.h"
 #import "BMUtilities.h"
 #import "BMImage.h"
+#import "BMViewWithColor.h"
 
 @interface BMBrowserViewController ()
 - (void)updateZoomValue:(NSNotification *)notification;
@@ -23,6 +24,7 @@
 @synthesize scrollView;
 @synthesize windowController;
 @synthesize imageArrayController;
+@synthesize startView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,6 +43,8 @@
     [imageBrowserView setContentResizingMask:NSViewWidthSizable];
     //[[self imageBrowserView] setCellSize:CGSizeMake(450.0, 300.0)];
     //[[self imageBrowserView] setCellsStyleMask:(IKCellsStyleTitled|IKCellsStyleShadowed)];
+    // Set tutorial display properties
+    [startView fillWithColor:[NSColor colorWithCalibratedWhite:1.0f alpha:1.0f]];
     CALayer* backgroundLayer = [CALayer layer];
     [backgroundLayer setBackgroundColor:CGColorCreateGenericGray(0.0, 1.0)];
     [[self view] setWantsLayer:YES];
