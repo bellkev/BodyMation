@@ -9,6 +9,7 @@
 #import "BMBrowserViewController.h"
 #import "BMWindowController.h"
 #import "BMUtilities.h"
+#import "BMImage.h"
 
 @interface BMBrowserViewController ()
 - (void)updateZoomValue:(NSNotification *)notification;
@@ -21,6 +22,7 @@
 @synthesize imageBrowserView;
 @synthesize scrollView;
 @synthesize windowController;
+@synthesize imageArrayController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -61,7 +63,7 @@
     //[NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(scrollUpdate:) userInfo:nil repeats:YES];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollUpdate:) name:@"IKImageBrowserDidStabilize" object:imageBrowserView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateZoomValue:) name:NSWindowDidResizeNotification object:[self windowController]];
-    [[self imageBrowserView] setZoomValue:0.95f];
+    [[self imageBrowserView] setZoomValue:0.92f];
     
     // Set buy button properties
     //NSFont *buyButtonFont = [NSFont font]
@@ -83,10 +85,22 @@
     [[self buyButton] setState:NSOffState];
 }
 
+- (IBAction)deleteButtonWasClicked:(id)sender {
+    NSAlert *deleteAlert = [NSAlert alertWithMessageText:@"Delete Confirmation" defaultButton:@"Delete" alternateButton:@"Cancel" otherButton:@"" informativeTextWithFormat:@"Are you sure you want to delete the selected picture(s)? You can't undo this."];
+    NSInteger button = [deleteAlert runModal];
+    if (button == NSAlertDefaultReturn) {
+        NSManagedObjectContext *context = [[NSApp delegate] managedObjectContext];
+        NSArray *toDelete = [[self imageArrayController] selectedObjects];
+        for (BMImage *image in toDelete) {
+            [context deleteObject:image];
+        }
+    }
+}
+
 - (void)updateZoomValue:(NSNotification *)notification {
     // Workaround to keep imageBrowserView zoom set to desired value
-    if ([[self imageBrowserView] zoomValue] != 0.95) {
-        [[self imageBrowserView] setZoomValue:0.95f];
+    if ([[self imageBrowserView] zoomValue] != 0.92f) {
+        [[self imageBrowserView] setZoomValue:0.92f];
     }
 }
 @end

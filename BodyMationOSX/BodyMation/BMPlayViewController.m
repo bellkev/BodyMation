@@ -30,6 +30,7 @@
 @synthesize progressIndicator;
 @synthesize movieNeedsRefresh;
 @synthesize renderText;
+@synthesize controllerView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -62,8 +63,7 @@
     [[self view] setLayer:backgroundLayer];
     [[self view] setWantsLayer:YES];
     // Hide play/pause buttons to start
-    [[self playButton] setHidden:YES];
-    [[self pauseButton] setHidden:YES];
+    [[self controllerView] setHidden:YES];
     // Set up movie
     [self createVideo];
 }
@@ -71,6 +71,7 @@
 - (void)createVideo {
     NSLog(@"Creating video...");
     [[self movieView] setHidden:YES];
+    [[self controllerView] setHidden:YES];
     [[self progressIndicator] startAnimation:nil];
     [[self renderText] setHidden:NO];
     NSOperation *renderOperation = [self renderVideoOperation];
@@ -86,7 +87,9 @@
     [[self progressIndicator] stopAnimation:nil];
     [[self renderText] setHidden:YES];
     [[self movieView] setHidden:NO];
+    [[self controllerView] setHidden:NO];
     [[self playButton] setHidden:NO];
+    [[self pauseButton] setHidden:YES];
 }
 
 - (NSOperation*)renderVideoOperation {
@@ -176,6 +179,14 @@
     [[self movieView] pause:nil];
     [[self pauseButton] setHidden:YES];
     [[self playButton] setHidden:NO];
+}
+
+- (IBAction)firstButtonWasPushed:(id)sender {
+    [[self movieView] gotoBeginning:nil];
+}
+
+- (IBAction)lastButtonWasPushed:(id)sender {
+    [[self movieView] gotoEnd:nil];
 }
 
 - (CVPixelBufferRef)bufferFromImageObject:(BMImage *)imageObject {

@@ -20,11 +20,14 @@
 @property /*(weak)*/ IBOutlet NSTextField *renderText;
 @property (unsafe_unretained) IBOutlet NSButton *playButton;
 @property (unsafe_unretained) IBOutlet NSButton *pauseButton;
+@property (weak) IBOutlet NSView *controllerView;
 
 
 - (void)createVideo;
 - (void)renderVideo;
 - (IBAction)playButtonWasPushed:(id)sender;
 - (IBAction)pauseButtonWasPushed:(id)sender;
+- (IBAction)firstButtonWasPushed:(id)sender;
+- (IBAction)lastButtonWasPushed:(id)sender;
 
 @end

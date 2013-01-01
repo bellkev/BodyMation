@@ -19,8 +19,10 @@
 @property /*(weak)*/ IBOutlet NSScrollView *scrollView;
 @property BMWindowController *windowController;
 @property (unsafe_unretained) IBOutlet NSButton *buyButton;
+@property (strong) IBOutlet NSArrayController *imageArrayController;
 - (void)scrollUpdate:(id)sender;
 - (IBAction)buyButtonWasClicked:(id)sender;
+- (IBAction)deleteButtonWasClicked:(id)sender;
 
 
 @end
