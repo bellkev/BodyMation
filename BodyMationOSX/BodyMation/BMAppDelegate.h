@@ -48,5 +48,6 @@
 - (void)openRegisterWindowController;
 - (void)updateCameras:(NSNotification *)notification;
 - (void)cameraMenuItemSelected:(id)sender;
+- (CGSize)currentResolution;
 
 @end

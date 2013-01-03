@@ -9,11 +9,27 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
-@interface BMCaptureController : NSObject
+@interface BMCaptureController : NSObject <AVCaptureVideoDataOutputSampleBufferDelegate>
 
 @property AVCaptureSession *captureSession;
 @property AVCaptureInput *videoInput;
+@property AVCaptureVideoDataOutput *videoOutput;
+@property AVCaptureStillImageOutput *imageOutput;
+@property NSInteger countDown;
+@property NSNumber *comparePeriod;
+@property NSNumber *compareTime;
+@property NSTimer *countDownTimer;
+@property NSTimer *compareTimer;
+
+
+// View-related properties
+@property BOOL isCapturingFrames;
+@property BOOL beforeImageViewShouldBeHidden;
+@property BOOL flashViewShouldBeHidden;
+@property CGSize videoResolution;
 
 - (void)setInputDevice:(AVCaptureDevice *)device;
+- (void)startCapture;
+- (void) stopCapture;
 
 @end

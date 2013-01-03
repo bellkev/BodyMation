@@ -8,6 +8,7 @@
 
 #import "BMBorderView.h"
 #import "BMUtilities.h"
+#import "BMAppDelegate.h"
 
 @implementation BMBorderView
 
@@ -30,7 +31,6 @@
     // Drawing code here.
     NSRect destinationRect = [BMUtilities rectWithPreservedAspectRatioForSourceSize:[self borderSize] andBoundingRect:[self bounds]];
     [[self borderColor] setFill];
-    NSLog(@"%@", [self borderColor]);
     NSFrameRectWithWidth(destinationRect, 15);
     
 }

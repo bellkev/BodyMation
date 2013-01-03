@@ -14,6 +14,7 @@
 
 @dynamic name;
 @dynamic images;
+@dynamic movieIsCurrent;
 
 + (id)seriesInDefaultContext {
     NSManagedObjectContext *context = [[NSApp delegate] managedObjectContext];

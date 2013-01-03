@@ -50,6 +50,7 @@
 							<object class="NSButton" id="44905265">
 								<reference key="NSNextResponder" ref="896580709"/>
 								<int key="NSvFlags">256</int>
+								<array class="NSMutableArray" key="NSSubviews"/>
 								<string key="NSFrame">{{50, 0}, {50, 50}}</string>
 								<reference key="NSSuperview" ref="896580709"/>
 								<reference key="NSNextKeyView" ref="897916848"/>
@@ -82,6 +83,7 @@
 							<object class="NSButton" id="897916848">
 								<reference key="NSNextResponder" ref="896580709"/>
 								<int key="NSvFlags">256</int>
+								<array class="NSMutableArray" key="NSSubviews"/>
 								<string key="NSFrame">{{100, 0}, {50, 50}}</string>
 								<reference key="NSSuperview" ref="896580709"/>
 								<reference key="NSNextKeyView"/>
@@ -110,6 +112,7 @@
 							<object class="NSButton" id="965026873">
 								<reference key="NSNextResponder" ref="896580709"/>
 								<int key="NSvFlags">256</int>
+								<array class="NSMutableArray" key="NSSubviews"/>
 								<string key="NSFrame">{{50, 0}, {50, 50}}</string>
 								<reference key="NSSuperview" ref="896580709"/>
 								<reference key="NSNextKeyView" ref="44905265"/>
@@ -138,6 +141,7 @@
 							<object class="NSButton" id="1039566733">
 								<reference key="NSNextResponder" ref="896580709"/>
 								<int key="NSvFlags">256</int>
+								<array class="NSMutableArray" key="NSSubviews"/>
 								<string key="NSFrameSize">{50, 50}</string>
 								<reference key="NSSuperview" ref="896580709"/>
 								<reference key="NSNextKeyView" ref="965026873"/>
@@ -167,6 +171,7 @@
 						<string key="NSFrame">{{245, 30}, {150, 50}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSNextKeyView" ref="1039566733"/>
+						<bool key="NSViewIsLayerTreeHost">YES</bool>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<string key="NSClassName">NSView</string>
 					</object>
@@ -176,6 +181,7 @@
 						<string key="NSFrame">{{171, 264}, {298, 37}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSNextKeyView" ref="103075948"/>
+						<bool key="NSViewIsLayerTreeHost">YES</bool>
 						<string key="NSReuseIdentifierKey">_NS:1535</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="1056322931">
@@ -211,6 +217,7 @@
 						<string key="NSFrame">{{304, 224}, {32, 32}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSNextKeyView" ref="896580709"/>
+						<bool key="NSViewIsLayerTreeHost">YES</bool>
 						<string key="NSReuseIdentifierKey">_NS:945</string>
 						<int key="NSpiFlags">28682</int>
 						<double key="NSMaxValue">100</double>
@@ -227,6 +234,7 @@
 						<string key="NSFrameSize">{640, 480}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSNextKeyView" ref="610915510"/>
+						<bool key="NSViewIsLayerTreeHost">YES</bool>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="kCoderFillColor">
 							<int key="NSColorSpace">3</int>
@@ -241,6 +249,7 @@
 				<string key="NSFrameSize">{640, 480}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSNextKeyView" ref="848722505"/>
+				<bool key="NSViewIsLayerTreeHost">YES</bool>
 				<string key="NSClassName">NSView</string>
 			</object>
 			<object class="NSUserDefaultsController" id="635982185">

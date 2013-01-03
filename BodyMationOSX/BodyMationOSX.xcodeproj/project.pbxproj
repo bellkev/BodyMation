@@ -632,7 +632,7 @@
 				0A6124891690033600101647 /* BodyMation 2.xcdatamodel */,
 				0AA296B51640C27600B2F4FB /* BodyMation.xcdatamodel */,
 			);
-			currentVersion = 0AA296B51640C27600B2F4FB /* BodyMation.xcdatamodel */;
+			currentVersion = 0A6124891690033600101647 /* BodyMation 2.xcdatamodel */;
 			path = BodyMation.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

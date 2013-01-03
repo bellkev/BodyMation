@@ -15,6 +15,7 @@
 #import "BMSeries.h"
 #import "BMImage.h"
 #import "BMUtilities.h"
+#import "BMCaptureController.h"
 
 @interface BMWindowController ()
 - (void)openViewController:(NSViewController *)viewController;
@@ -141,7 +142,7 @@
             [self setCaptureViewController:[[BMCaptureViewController alloc] initWithNibName:@"BMCaptureViewController" bundle:nil]];
         }
         else {
-            [[self captureViewController] startCapture];
+            [[[NSApp delegate] captureController] startCapture];
         }
         [self openViewController:[self captureViewController]];
     }
@@ -166,7 +167,7 @@
     [[viewController view] setFrame:[[[self window] contentView] bounds]];
     // Handle any necessary cleanup of current view
     if ([[self currentViewController] isKindOfClass:[BMCaptureViewController class]]) {
-        [(BMCaptureViewController *)[self currentViewController] stopCapture];
+        [[[NSApp delegate] captureController] stopCapture];
     }
     // Swap to new view
     [[[self currentViewController] view] removeFromSuperview];

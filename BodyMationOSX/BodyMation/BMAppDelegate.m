@@ -104,6 +104,12 @@
     }
 }
 
+- (CGSize)currentResolution {
+    CMVideoFormatDescriptionRef videoDescription = [[[self currentVideoDevice] activeFormat] formatDescription];
+    // TODO: research what exactly "clean aperture" and "pixel aspect ration" parameters below mean
+    return CMVideoFormatDescriptionGetPresentationDimensions(videoDescription, YES, YES);
+}
+
 - (void)cameraMenuItemSelected:(id)sender {
     NSMenuItem *item = sender;
     [self setActiveCameraMenuItem:item];

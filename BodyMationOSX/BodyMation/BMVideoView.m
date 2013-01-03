@@ -8,33 +8,38 @@
 
 #import "BMVideoView.h"
 #import "BMBorderView.h"
+#import "BMUtilities.h"
+#import "BMAppDelegate.h"
+#import "BMCaptureController.h"
 //#import <math.h>
 
 @interface BMVideoView ()
+@property NSView *previewView;
 - (void)applyRotation;
 @end
 
 @implementation BMVideoView
 
 @synthesize previewLayer;
+@synthesize previewView;
 @synthesize borderView;
 @synthesize borderColor;
+@synthesize size;
 
-- (id)initWithFrame:(NSRect)frame andSession:(AVCaptureSession *)session andBorderColor:(NSColor *)color
+- (id)initWithFrame:(NSRect)frame andCaptureController:(BMCaptureController *)controller andBorderColor:(NSColor *)color
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Make this view layer-hosting and add a root layer
-        [self setWantsLayer:YES];
+        // Host layer
         [self setLayer:[CALayer layer]];
+        [self setWantsLayer:YES];
         // Make autoresize
         [self setAutoresizingMask:(NSViewWidthSizable|NSViewHeightSizable)];
         // Create video layer
-        [self setPreviewLayer:[[AVCaptureVideoPreviewLayer alloc] initWithSession:session]];
+        [self setPreviewLayer:[[AVCaptureVideoPreviewLayer alloc] initWithSession:[controller captureSession]]];
         [[self previewLayer] setVideoGravity:AVLayerVideoGravityResizeAspect];
-        // Make video layer autoresize
         [[self previewLayer] setAutoresizingMask:(kCALayerHeightSizable | kCALayerWidthSizable)];
-        // Flip the video so that it's mirror-like
+        // Apply size/rotation settings
         [self setCameraRotationIndex:[[NSUserDefaults standardUserDefaults] valueForKey:@"CameraRotationIndex"]];
         [self applyRotation];
         // Size to fill view
@@ -45,26 +50,43 @@
         [self setBorderColor:color];
         [self setBorderView:[[BMBorderView alloc] initWithFrame:[self bounds]]];
         [[self borderView] setBorderColor:[self borderColor]];
-        [[self borderView] setBorderSize:CGSizeMake(640.0, 480.0)];
+        [[self borderView] setBorderSize:CGSizeMake(640.0f, 480.0f)];
+        // Bind border to video size
+        [[self borderView] bind:@"borderSize" toObject:controller withKeyPath:@"videoResolution" options:nil];
         [self addSubview:[self borderView]];
-        [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(refreshLayout:) name:@"BodyMationInputDeviceChanged" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRotation:) name:NSUserDefaultsDidChangeNotification object:nil];
+//        [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(updateVideoSize:) name:@"BodyMationInputDeviceChanged" object:nil];
+//        //[[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(updateVideoSize:) name:nil object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRotation:) name:NSUserDefaultsDidChangeNotification object:nil];
     }
     
     return self;
 }
 
-- (void)refreshLayout:(NSNotification *)notification {
-    [[self previewLayer] setNeedsLayout];
-}
+//- (void)updateVideoSize:(NSNotification *)notification {
+//    CGSize videoSize = [[NSApp delegate] currentResolution];
+//    NSLog(@"Video Size: W: %f H: %f", videoSize.width, videoSize.height);
+//    NSLog(@"%@", notification);
+//    CGSize videoViewSize;
+//    if ([self cameraRotationIndex] == 0) {
+//        videoViewSize = videoSize;
+//    }
+//    else {
+//        videoViewSize.width = videoSize.height;
+//        videoViewSize.height = videoSize.width;
+//    }
+//    [self setSize:videoViewSize];
+//    [self setNeedsDisplay:YES];
+//}
 
-- (void)updateRotation:(NSNotification *)notification {
-    NSNumber *currentRotation = [[NSUserDefaults standardUserDefaults] valueForKey:@"CameraRotationIndex"];
-    if ([self cameraRotationIndex] != currentRotation) {
-        [self setCameraRotationIndex:currentRotation];
-        [self applyRotation];
-    }
-}
+//- (void)updateRotation:(NSNotification *)notification {
+//    NSNumber *currentRotation = [[NSUserDefaults standardUserDefaults] valueForKey:@"CameraRotationIndex"];
+//    if ([self cameraRotationIndex] != currentRotation) {
+//        [self setCameraRotationIndex:currentRotation];
+//        [self applyRotation];
+//        [self updateVideoSize:nil];
+//    }
+//}
+//
 
 - (void)applyRotation {
     // Start by flipping accross the y-axis
@@ -86,12 +108,18 @@
             break;
     }
     [[self previewLayer] setTransform:transform];
-    [[self previewLayer] setFrame:[self bounds]];
 }
 
 - (void)drawRect:(NSRect)dirtyRect
 {
     // Drawing code here.
+    NSRect destinationRect = [BMUtilities rectWithPreservedAspectRatioForSourceSize:CGSizeMake(640.0f, 480.0f) andBoundingRect:[self bounds]];
+    [CATransaction begin];
+    [CATransaction setValue:[NSNumber numberWithFloat:0.0f]
+                     forKey:kCATransactionAnimationDuration];
+    [[self previewLayer] setFrame:destinationRect];
+    [CATransaction commit];
+    NSLog(@"W: %f H: %f", [self size].width, [self size].height);
 }
 
 @end

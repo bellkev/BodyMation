@@ -97,8 +97,7 @@
     return destinationRect;
 }
 
-+ (void)buyNow
-{
++ (void)buyNow {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.google.com/"]];
 }
 
@@ -136,4 +135,5 @@
     [rotatedImage unlockFocus] ;
     return rotatedImage;
 }
+
 @end

@@ -10,6 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 @class BMBorderView;
+@class BMCaptureController;
 
 @interface BMVideoView : NSView
 
@@ -17,9 +18,11 @@
 @property BMBorderView *borderView;
 @property NSColor *borderColor;
 @property NSNumber *cameraRotationIndex;
+@property CGSize size;
 
-- (id)initWithFrame:(NSRect)frame andSession:(AVCaptureSession *)session andBorderColor:(NSColor *)color;
-- (void)refreshLayout:(NSNotification *)notification;
+- (id)initWithFrame:(NSRect)frame andCaptureController:(BMCaptureController *)controller andBorderColor:(NSColor *)color;
+- (void)updateVideoSize:(NSNotification *)notification;
 - (void)updateRotation:(NSNotification *)notification;
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 
 @end

@@ -11,35 +11,20 @@
 #import <AVFoundation/AVFoundation.h>
 
 @class BMBeforeImageView;
+@class BMVideoView;
 @class BMWindowController;
+@class BMCaptureController;
 
 @interface BMCaptureViewController : NSViewController
 
+@property BMWindowController *windowController;
+@property BMCaptureController *captureController;
+
 // View-related properties
 @property BMBeforeImageView *beforeImageView;
-@property NSView *captureView;
-@property NSImage *capturedImage;
-@property /*(weak)*/ IBOutlet NSTextField *countDownLabel;
+@property BMVideoView *videoView;
+@property (weak) IBOutlet NSView *overlayView;
+@property (weak) IBOutlet NSTextField *countDownLabel;
 @property NSView *flashView;
-@property /*(weak)*/ IBOutlet NSView *overlayView;
-@property BMWindowController *windowController;
-
-// Capture session properties
-@property AVCaptureStillImageOutput *imageOutput;
-@property AVCaptureVideoDataOutput *videoOutput;
-@property AVCaptureSession *captureSession;
-
-// Timing-related properties
-@property float comparePeriod;
-@property float compareTime;
-@property (retain) NSTimer *compareTimer;
-@property NSInteger countDownLength;
-@property NSInteger countDownRemaining;
-@property (retain) NSTimer *countDownTimer;
-
-// Instance methods
-- (void) startCapture;
-- (void) stopCapture;
-- (void) captureStillImage;
 
 @end

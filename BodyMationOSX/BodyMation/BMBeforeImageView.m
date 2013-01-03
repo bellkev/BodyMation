@@ -24,9 +24,11 @@
     if (self) {
         // Set before image to most recent image
         
-        // Add before image layer
-        [self setWantsLayer:YES];
+        // Make autoresize
+        [self setAutoresizingMask:(NSViewWidthSizable|NSViewHeightSizable)];
+        // Host layer
         [self setLayer:[CALayer layer]];
+        [self setWantsLayer:YES];
         [self setBeforeImageLayer:[CALayer layer]];
         [[self beforeImageLayer] setAutoresizingMask:(kCALayerHeightSizable | kCALayerWidthSizable)];
         [[self beforeImageLayer] setContentsGravity:kCAGravityResizeAspect];
