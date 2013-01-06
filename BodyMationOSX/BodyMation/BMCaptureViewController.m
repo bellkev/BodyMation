@@ -59,7 +59,7 @@
     [[self view] setLayer:backgroundLayer];
     
     // Make an extra-wide frame rect so that video will always be as tall as possible with "aspect" video gravity
-    float paddedWidth = 10000.0;
+    float paddedWidth = 10000.0f;
     CGRect boundsRect = [[self view] bounds];
     CGRect paddedRect = CGRectMake(-paddedWidth / 2 + boundsRect.size.width / 2.0,
                                    boundsRect.origin.y,
@@ -78,11 +78,7 @@
     
     // Create video view and add under before image view
     [self setVideoView:[[BMVideoView alloc] initWithFrame:paddedRect
-                                     andCaptureController:[self captureController]
-                                           andBorderColor:[NSColor colorWithCalibratedRed:1.0
-                                                                                    green:0.0
-                                                                                     blue:0.0
-                                                                                    alpha:0.5]]];
+                                    andCaptureController:[self captureController]]];
     [[self overlayView] setWantsLayer:YES];
     [[self view] addSubview:[self videoView]
                  positioned:NSWindowBelow

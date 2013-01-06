@@ -30,7 +30,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Initialization code here.        
+        // Initialization code here.
     }
     
     return self;
@@ -44,11 +44,11 @@
     //[[self imageBrowserView] setCellSize:CGSizeMake(450.0, 300.0)];
     //[[self imageBrowserView] setCellsStyleMask:(IKCellsStyleTitled|IKCellsStyleShadowed)];
     // Set tutorial display properties
-    [startView fillWithColor:[NSColor colorWithCalibratedWhite:1.0f alpha:1.0f]];
-    CALayer* backgroundLayer = [CALayer layer];
-    [backgroundLayer setBackgroundColor:CGColorCreateGenericGray(0.0, 1.0)];
-    [[self view] setWantsLayer:YES];
-    [[self view] setLayer:backgroundLayer];
+//    [startView fillWithColor:[NSColor colorWithCalibratedWhite:1.0f alpha:1.0f]];
+//    CALayer* backgroundLayer = [CALayer layer];
+//    [backgroundLayer setBackgroundColor:CGColorCreateGenericGray(0.0, 1.0)];
+//    [[self view] setWantsLayer:YES];
+//    [[self view] setLayer:backgroundLayer];
     NSColor* background = [NSColor colorWithCalibratedWhite:0.2 alpha:1.0];
     [imageBrowserView setValue:background forKey:IKImageBrowserBackgroundColorKey];
     NSDictionary *titleAttributes = [NSDictionary dictionaryWithObjectsAndKeys:

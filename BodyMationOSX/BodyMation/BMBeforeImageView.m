@@ -47,7 +47,7 @@
         [self setBorderColor:color];
         [self setBorderView:[[BMBorderView alloc] initWithFrame:[self bounds]]];
         [[self borderView] setBorderColor:[self borderColor]];
-        [[self borderView] setBorderSize:CGSizeMake(640.0, 480.0)];
+        [[self borderView] setBorderSize:[[self beforeImage] size]];
         [self addSubview:[self borderView]];
         
         // Hide for now

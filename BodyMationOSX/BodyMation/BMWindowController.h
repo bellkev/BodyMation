@@ -13,7 +13,7 @@
 @class BMPlayViewController;
 @class BMSeries;
 
-@interface BMWindowController : NSWindowController
+@interface BMWindowController : NSWindowController <NSWindowDelegate>
 
 
 @property BMBrowserViewController *browserViewController;

@@ -16,6 +16,7 @@
 @property AVCaptureVideoDataOutput *videoOutput;
 @property AVCaptureStillImageOutput *imageOutput;
 @property NSInteger countDown;
+@property NSInteger countUp;
 @property NSNumber *comparePeriod;
 @property NSNumber *compareTime;
 @property NSTimer *countDownTimer;
@@ -23,13 +24,13 @@
 
 
 // View-related properties
-@property BOOL isCapturingFrames;
 @property BOOL beforeImageViewShouldBeHidden;
 @property BOOL flashViewShouldBeHidden;
 @property CGSize videoResolution;
 
 - (void)setInputDevice:(AVCaptureDevice *)device;
 - (void)startCapture;
-- (void) stopCapture;
+- (void)stopCapture;
+- (void)updateSessionStatus:(NSNotification *)notification;
 
 @end

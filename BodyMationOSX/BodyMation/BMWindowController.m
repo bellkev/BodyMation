@@ -52,12 +52,15 @@
 {
     self = [super initWithWindow:window];
     if (self) {
+        // Set self as delegate
+        [[self window] setDelegate:self];
         // Initialization code here.
         [self setShouldScrollToNewestImage:YES];
         // Set sort type for series array controller
         NSSortDescriptor *sort;
         sort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
         [self setSeriesSortDescriptors:[NSArray arrayWithObject:sort]];
+        // Setup updates to series property TODO: Bind this instead
         NSString *seriesName = [[NSUserDefaults standardUserDefaults] valueForKey:@"DefaultSeriesName"];
         [self setCurrentSeries:[BMSeries seriesForName:seriesName]];
         [self setCurrentSeriesName:seriesName];
@@ -65,6 +68,10 @@
     }
     
     return self;
+}
+
+- (NSApplicationPresentationOptions)window:(NSWindow *)window willUseFullScreenPresentationOptions:(NSApplicationPresentationOptions)proposedOptions {
+    return proposedOptions | NSApplicationPresentationAutoHideToolbar;
 }
 
 - (void)windowDidLoad

@@ -19,9 +19,10 @@
 @property NSColor *borderColor;
 @property NSNumber *cameraRotationIndex;
 @property CGSize size;
+@property BMCaptureController *captureController;
 
-- (id)initWithFrame:(NSRect)frame andCaptureController:(BMCaptureController *)controller andBorderColor:(NSColor *)color;
-- (void)updateVideoSize:(NSNotification *)notification;
+- (id)initWithFrame:(NSRect)frame andCaptureController:(BMCaptureController *)controller;
+- (void)refreshPreviewLayer:(NSNotification *)notification;
 - (void)updateRotation:(NSNotification *)notification;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 

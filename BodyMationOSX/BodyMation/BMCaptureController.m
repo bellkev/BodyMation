@@ -29,20 +29,19 @@
 
 // Timing
 @synthesize countDown;
+@synthesize countUp;
 @synthesize countDownTimer;
 @synthesize comparePeriod;
 @synthesize compareTime;
 
 // View control
 @synthesize beforeImageViewShouldBeHidden;
-@synthesize isCapturingFrames;
 @synthesize flashViewShouldBeHidden;
 
 - (id)init {
     self = [super init];
     if (self) {
         [self setBeforeImageViewShouldBeHidden:YES];
-        [self setIsCapturingFrames:NO];
         [self setFlashViewShouldBeHidden:YES];
         [self createCaptureSession];
     }
@@ -62,27 +61,6 @@
     else {
         NSLog(@"ERROR: Unable to add image output to AVCaptureSession");
     }
-    // This slows shit down! Don't do it!
-//    // Add video output to watch frames
-//    [self setVideoOutput:[[AVCaptureVideoDataOutput alloc] init]];
-//    [[self videoOutput] setAlwaysDiscardsLateVideoFrames:YES];
-//    dispatch_queue_t queue = dispatch_queue_create("cameraQueue", NULL);
-//    [videoOutput setSampleBufferDelegate:self queue:queue];
-//    if ([[self captureSession] canAddOutput:[self videoOutput]]) {
-//        [[self captureSession] addOutput:[self videoOutput]];
-//    }
-//    else {
-//        NSLog(@"ERROR: Unable to add image output to AVCaptureSession");
-//    }
-}
-
-- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
-    // Indicate that frames are being captured
-    [self setIsCapturingFrames:YES];
-    // Update video resolution
-//    CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
-//    [self setVideoResolution:CGSizeMake(CVPixelBufferGetWidth(imageBuffer),
-//                                        CVPixelBufferGetHeight(imageBuffer))];
 }
 
 - (void)setInputDevice:(AVCaptureDevice *)device {
@@ -113,6 +91,7 @@
     // Apply capture settings
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [self setCountDown:[defaults integerForKey:@"CountDownLength"]];
+    [self setCountUp:0];
     [self setComparePeriod:[defaults objectForKey:@"ComparePeriod"]];
     [self setCompareTime:[defaults objectForKey:@"CompareTime"]];
     // Setup timers
@@ -128,7 +107,6 @@
 - (void) stopCapture {
     [[self countDownTimer] invalidate];
     [[self compareTimer] invalidate];
-    [self setIsCapturingFrames:NO];
     [[self captureSession] stopRunning];
 }
 
@@ -138,15 +116,17 @@
         [self captureStillImage];
     }
     else {
-        self.countDown--; // Don't go negative
+        self.countDown--; // Don't go negative because it will be displayed
+        self.countUp++;
     }
 }
 
 - (void)showBeforeImage:(NSTimer *)timer {
-    //if (isCapturingFrames) {
-    [self setBeforeImageViewShouldBeHidden:NO];
-    [NSTimer scheduledTimerWithTimeInterval:[[self compareTime] floatValue] target:self selector:@selector(hideBeforeImage:) userInfo:nil repeats:NO];
-    //}
+    // Wait a couple of seconds for the capture session to start outputting video
+    if (self.countUp > 1) {
+        [self setBeforeImageViewShouldBeHidden:NO];
+        [NSTimer scheduledTimerWithTimeInterval:[[self compareTime] floatValue] target:self selector:@selector(hideBeforeImage:) userInfo:nil repeats:NO];
+    }
 }
 
 - (void)hideBeforeImage:(NSTimer *)timer {
