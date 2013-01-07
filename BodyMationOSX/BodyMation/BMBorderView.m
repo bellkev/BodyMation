@@ -21,6 +21,7 @@
     if (self) {
         // Make autoresize
         [self setAutoresizingMask:(NSViewWidthSizable|NSViewHeightSizable)];
+        [self setWantsLayer:YES];
     }
     
     return self;

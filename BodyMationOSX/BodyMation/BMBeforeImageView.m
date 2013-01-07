@@ -22,27 +22,12 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Set before image to most recent image
-        
         // Make autoresize
         [self setAutoresizingMask:(NSViewWidthSizable|NSViewHeightSizable)];
-        // Host layer
-        [self setLayer:[CALayer layer]];
-        [self setWantsLayer:YES];
-        [self setBeforeImageLayer:[CALayer layer]];
-        [[self beforeImageLayer] setAutoresizingMask:(kCALayerHeightSizable | kCALayerWidthSizable)];
-        [[self beforeImageLayer] setContentsGravity:kCAGravityResizeAspect];
-        [[self beforeImageLayer] setFrame:[self bounds]];
         
-        // Flip to match the preview video
-        CATransform3D flipTransform = CATransform3DScale(CATransform3DIdentity, -1.0, 1.0, 1.0);
-        [[self beforeImageLayer] setTransform:flipTransform];
-        [[self layer] addSublayer:[self beforeImageLayer]];
-        
-        // Set layer content to before image
+        // Set before image to latest image
         [self updateBeforeImage];
-        [[self beforeImageLayer] setContents:[BMUtilities CGImageFromNSImage:[self beforeImage]]];
-        
+
         // Add border view
         [self setBorderColor:color];
         [self setBorderView:[[BMBorderView alloc] initWithFrame:[self bounds]]];
@@ -74,15 +59,23 @@
     }
     else if ([fetchedArray count] == 0) {
         [self setBeforeImage:nil];
+        NSLog(@"No before image found");
         return;
     }
     BMImage *latestImageObject = [fetchedArray objectAtIndex:0];
     [self setBeforeImage:[[NSImage alloc] initWithData:[latestImageObject imageData]]];
+    NSLog(@"Successfully set before image");
 }
 
 - (void)drawRect:(NSRect)dirtyRect
 {
     // Drawing code here.
+    NSRect destinationRect = [BMUtilities rectWithPreservedAspectRatioForSourceSize:[[self beforeImage] size] andBoundingRect:[self bounds]];
+    NSAffineTransform* transform = [NSAffineTransform transform];
+    [transform scaleXBy:-1.0f yBy:1.0f];
+    [transform translateXBy:-self.bounds.size.width yBy:0.0f];
+    [transform concat];
+    [[self beforeImage] drawInRect:destinationRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
 }
 
 @end

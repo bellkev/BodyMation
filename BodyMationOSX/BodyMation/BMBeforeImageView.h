@@ -18,5 +18,6 @@
 @property NSColor *borderColor;
 
 - (id)initWithFrame:(NSRect)frameRect andBorderColor:(NSColor *)color;
+- (void)updateBeforeImage;
 
 @end

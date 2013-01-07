@@ -66,8 +66,8 @@
     //[[self imageBrowserView] scrollIndexToVisible:3];
     //[NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(scrollUpdate:) userInfo:nil repeats:YES];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollUpdate:) name:@"IKImageBrowserDidStabilize" object:imageBrowserView];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateZoomValue:) name:NSWindowDidResizeNotification object:[self windowController]];
-    [[self imageBrowserView] setZoomValue:0.92f];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateZoomValue:) name:NSWindowDidResizeNotification object:[self windowController]];
+    //[[self imageBrowserView] setZoomValue:0.92f];
     
     // Set buy button properties
     //NSFont *buyButtonFont = [NSFont font]
