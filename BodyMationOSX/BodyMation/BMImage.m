@@ -35,6 +35,7 @@
 
 - (NSString *)imageTitleNoSlashes {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    // TODO: Check that this isn't the buggy date format
     [formatter setDateFormat:@"yyyy-MM-dd"];
     NSString *dateString = [formatter stringFromDate:[self dateTaken]];
     return dateString;
