@@ -46,7 +46,6 @@
 - (void)mouseDown:(NSEvent *)theEvent {
     // Get the mouse location in window coordinates.
     self.initialLocation = [theEvent locationInWindow];
-    NSLog(@"X: %f Y: %f", initialLocation.x, initialLocation.y);
 }
 
 /*

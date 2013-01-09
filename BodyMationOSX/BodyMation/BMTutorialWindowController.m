@@ -14,6 +14,8 @@
 
 @implementation BMTutorialWindowController
 
+@synthesize instructionLabel;
+
 - (id)initWithWindow:(NSWindow *)window
 {
     self = [super initWithWindow:window];
@@ -30,8 +32,10 @@
     [super windowDidLoad];
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
-    [[self window] setBackgroundColor:[NSColor colorWithCalibratedWhite:0.15 alpha:0.5]];
-    [[self window] setOpaque:NO];
+    [[self window] setBackgroundColor:[NSColor colorWithCalibratedWhite:0.0f alpha:0.7f]];
+    [[self instructionLabel] setAlphaValue:0.7f];
 }
 
+- (IBAction)closeButtonWasPresssed:(id)sender {
+}
 @end

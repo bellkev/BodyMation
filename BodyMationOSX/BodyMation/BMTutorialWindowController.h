@@ -9,5 +9,8 @@
 #import <Cocoa/Cocoa.h>
 
 @interface BMTutorialWindowController : NSWindowController
+@property (weak) IBOutlet NSTextField *instructionLabel;
+- (IBAction)closeButtonWasPresssed:(id)sender;
+
 
 @end
