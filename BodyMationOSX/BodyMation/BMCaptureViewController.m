@@ -72,6 +72,7 @@
                                                                                                 green:1.0
                                                                                                  blue:0.0
                                                                                                 alpha:0.5]]];
+    [[self beforeImageView] setWantsLayer:YES];
     [[self view] addSubview:[self beforeImageView]
                       positioned:NSWindowBelow
                       relativeTo:[self overlayView]];

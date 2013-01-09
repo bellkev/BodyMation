@@ -19,7 +19,6 @@
 @implementation BMBrowserViewController
 
 @synthesize imagesSortDescriptors;
-@synthesize arrayController;
 @synthesize imageBrowserView;
 @synthesize scrollView;
 @synthesize windowController;

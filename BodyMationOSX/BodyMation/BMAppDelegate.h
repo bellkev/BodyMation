@@ -45,11 +45,17 @@
 - (IBAction)preferencesMenuItemSelected:(id)sender;
 - (IBAction)saveAction:(id)sender;
 
+// Window methods
 - (void)openPreferenceWindowController;
 - (void)openSeriesWindowController;
 - (void)openRegisterWindowController;
-- (void)openTutorialWindowController;
+- (void)openTutorialWindowControllerWithMessage:(NSString *)message;
+
+// Notification selectors
 - (void)updateCameras:(NSNotification *)notification;
+- (void)checkTutorial:(NSNotification *)notification;
+
+// Camera-related methods
 - (void)cameraMenuItemSelected:(id)sender;
 - (CGSize)currentResolution;
 

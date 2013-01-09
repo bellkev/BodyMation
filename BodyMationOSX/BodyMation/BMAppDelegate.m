@@ -19,6 +19,18 @@
 #import "BMCaptureController.h"
 #import <AVFoundation/AVFoundation.h>
 
+#pragma mark String Constants
+static NSString* const BMTutorialMessage1 = @"Alright! You took your first picture. "
+                                            "Now the next time you take a picture "
+                                            "you'll compare it with this one to make "
+                                            "sure you're in exactly the same spot. Go "
+                                            "ahead, try clicking \"Capture\" again now!";
+static NSString* const BMTutorialMessage2 = @"Great! Now that you have more than one picture, "
+                                            "you can press \"Play\" any time to watch "
+                                            "a movie of your body changing!\n(It'll be "
+                                            "kind of boring now, but keep taking pictures!)";
+#pragma mark -
+
 @interface BMAppDelegate ()
 - (void)setActiveCameraMenuItem:(NSMenuItem *)item;
 @end
@@ -45,6 +57,7 @@
 {
     // Register user defaults
     [self setupPreferences];
+    
     // Setup license verification
     [self setLicenseVerifier:[[CFobLicVerifier alloc]init]];
     NSError *error;
@@ -68,6 +81,7 @@
     if (error) {
         NSLog(@"%@", error);
     }
+    
     // Check stored license
     NSString *email = [[NSUserDefaults standardUserDefaults] valueForKey:@"email"];
     NSString *license = [[NSUserDefaults standardUserDefaults] valueForKey:@"license"];
@@ -76,6 +90,7 @@
     {
         NSLog(@"%@", error);
     }
+    
     // Setup capture controller
     [self setCaptureController:[[BMCaptureController alloc] init]];
     [self setCurrentVideoDevice:[AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo]];
@@ -83,11 +98,13 @@
     [self updateCameras:[NSNotification notificationWithName:@"note" object:nil]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCameras:) name:AVCaptureDeviceWasConnectedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCameras:) name:AVCaptureDeviceWasDisconnectedNotification object:nil];
+    
     // Launch main window
     windowController = [[BMWindowController alloc] initWithWindowNibName:@"BMWindowController"];
     [windowController showWindow:nil];
-    NSLog(@"IS FULL VERSION: %@", [self isFullVersion] ? @"YES" : @"NO");
-    [self openTutorialWindowController];
+    
+    // Observe core data notifications for displaying tutorial window
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkTutorial:) name:NSManagedObjectContextObjectsDidChangeNotification object:nil];
 }
 
 - (void)updateCameras:(NSNotification *)notification {
@@ -105,6 +122,31 @@
             [item setState:NSOnState];
         }
         [[self cameraMenu] addItem:item];
+    }
+}
+
+- (void)checkTutorial:(NSNotification *)notification {
+    // Don't display if an image was deleted
+    if ([[notification userInfo] objectForKey:NSInsertedObjectsKey]) {
+        NSInteger imageCount = [[[[self windowController] currentSeries] images] count];
+        NSString *message = nil;
+        switch (imageCount) {
+            case 1:
+                message = BMTutorialMessage1;
+                break;
+            case 2:
+                message = BMTutorialMessage2;
+                break;
+            default:
+                break;
+        }
+        if (message) {
+            NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[BMAppDelegate instanceMethodSignatureForSelector:@selector(openTutorialWindowControllerWithMessage:)]];
+            [invocation setTarget:self];
+            [invocation setSelector:@selector(openTutorialWindowControllerWithMessage:)];
+            [invocation setArgument:&message atIndex:2];
+            [NSTimer scheduledTimerWithTimeInterval:2.0f invocation:invocation repeats:NO];
+        }
     }
 }
 
@@ -162,10 +204,21 @@
 }
 
 // Tutorial window controller
-- (void)openTutorialWindowController {
+- (void)openTutorialWindowControllerWithMessage:(NSString *)message {
     if (![self tutorialWindowController]) {
         [self setTutorialWindowController:[[BMTutorialWindowController alloc] initWithWindowNibName:@"BMTutorialWindowController"]];
     }
+    NSLog(@"Label: %@", tutorialWindowController.instructionLabel);
+    [[self tutorialWindowController] setInstructionText:message];
+    // Position tutorial window in upper left
+    NSRect mainWindowRect = [[[self windowController] window] frame];
+    NSRect contentViewRect = [[[[self windowController] window] contentView] frame];
+    NSPoint mainWindowOrigin = mainWindowRect.origin;
+    NSRect tutorialRect = [[[self tutorialWindowController] window] frame];
+    NSPoint tutorialOrigin;
+    tutorialOrigin.x = mainWindowOrigin.x + contentViewRect.size.width - tutorialRect.size.width;
+    tutorialOrigin.y = mainWindowOrigin.y + contentViewRect.size.height - tutorialRect.size.height;
+    [[[self tutorialWindowController] window] setFrameOrigin:tutorialOrigin];
     [[self tutorialWindowController] showWindow:nil];
 }
 - (void)setupPreferences {

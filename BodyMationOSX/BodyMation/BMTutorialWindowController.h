@@ -10,6 +10,8 @@
 
 @interface BMTutorialWindowController : NSWindowController
 @property (weak) IBOutlet NSTextField *instructionLabel;
+@property NSString *instructionText;
+
 - (IBAction)closeButtonWasPresssed:(id)sender;
 
 

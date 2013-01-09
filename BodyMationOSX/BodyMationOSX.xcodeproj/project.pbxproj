@@ -15,7 +15,6 @@
 		0A34876E1692BAE700114B0E /* play-instructions.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A34876D1692BAE700114B0E /* play-instructions.png */; };
 		0A3487701692C09500114B0E /* export-instructions.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A34876F1692C09500114B0E /* export-instructions.png */; };
 		0A3487721692C2E600114B0E /* delete-instructions.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3487711692C2E600114B0E /* delete-instructions.png */; };
-		0A3487791692D52500114B0E /* BMNotOneTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3487781692D52500114B0E /* BMNotOneTransformer.m */; };
 		0A398E9C16438F9700829BF9 /* BMBeforeImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A398E9B16438F9700829BF9 /* BMBeforeImageView.m */; };
 		0A398E9E16439FAA00829BF9 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A398E9D16439FAA00829BF9 /* CoreMedia.framework */; };
 		0A398EA21643A00400829BF9 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A398EA11643A00400829BF9 /* CoreVideo.framework */; };
@@ -87,8 +86,6 @@
 		0A34876D1692BAE700114B0E /* play-instructions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "play-instructions.png"; path = "Resources/play-instructions.png"; sourceTree = "<group>"; };
 		0A34876F1692C09500114B0E /* export-instructions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "export-instructions.png"; path = "Resources/export-instructions.png"; sourceTree = "<group>"; };
 		0A3487711692C2E600114B0E /* delete-instructions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "delete-instructions.png"; path = "Resources/delete-instructions.png"; sourceTree = "<group>"; };
-		0A3487771692D52500114B0E /* BMNotOneTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMNotOneTransformer.h; sourceTree = "<group>"; };
-		0A3487781692D52500114B0E /* BMNotOneTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMNotOneTransformer.m; sourceTree = "<group>"; };
 		0A398E9A16438F9700829BF9 /* BMBeforeImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMBeforeImageView.h; sourceTree = "<group>"; };
 		0A398E9B16438F9700829BF9 /* BMBeforeImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMBeforeImageView.m; sourceTree = "<group>"; };
 		0A398E9D16439FAA00829BF9 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -288,8 +285,6 @@
 				0AA296AB1640C27600B2F4FB /* Credits.rtf */,
 				0A91238216929E02001E878D /* BMViewWithColor.h */,
 				0A91238316929E02001E878D /* BMViewWithColor.m */,
-				0A3487771692D52500114B0E /* BMNotOneTransformer.h */,
-				0A3487781692D52500114B0E /* BMNotOneTransformer.m */,
 				0AD79A6C169D1E5F00AACD9D /* BMTranslucentWindow.h */,
 				0AD79A6D169D1E5F00AACD9D /* BMTranslucentWindow.m */,
 			);
@@ -501,7 +496,6 @@
 				0A63F476168FB6AB004C72E2 /* NSString+PECrypt.m in Sources */,
 				0AE403CE1690E08E008A57C2 /* BMCaptureController.m in Sources */,
 				0A91238416929E02001E878D /* BMViewWithColor.m in Sources */,
-				0A3487791692D52500114B0E /* BMNotOneTransformer.m in Sources */,
 				0AD79A6A169D18E200AACD9D /* BMTutorialWindowController.m in Sources */,
 				0AD79A6E169D1E5F00AACD9D /* BMTranslucentWindow.m in Sources */,
 			);

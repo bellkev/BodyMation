@@ -25,6 +25,7 @@
     if (self != nil) {
         // Start with no transparency for all drawing into the window
         [self setAlphaValue:1.0];
+        [self setBackgroundColor:[NSColor colorWithCalibratedWhite:0.0f alpha:0.7f]];
         // Turn off opacity so that the parts of the window that are not drawn into are transparent.
         [self setOpaque:NO];
     }

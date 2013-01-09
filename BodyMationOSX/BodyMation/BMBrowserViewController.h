@@ -15,7 +15,6 @@
 @interface BMBrowserViewController : NSViewController
 
 @property NSArray *imagesSortDescriptors;
-@property (strong) IBOutlet NSArrayController *arrayController;
 @property (weak) IBOutlet IKImageBrowserView *imageBrowserView;
 @property (weak) IBOutlet NSScrollView *scrollView;
 @property BMWindowController *windowController;
