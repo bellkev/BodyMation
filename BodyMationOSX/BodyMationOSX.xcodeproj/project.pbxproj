@@ -55,8 +55,12 @@
 		0AA5EE041650539F009A7AFA /* BMPreferenceWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA5EE021650539E009A7AFA /* BMPreferenceWindowController.m */; };
 		0AA5EE051650539F009A7AFA /* BMPreferenceWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AA5EE031650539E009A7AFA /* BMPreferenceWindowController.xib */; };
 		0AA8852C164B814400D0DDDA /* BMBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA8852A164B814400D0DDDA /* BMBrowserViewController.m */; };
-		0AA8852D164B814400D0DDDA /* BMBrowserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AA8852B164B814400D0DDDA /* BMBrowserViewController.xib */; };
+		0AA8852D164B814400D0DDDA /* BMBrowserViewControllerOld.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AA8852B164B814400D0DDDA /* BMBrowserViewControllerOld.xib */; };
 		0AA88535164B86FB00D0DDDA /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA88534164B86FB00D0DDDA /* Quartz.framework */; };
+		0AD79A66169BE75A00AACD9D /* BMBrowserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AD79A65169BE75A00AACD9D /* BMBrowserViewController.xib */; };
+		0AD79A6A169D18E200AACD9D /* BMTutorialWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD79A68169D18E100AACD9D /* BMTutorialWindowController.m */; };
+		0AD79A6B169D18E200AACD9D /* BMTutorialWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AD79A69169D18E100AACD9D /* BMTutorialWindowController.xib */; };
+		0AD79A6E169D1E5F00AACD9D /* BMTranslucentWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD79A6D169D1E5F00AACD9D /* BMTranslucentWindow.m */; };
 		0ADF4E2216866B2F0019DCBD /* play-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ADF4E1A16866B2F0019DCBD /* play-blue.png */; };
 		0ADF4E2316866B2F0019DCBD /* camera-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ADF4E1B16866B2F0019DCBD /* camera-blue.png */; };
 		0ADF4E2416866B2F0019DCBD /* browser-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ADF4E1C16866B2F0019DCBD /* browser-blue.png */; };
@@ -147,8 +151,14 @@
 		0AA5EE031650539E009A7AFA /* BMPreferenceWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BMPreferenceWindowController.xib; sourceTree = "<group>"; };
 		0AA88529164B814300D0DDDA /* BMBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMBrowserViewController.h; sourceTree = "<group>"; };
 		0AA8852A164B814400D0DDDA /* BMBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMBrowserViewController.m; sourceTree = "<group>"; };
-		0AA8852B164B814400D0DDDA /* BMBrowserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BMBrowserViewController.xib; sourceTree = "<group>"; };
+		0AA8852B164B814400D0DDDA /* BMBrowserViewControllerOld.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BMBrowserViewControllerOld.xib; sourceTree = "<group>"; };
 		0AA88534164B86FB00D0DDDA /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		0AD79A65169BE75A00AACD9D /* BMBrowserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BMBrowserViewController.xib; sourceTree = "<group>"; };
+		0AD79A67169D18E100AACD9D /* BMTutorialWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMTutorialWindowController.h; sourceTree = "<group>"; };
+		0AD79A68169D18E100AACD9D /* BMTutorialWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMTutorialWindowController.m; sourceTree = "<group>"; };
+		0AD79A69169D18E100AACD9D /* BMTutorialWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BMTutorialWindowController.xib; sourceTree = "<group>"; };
+		0AD79A6C169D1E5F00AACD9D /* BMTranslucentWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMTranslucentWindow.h; sourceTree = "<group>"; };
+		0AD79A6D169D1E5F00AACD9D /* BMTranslucentWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMTranslucentWindow.m; sourceTree = "<group>"; };
 		0ADF4E1A16866B2F0019DCBD /* play-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "play-blue.png"; path = "Resources/play-blue.png"; sourceTree = "<group>"; };
 		0ADF4E1B16866B2F0019DCBD /* camera-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera-blue.png"; path = "Resources/camera-blue.png"; sourceTree = "<group>"; };
 		0ADF4E1C16866B2F0019DCBD /* browser-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "browser-blue.png"; path = "Resources/browser-blue.png"; sourceTree = "<group>"; };
@@ -241,6 +251,8 @@
 				0A104309168184F500A63E1F /* BMRegisterWindowController.m */,
 				0A6099C11686DD9100371707 /* BMSeriesWindowController.h */,
 				0A6099C21686DD9100371707 /* BMSeriesWindowController.m */,
+				0AD79A67169D18E100AACD9D /* BMTutorialWindowController.h */,
+				0AD79A68169D18E100AACD9D /* BMTutorialWindowController.m */,
 				0AE403CC1690E08E008A57C2 /* BMCaptureController.h */,
 				0AE403CD1690E08E008A57C2 /* BMCaptureController.m */,
 				0AA88537164CD51100D0DDDA /* View Controllers */,
@@ -276,6 +288,8 @@
 				0A91238316929E02001E878D /* BMViewWithColor.m */,
 				0A3487771692D52500114B0E /* BMNotOneTransformer.h */,
 				0A3487781692D52500114B0E /* BMNotOneTransformer.m */,
+				0AD79A6C169D1E5F00AACD9D /* BMTranslucentWindow.h */,
+				0AD79A6D169D1E5F00AACD9D /* BMTranslucentWindow.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -308,14 +322,16 @@
 		0AA88538164CD55800D0DDDA /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
+				0AD79A65169BE75A00AACD9D /* BMBrowserViewController.xib */,
 				0AA296B11640C27600B2F4FB /* MainMenu.xib */,
 				0AA296BE1640C2C900B2F4FB /* BMWindowController.xib */,
-				0AA8852B164B814400D0DDDA /* BMBrowserViewController.xib */,
+				0AA8852B164B814400D0DDDA /* BMBrowserViewControllerOld.xib */,
 				0AA296C31640C31D00B2F4FB /* BMCaptureViewController.xib */,
 				0AA5EDF4164F4EFB009A7AFA /* BMPlayViewController.xib */,
 				0AA5EE031650539E009A7AFA /* BMPreferenceWindowController.xib */,
 				0A10430A168184F500A63E1F /* BMRegisterWindowController.xib */,
 				0A6099C31686DD9100371707 /* BMSeriesWindowController.xib */,
+				0AD79A69169D18E100AACD9D /* BMTutorialWindowController.xib */,
 			);
 			name = Nibs;
 			sourceTree = "<group>";
@@ -420,7 +436,7 @@
 				0AA296B31640C27600B2F4FB /* MainMenu.xib in Resources */,
 				0AA296C01640C2C900B2F4FB /* BMWindowController.xib in Resources */,
 				0AA296C51640C31D00B2F4FB /* BMCaptureViewController.xib in Resources */,
-				0AA8852D164B814400D0DDDA /* BMBrowserViewController.xib in Resources */,
+				0AA8852D164B814400D0DDDA /* BMBrowserViewControllerOld.xib in Resources */,
 				0AA5EDF6164F4EFB009A7AFA /* BMPlayViewController.xib in Resources */,
 				0AA5EE051650539F009A7AFA /* BMPreferenceWindowController.xib in Resources */,
 				0A10430C168184F500A63E1F /* BMRegisterWindowController.xib in Resources */,
@@ -444,6 +460,8 @@
 				0A34876E1692BAE700114B0E /* play-instructions.png in Resources */,
 				0A3487701692C09500114B0E /* export-instructions.png in Resources */,
 				0A3487721692C2E600114B0E /* delete-instructions.png in Resources */,
+				0AD79A66169BE75A00AACD9D /* BMBrowserViewController.xib in Resources */,
+				0AD79A6B169D18E200AACD9D /* BMTutorialWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,6 +498,8 @@
 				0AE403CE1690E08E008A57C2 /* BMCaptureController.m in Sources */,
 				0A91238416929E02001E878D /* BMViewWithColor.m in Sources */,
 				0A3487791692D52500114B0E /* BMNotOneTransformer.m in Sources */,
+				0AD79A6A169D18E200AACD9D /* BMTutorialWindowController.m in Sources */,
+				0AD79A6E169D1E5F00AACD9D /* BMTranslucentWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

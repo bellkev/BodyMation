@@ -81,6 +81,7 @@
     // THIS WAS DUMB!!!://[[self window] setBackgroundColor:[NSColor colorWithCalibratedWhite:0.2 alpha:0]];
     [self setButtons:[NSArray arrayWithObjects:browseButton, captureButton, playButton, nil]];
     [self openBrowserViewController];
+    
 }
 
 - (void)setDefaultSeries:(NSNotification *)note {

@@ -13,6 +13,7 @@
 @class BMPreferenceWindowController;
 @class BMRegisterWindowController;
 @class BMSeriesWindowController;
+@class BMTutorialWindowController;
 @class CFobLicVerifier;
 @class BMCaptureController;
 
@@ -22,6 +23,7 @@
 @property BMPreferenceWindowController *preferenceWindowController;
 @property BMRegisterWindowController *registerWindowController;
 @property BMSeriesWindowController *seriesWindowController;
+@property BMTutorialWindowController *tutorialWindowController;
 @property CFobLicVerifier *licenseVerifier;
 @property BMCaptureController *captureController;
 @property NSArray *videoDevices;
@@ -46,6 +48,7 @@
 - (void)openPreferenceWindowController;
 - (void)openSeriesWindowController;
 - (void)openRegisterWindowController;
+- (void)openTutorialWindowController;
 - (void)updateCameras:(NSNotification *)notification;
 - (void)cameraMenuItemSelected:(id)sender;
 - (CGSize)currentResolution;

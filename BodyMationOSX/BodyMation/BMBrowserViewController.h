@@ -22,6 +22,9 @@
 @property (unsafe_unretained) IBOutlet NSButton *buyButton;
 @property (strong) IBOutlet NSArrayController *imageArrayController;
 @property (weak) IBOutlet BMViewWithColor *startView;
+@property (strong) IBOutlet NSImageView *welcomeView;
+@property (strong) IBOutlet NSImageView *firstPictureView;
+
 - (void)scrollUpdate:(id)sender;
 - (IBAction)buyButtonWasClicked:(id)sender;
 - (IBAction)deleteButtonWasClicked:(id)sender;

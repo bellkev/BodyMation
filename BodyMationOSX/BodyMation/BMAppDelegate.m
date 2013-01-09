@@ -12,6 +12,7 @@
 #import "BMRegisterWindowController.h"
 #import "BMKeyChecker.h"
 #import "BMSeriesWindowController.h"
+#import "BMTutorialWindowController.h"
 #import "BMUtilities.h"
 #import "CFobLicVerifier.h"
 #import "BMSeries.h"
@@ -26,6 +27,8 @@
 
 @synthesize windowController;
 @synthesize preferenceWindowController;
+@synthesize seriesWindowController;
+@synthesize tutorialWindowController;
 @synthesize licenseVerifier;
 @synthesize captureController;
 @synthesize videoDevices;
@@ -84,6 +87,7 @@
     windowController = [[BMWindowController alloc] initWithWindowNibName:@"BMWindowController"];
     [windowController showWindow:nil];
     NSLog(@"IS FULL VERSION: %@", [self isFullVersion] ? @"YES" : @"NO");
+    [self openTutorialWindowController];
 }
 
 - (void)updateCameras:(NSNotification *)notification {
@@ -157,6 +161,13 @@
     [[self seriesWindowController] showWindow:nil];
 }
 
+// Tutorial window controller
+- (void)openTutorialWindowController {
+    if (![self tutorialWindowController]) {
+        [self setTutorialWindowController:[[BMTutorialWindowController alloc] initWithWindowNibName:@"BMTutorialWindowController"]];
+    }
+    [[self tutorialWindowController] showWindow:nil];
+}
 - (void)setupPreferences {
     NSMutableDictionary* defaultSettings = [[NSMutableDictionary alloc] init];
     // (Add everything as top level objects so they can be bound to

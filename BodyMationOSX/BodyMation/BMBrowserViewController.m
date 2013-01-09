@@ -25,6 +25,8 @@
 @synthesize windowController;
 @synthesize imageArrayController;
 @synthesize startView;
+@synthesize welcomeView;
+@synthesize firstPictureView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,17 +40,14 @@
 
 - (void)loadView {
     [super loadView];
+    // Setup background
+    CALayer* backgroundLayer = [CALayer layer];
+    [backgroundLayer setBackgroundColor:CGColorCreateGenericGray(0.2, 1.0)];
+    [[self view] setLayer:backgroundLayer];
+    [[self view] setWantsLayer:YES];
     
-    // Set imageBrowser display properties
+    // Setup imageBrowser
     [imageBrowserView setContentResizingMask:NSViewWidthSizable];
-    //[[self imageBrowserView] setCellSize:CGSizeMake(450.0, 300.0)];
-    //[[self imageBrowserView] setCellsStyleMask:(IKCellsStyleTitled|IKCellsStyleShadowed)];
-    // Set tutorial display properties
-//    [startView fillWithColor:[NSColor colorWithCalibratedWhite:1.0f alpha:1.0f]];
-//    CALayer* backgroundLayer = [CALayer layer];
-//    [backgroundLayer setBackgroundColor:CGColorCreateGenericGray(0.0, 1.0)];
-//    [[self view] setWantsLayer:YES];
-//    [[self view] setLayer:backgroundLayer];
     NSColor* background = [NSColor colorWithCalibratedWhite:0.2 alpha:1.0];
     [imageBrowserView setValue:background forKey:IKImageBrowserBackgroundColorKey];
     NSDictionary *titleAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -57,21 +56,26 @@
                                      [NSFont fontWithName:@"Lucida Grande" size:12], NSFontAttributeName,
                                      nil];
     [[self imageBrowserView] setValue:titleAttributes forKey:IKImageBrowserCellsTitleAttributesKey];
+    [[self imageBrowserView] setZoomValue:0.92f];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateZoomValue:) name:NSWindowDidResizeNotification object:[self windowController]];
+    
+    // Set initial scroll position
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollUpdate:) name:@"IKImageBrowserDidStabilize" object:imageBrowserView];
+    
+    // Set tutorial display properties
+    [startView fillWithColor:[NSColor colorWithCalibratedWhite:1.0f alpha:1.0f]];
+    [[self startView] setFrame:[[self view] bounds]];
+    [[self view] addSubview:[self startView]];
+    [[self welcomeView] setFrame:NSMakeRect(50.0f, 100.0f, 590.0f, 380.0f)];
+    [[self startView] addSubview:[self welcomeView]];
+    [[self firstPictureView] setFrame:NSMakeRect(0.0f, 100.0f, 640.0f, 380.0f)];
+    NSLog(@"View size: %f %f", self.view.bounds.size.width, self.view.bounds.size.height);
+    [[self startView] addSubview:[self firstPictureView]];
+
     // Set images sort desciptors
     NSSortDescriptor* sort;
     sort = [NSSortDescriptor sortDescriptorWithKey:@"dateTaken" ascending:YES];
     [self setImagesSortDescriptors:[NSArray arrayWithObject:sort]];
-    
-    // Set initial position
-    //[[self imageBrowserView] scrollIndexToVisible:3];
-    //[NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(scrollUpdate:) userInfo:nil repeats:YES];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollUpdate:) name:@"IKImageBrowserDidStabilize" object:imageBrowserView];
-    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateZoomValue:) name:NSWindowDidResizeNotification object:[self windowController]];
-    //[[self imageBrowserView] setZoomValue:0.92f];
-    
-    // Set buy button properties
-    //NSFont *buyButtonFont = [NSFont font]
-    //[self buyButton]
 }
 
 - (void)scrollUpdate:(id)sender {
