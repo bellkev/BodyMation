@@ -30,4 +30,6 @@
 - (IBAction)firstButtonWasPushed:(id)sender;
 - (IBAction)lastButtonWasPushed:(id)sender;
 
+- (NSInteger)framesPerSecondForNumberOfFrames:(NSInteger)frames;
+
 @end

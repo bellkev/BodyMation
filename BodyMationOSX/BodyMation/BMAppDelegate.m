@@ -233,7 +233,7 @@ static NSString* const BMTutorialMessage2 = @"Great! Now that you have more than
     [defaultSettings setObject:[NSNumber numberWithInt:0] forKey:@"CameraRotationIndex"];
     // Playback settings
     [defaultSettings setObject:[NSNumber numberWithInt:10] forKey:@"FrameRate"];
-    
+    [defaultSettings setObject:[NSNumber numberWithBool:NO]forKey:@"ManualFrameRate"];
     // Other settings
     [defaultSettings setObject:@"" forKey:@"DefaultSeriesName"];
     [defaultSettings setObject:@"" forKey:@"email"];

@@ -29,6 +29,10 @@
 
 + (NSURL *)getUniqueURLFromBaseURL:(NSURL *)baseURL withManager:(NSFileManager *)manager;
 
-+ (NSImage*)rotateImage:(NSImage *)image byDegrees:(CGFloat)degrees;
++ (NSImage *)rotateImage:(NSImage *)image byDegrees:(CGFloat)degrees;
+
++ (NSImage *)resizeImageForVideo:(NSImage *)image;
+
++ (CVPixelBufferRef)fastImageFromNSImage:(NSImage *)image;
 
 @end

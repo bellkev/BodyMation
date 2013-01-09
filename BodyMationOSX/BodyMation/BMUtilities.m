@@ -8,6 +8,7 @@
 
 #import "BMUtilities.h"
 #import <AVFoundation/AVFoundation.h>
+#import "BMImage.h"
 
 @interface BMUtilities ()
 + (void)runEndBlock:(void (^)(void))completionBlock;
@@ -136,4 +137,55 @@
     return rotatedImage;
 }
 
++ (NSImage *)resizeImageForVideo:(NSImage *)image {
+    NSSize size = NSMakeSize(1920.0f, 1080.0f);
+    NSRect imageRect = NSMakeRect(0.0f, 0.0f, 1920.0f, 1080.0f);
+    NSImage *resizedImage = [[NSImage alloc] initWithSize:size];
+    NSRect destinationRect = [BMUtilities rectWithPreservedAspectRatioForSourceSize:[image size] andBoundingRect:imageRect];
+    [resizedImage lockFocus];
+    [[NSColor blackColor] setFill];
+    NSRectFill(imageRect);
+    [image drawInRect:destinationRect fromRect:NSZeroRect operation:NSCompositeCopy fraction:1.0];
+    [resizedImage unlockFocus];
+    return resizedImage;
+}
+
++ (CVPixelBufferRef)fastImageFromNSImage:(NSImage *)image
+{
+    CVPixelBufferRef buffer = NULL;
+    
+    
+    // config
+    size_t width = [image size].width;
+    size_t height = [image size].height;
+    size_t bitsPerComponent = 8; // *not* CGImageGetBitsPerComponent(image);
+    CGColorSpaceRef cs = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
+    CGBitmapInfo bi = kCGImageAlphaNoneSkipFirst; // *not* CGImageGetBitmapInfo(image);
+    NSDictionary *d = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], kCVPixelBufferCGImageCompatibilityKey, [NSNumber numberWithBool:YES], kCVPixelBufferCGBitmapContextCompatibilityKey, nil];
+    
+    // create pixel buffer
+    CVPixelBufferCreate(kCFAllocatorDefault, width, height, k32ARGBPixelFormat, (__bridge CFDictionaryRef)d, &buffer);
+    CVPixelBufferLockBaseAddress(buffer, 0);
+    void *rasterData = CVPixelBufferGetBaseAddress(buffer);
+    size_t bytesPerRow = CVPixelBufferGetBytesPerRow(buffer);
+    
+    // context to draw in, set to pixel buffer's address
+    CGContextRef ctxt = CGBitmapContextCreate(rasterData, width, height, bitsPerComponent, bytesPerRow, cs, bi);
+    if(ctxt == NULL){
+        NSLog(@"could not create context");
+        return NULL;
+    }
+    
+    // draw
+    NSGraphicsContext *nsctxt = [NSGraphicsContext graphicsContextWithGraphicsPort:ctxt flipped:NO];
+    [NSGraphicsContext saveGraphicsState];
+    [NSGraphicsContext setCurrentContext:nsctxt];
+    [image compositeToPoint:NSMakePoint(0.0, 0.0) operation:NSCompositeCopy];
+    [NSGraphicsContext restoreGraphicsState];
+    
+    CVPixelBufferUnlockBaseAddress(buffer, 0);
+    CFRelease(ctxt);
+    
+    return buffer;
+}
 @end

@@ -9,6 +9,7 @@
 #import "BMPlayViewController.h"
 #import "BMImage.h"
 #import <AVFoundation/AVFoundation.h>
+#import "BMUtilities.h"
 
 @interface BMPlayViewController ()
 @property NSURL *tempDir;
@@ -99,8 +100,28 @@
     return renderOperation;
 }
 
+- (NSInteger)framesPerSecondForNumberOfFrames:(NSInteger)frames {
+    const int frameRateTable[] = {1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9};
+    BOOL manualFrameRateDefault = [[NSUserDefaults standardUserDefaults] boolForKey:@"ManualFrameRate"];
+    NSInteger frameRate = [[NSUserDefaults standardUserDefaults] integerForKey:@"FrameRate"];
+    if (manualFrameRateDefault) {
+        NSLog(@"Manual frame rate");
+        return frameRate;
+    }
+    else if (frames == 0) {
+        return 0;
+    }
+    else if (frames > 18) {
+        return 10;
+    }
+    else {
+        return frameRateTable[frames - 1];
+    }
+}
+
 - (void)renderVideo {
     NSLog(@"Starting rendering...");
+    NSInteger frameRate = [self framesPerSecondForNumberOfFrames:10];
     NSError *error = nil;
     // Remove movie file if it exists
     if ([[self movieURL] checkResourceIsReachableAndReturnError:nil]) {
@@ -119,8 +140,8 @@
     }
     NSDictionary *videoSettings = [NSDictionary dictionaryWithObjectsAndKeys:
                                    AVVideoCodecH264, AVVideoCodecKey,
-                                   [NSNumber numberWithInt:640], AVVideoWidthKey,
-                                   [NSNumber numberWithInt:480], AVVideoHeightKey,
+                                   [NSNumber numberWithInt:1920], AVVideoWidthKey,
+                                   [NSNumber numberWithInt:1080], AVVideoHeightKey,
                                    nil];
     AVAssetWriterInput* writerInput = [AVAssetWriterInput
                                        assetWriterInputWithMediaType:AVMediaTypeVideo
@@ -141,10 +162,9 @@
     [writer startSessionAtSourceTime:kCMTimeZero];
     int frameCount = 0;
     for (BMImage *image in images) {
-        //NSLog(@"Loop");
         CVPixelBufferRef pixelBuffer = [self bufferFromImageObject:image];
         while (![writerInput isReadyForMoreMediaData]) ;//NSLog(@"Not ready for data");
-        [avAdaptor appendPixelBuffer:pixelBuffer withPresentationTime:CMTimeMake(frameCount * 10, 100)];
+        [avAdaptor appendPixelBuffer:pixelBuffer withPresentationTime:CMTimeMake(frameCount, (int)frameRate)];
         frameCount++;
     }
     [writerInput markAsFinished];
@@ -190,39 +210,53 @@
 }
 
 - (CVPixelBufferRef)bufferFromImageObject:(BMImage *)imageObject {
-    // Get CGImage from BMImage
-    CFDataRef data = (CFDataRef)CFBridgingRetain([imageObject imageData]);
-    CGDataProviderRef dataProvider = CGDataProviderCreateWithCFData(data);
-    CGImageRef image = CGImageCreateWithJPEGDataProvider(dataProvider, nil, YES, kCGRenderingIntentDefault);
-    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-                             [NSNumber numberWithBool:YES], kCVPixelBufferCGImageCompatibilityKey,
-                             [NSNumber numberWithBool:YES], kCVPixelBufferCGBitmapContextCompatibilityKey,
-                             nil];
-    CVPixelBufferRef pxbuffer = NULL;
-    CVReturn status = CVPixelBufferCreate(kCFAllocatorDefault, CGImageGetWidth(image),
-                                          CGImageGetHeight(image), kCVPixelFormatType_32ARGB, (CFDictionaryRef) CFBridgingRetain(options),
-                                          &pxbuffer);
-    NSParameterAssert(status == kCVReturnSuccess && pxbuffer != NULL);
-    
-    CVPixelBufferLockBaseAddress(pxbuffer, 0);
-    void *pxdata = CVPixelBufferGetBaseAddress(pxbuffer);
-    NSParameterAssert(pxdata != NULL);
-    
-    CGColorSpaceRef rgbColorSpace = CGColorSpaceCreateDeviceRGB();
-    CGContextRef context = CGBitmapContextCreate(pxdata, CGImageGetWidth(image),
-                                                 CGImageGetHeight(image), 8, 4*CGImageGetWidth(image), rgbColorSpace,
-                                                 kCGImageAlphaNoneSkipFirst);
-    NSParameterAssert(context);
-    CGContextConcatCTM(context, CGAffineTransformIdentity);
-    CGContextDrawImage(context, CGRectMake(0, 0, CGImageGetWidth(image),
-                                           CGImageGetHeight(image)), image);
-    CGColorSpaceRelease(rgbColorSpace);
-    CGContextRelease(context);
-    
-    CVPixelBufferUnlockBaseAddress(pxbuffer, 0);
-    
-    return pxbuffer;
+    // Get resized NSImage from BMImage
+    NSImage *imageOriginal = [[NSImage alloc] initWithData:[imageObject imageData]];
+    NSImage *imageResized = [BMUtilities resizeImageForVideo:imageOriginal];
+    // Get pixel buffer
+    CVPixelBufferRef pixelBuffer = [BMUtilities fastImageFromNSImage:imageResized];
+    return pixelBuffer;
 }
+
+//- (CVPixelBufferRef)bufferFromImageObject:(BMImage *)imageObject {
+//    // Get CGImage from BMImage
+//    NSImage *imageOriginal = [[NSImage alloc] initWithData:[imageObject imageData]];
+//    NSImage *imageResized = [BMUtilities resizeImageForVideo:imageOriginal];
+////    CFDataRef data = (CFDataRef)CFBridgingRetain([imageResized TIFFRepresentation]);
+////    CGDataProviderRef dataProvider = CGDataProviderCreateWithCFData(data);
+////    CGImageRef image = CGImageCreateWithJPEGDataProvider(dataProvider, nil, YES, kCGRenderingIntentDefault);
+//    NSGraphicsContext *graphicsContext = [[NSGraphicsContext alloc] init];
+//    NSRect imageRect = NSMakeRect(0.0f, 0.0f, 1080.0f, 1920.0f);
+//    CGImageRef image = [imageResized CGImageForProposedRect:&imageRect context:graphicsContext hints:nil];
+//    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+//                             [NSNumber numberWithBool:YES], kCVPixelBufferCGImageCompatibilityKey,
+//                             [NSNumber numberWithBool:YES], kCVPixelBufferCGBitmapContextCompatibilityKey,
+//                             nil];
+//    CVPixelBufferRef pxbuffer = NULL;
+//    CVReturn status = CVPixelBufferCreate(kCFAllocatorDefault, CGImageGetWidth(image),
+//                                          CGImageGetHeight(image), kCVPixelFormatType_32ARGB, (CFDictionaryRef) CFBridgingRetain(options),
+//                                          &pxbuffer);
+//    NSParameterAssert(status == kCVReturnSuccess && pxbuffer != NULL);
+//    
+//    CVPixelBufferLockBaseAddress(pxbuffer, 0);
+//    void *pxdata = CVPixelBufferGetBaseAddress(pxbuffer);
+//    NSParameterAssert(pxdata != NULL);
+//    
+//    CGColorSpaceRef rgbColorSpace = CGColorSpaceCreateDeviceRGB();
+//    CGContextRef context = CGBitmapContextCreate(pxdata, CGImageGetWidth(image),
+//                                                 CGImageGetHeight(image), 8, 4*CGImageGetWidth(image), rgbColorSpace,
+//                                                 kCGImageAlphaNoneSkipFirst);
+//    NSParameterAssert(context);
+//    CGContextConcatCTM(context, CGAffineTransformIdentity);
+//    CGContextDrawImage(context, CGRectMake(0, 0, CGImageGetWidth(image),
+//                                           CGImageGetHeight(image)), image);
+//    CGColorSpaceRelease(rgbColorSpace);
+//    CGContextRelease(context);
+//    
+//    CVPixelBufferUnlockBaseAddress(pxbuffer, 0);
+//    
+//    return pxbuffer;
+//}
 
 - (NSArray *)getAllImages {
     NSManagedObjectContext *context = [[NSApp delegate] managedObjectContext];
