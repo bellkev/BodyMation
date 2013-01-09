@@ -76,7 +76,7 @@
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSButton" id="384509097">
 						<reference key="NSNextResponder" ref="1005"/>
-						<int key="NSvFlags">268</int>
+						<int key="NSvFlags">265</int>
 						<string key="NSFrame">{{603, 447}, {28, 27}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
@@ -408,7 +408,7 @@
 										<string key="NSFrameSize">{640, 445}</string>
 										<reference key="NSSuperview" ref="637415177"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="1066714793"/>
+										<reference key="NSNextKeyView" ref="184783818"/>
 										<bool key="NSViewWantsBestResolutionOpenGLSurface">YES</bool>
 										<string key="NSReuseIdentifierKey">_NS:24</string>
 										<bool key="constrainsToOriginalSize">NO</bool>
@@ -455,7 +455,6 @@
 								<string key="NSFrame">{{1, 516}, {689, 16}}</string>
 								<reference key="NSSuperview" ref="772958496"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:30</string>
 								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 								<int key="NSsFlags">1</int>
@@ -467,7 +466,7 @@
 						<string key="NSFrameSize">{640, 445}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="184783818"/>
+						<reference key="NSNextKeyView" ref="637415177"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<int key="NSsFlags">137760</int>
 						<reference key="NSVScroller" ref="184783818"/>
@@ -507,7 +506,6 @@
 						<string key="NSFrame">{{444, 7}, {209, 470}}</string>
 						<reference key="NSSuperview" ref="500412560"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="NSViewIsLayerTreeHost">YES</bool>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
@@ -1244,32 +1242,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/BMViewWithColor.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">IKImageBrowserView</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="_dataSource">id</string>
-						<string key="_delegate">id</string>
-						<string key="_dragDestinationDelegate">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="_dataSource">
-							<string key="name">_dataSource</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_delegate">
-							<string key="name">_delegate</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_dragDestinationDelegate">
-							<string key="name">_dragDestinationDelegate</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/IKImageBrowserView.h</string>
 					</object>
 				</object>
 			</array>
