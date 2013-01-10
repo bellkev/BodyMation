@@ -17,6 +17,7 @@
 #import "CFobLicVerifier.h"
 #import "BMSeries.h"
 #import "BMCaptureController.h"
+#import "BMVideoProcessor.h"
 #import <AVFoundation/AVFoundation.h>
 
 #pragma mark String Constants
@@ -43,6 +44,7 @@ static NSString* const BMTutorialMessage2 = @"Great! Now that you have more than
 @synthesize tutorialWindowController;
 @synthesize licenseVerifier;
 @synthesize captureController;
+@synthesize videoProcessor;
 @synthesize videoDevices;
 @synthesize currentVideoDevice;
 @synthesize cameraMenu;
@@ -91,13 +93,15 @@ static NSString* const BMTutorialMessage2 = @"Great! Now that you have more than
         NSLog(@"%@", error);
     }
     
-    // Setup capture controller
+    // Setup capture controller and video processor
     [self setCaptureController:[[BMCaptureController alloc] init]];
     [self setCurrentVideoDevice:[AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo]];
     [[self captureController] setInputDevice:[self currentVideoDevice]];
     [self updateCameras:[NSNotification notificationWithName:@"note" object:nil]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCameras:) name:AVCaptureDeviceWasConnectedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCameras:) name:AVCaptureDeviceWasDisconnectedNotification object:nil];
+    
+    [self setVideoProcessor:[[BMVideoProcessor alloc] init]];
     
     // Launch main window
     windowController = [[BMWindowController alloc] initWithWindowNibName:@"BMWindowController"];

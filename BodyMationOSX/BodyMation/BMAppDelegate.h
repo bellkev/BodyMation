@@ -16,6 +16,7 @@
 @class BMTutorialWindowController;
 @class CFobLicVerifier;
 @class BMCaptureController;
+@class BMVideoProcessor;
 
 @interface BMAppDelegate : NSObject <NSApplicationDelegate>
 
@@ -26,6 +27,7 @@
 @property BMTutorialWindowController *tutorialWindowController;
 @property CFobLicVerifier *licenseVerifier;
 @property BMCaptureController *captureController;
+@property BMVideoProcessor *videoProcessor;
 @property NSArray *videoDevices;
 @property AVCaptureDevice *currentVideoDevice;
 @property (weak) IBOutlet NSMenu *cameraMenu;

@@ -102,12 +102,31 @@
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.google.com/"]];
 }
 
-+ (NSURL *)getUniqueURLFromBaseURL:(NSURL *)baseURL withManager:(NSFileManager *)manager {
-    NSInteger repeatNumber = 1;
-    NSString *currentPath = [baseURL path];
-    while ([manager fileExistsAtPath:currentPath]) {
-        currentPath = [NSString stringWithFormat:@"%@-%ld", [baseURL path], repeatNumber];
-        repeatNumber++;
++ (NSURL *)getUniqueURLFromBaseURL:(NSURL *)url withManager:(NSFileManager *)manager keepSortable:(BOOL)sortable{
+    NSURL *urlNoExtension = [url URLByDeletingPathExtension];
+    NSString *extension = [url pathExtension];
+    NSString *currentPath = [url path];
+    NSInteger repeatNumber;
+    if (sortable) {
+        repeatNumber = 0;
+        do {
+            currentPath = [NSString stringWithFormat:@"%@-%02ld", [urlNoExtension path], repeatNumber];
+            if (![extension isEqualToString:@""]) {
+                currentPath = [currentPath stringByAppendingPathExtension:extension];
+            }
+            repeatNumber++;
+            NSLog(@"Current Path: %@",currentPath);
+        } while ([manager fileExistsAtPath:currentPath]);
+    }
+    else {
+        repeatNumber = 1;
+        while ([manager fileExistsAtPath:currentPath]) {
+            currentPath = [NSString stringWithFormat:@"%@-%ld", [urlNoExtension path], repeatNumber];
+            if (![extension isEqualToString:@""]) {
+                currentPath = [currentPath stringByAppendingPathExtension:extension];
+            }
+            repeatNumber++;
+        }
     }
     return [NSURL fileURLWithPath:currentPath];
 }

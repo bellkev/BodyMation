@@ -154,6 +154,7 @@
                  break;
              case 2:
                  imageFinal = [BMUtilities rotateImage:image byDegrees:90.0];
+                 break;
              default:
                  imageFinal = image;
                  break;

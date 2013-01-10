@@ -27,7 +27,7 @@
 
 + (void)buyNow;
 
-+ (NSURL *)getUniqueURLFromBaseURL:(NSURL *)baseURL withManager:(NSFileManager *)manager;
++ (NSURL *)getUniqueURLFromBaseURL:(NSURL *)url withManager:(NSFileManager *)manager keepSortable:(BOOL)sortable;
 
 + (NSImage *)rotateImage:(NSImage *)image byDegrees:(CGFloat)degrees;
 

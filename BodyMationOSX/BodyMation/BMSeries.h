@@ -16,6 +16,7 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSSet *images;
 @property (nonatomic) BOOL movieIsCurrent;
+@property (nonatomic, retain) NSData * movieData;
 
 @end
 

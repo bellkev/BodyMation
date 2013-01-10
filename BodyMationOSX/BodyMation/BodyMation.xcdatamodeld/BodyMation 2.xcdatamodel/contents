@@ -7,7 +7,7 @@
     </entity>
     <entity name="Series" representedClassName="BMSeries" syncable="YES">
         <attribute name="movieData" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="movieIsCurrent" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="movieIsCurrent" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="images" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Image" inverseName="series" inverseEntity="Image" syncable="YES"/>
     </entity>

@@ -162,7 +162,7 @@
         if (![self playViewController]) {
             [self setPlayViewController:[[BMPlayViewController alloc] initWithNibName:@"BMPlayViewController" bundle:nil]];
         }
-        else if ([[self playViewController] movieNeedsRefresh]) {
+        else if (![[[NSApp delegate] currentSeries] movieIsCurrent]) {
             [[self playViewController] createVideo];
         }
         [self openViewController:[self playViewController]];
@@ -297,7 +297,7 @@
         NSString *exportName = [input stringValue];
         NSURL *exportURL = [[openPanel URL] URLByAppendingPathComponent:exportName];
         NSFileManager *fileManager = [[NSFileManager alloc] init];
-        exportURL = [BMUtilities getUniqueURLFromBaseURL:exportURL withManager:fileManager];
+        exportURL = [BMUtilities getUniqueURLFromBaseURL:exportURL withManager:fileManager keepSortable:NO];
         NSError *error;
         [fileManager createDirectoryAtURL:exportURL withIntermediateDirectories:NO attributes:nil error:&error];
         if (error) {
@@ -305,8 +305,8 @@
         }
         for (BMImage *image in [[self currentSeries] images]) {
             NSURL *imageURL = [exportURL URLByAppendingPathComponent:[image imageTitleNoSlashes]];
-            imageURL = [BMUtilities getUniqueURLFromBaseURL:imageURL withManager:fileManager];
             imageURL = [imageURL URLByAppendingPathExtension:@"jpg"];
+            imageURL = [BMUtilities getUniqueURLFromBaseURL:imageURL withManager:fileManager keepSortable:YES];
             [[image imageData] writeToURL:imageURL atomically:NO];
         }
     }

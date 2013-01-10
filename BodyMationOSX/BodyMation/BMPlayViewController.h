@@ -12,12 +12,10 @@
 @interface BMPlayViewController : NSViewController
 
 @property NSWindowController *windowController;
-@property NSData *movieData;
-@property /*(weak)*/ IBOutlet QTMovieView *movieView;
+@property (weak) IBOutlet QTMovieView *movieView;
 @property QTMovie *movie;
-@property BOOL movieNeedsRefresh;
-@property /*(weak)*/ IBOutlet NSProgressIndicator *progressIndicator;
-@property /*(weak)*/ IBOutlet NSTextField *renderText;
+@property (weak) IBOutlet NSProgressIndicator *progressIndicator;
+@property (weak) IBOutlet NSTextField *renderText;
 @property (unsafe_unretained) IBOutlet NSButton *playButton;
 @property (unsafe_unretained) IBOutlet NSButton *pauseButton;
 @property (weak) IBOutlet NSView *controllerView;
@@ -29,7 +27,5 @@
 - (IBAction)pauseButtonWasPushed:(id)sender;
 - (IBAction)firstButtonWasPushed:(id)sender;
 - (IBAction)lastButtonWasPushed:(id)sender;
-
-- (NSInteger)framesPerSecondForNumberOfFrames:(NSInteger)frames;
 
 @end
