@@ -10,6 +10,8 @@
 
 @interface BMVideoProcessor : NSObject
 
+@property BOOL isRendering;
+
 - (void)updateVideoWithCallbackTarget:(id)target selector:(SEL)selector object:(id)object;
 
 @end

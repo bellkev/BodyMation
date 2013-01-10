@@ -9,10 +9,12 @@
 #import <Cocoa/Cocoa.h>
 #import <QTKit/QTKit.h>
 
+@class BMMovieView;
+
 @interface BMPlayViewController : NSViewController
 
 @property NSWindowController *windowController;
-@property (weak) IBOutlet QTMovieView *movieView;
+@property (weak) IBOutlet BMMovieView *movieView;
 @property QTMovie *movie;
 @property (weak) IBOutlet NSProgressIndicator *progressIndicator;
 @property (weak) IBOutlet NSTextField *renderText;

@@ -51,10 +51,11 @@
     [imageBrowserView setValue:background forKey:IKImageBrowserBackgroundColorKey];
     NSDictionary *titleAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                      [NSColor colorWithCalibratedWhite:0.8 alpha:1.0], NSForegroundColorAttributeName,
-                                     [NSNumber numberWithFloat:15.0], NSStrokeWidthAttributeName,
+                                     [NSNumber numberWithFloat:12.0], NSStrokeWidthAttributeName,
                                      [NSFont fontWithName:@"Lucida Grande" size:12], NSFontAttributeName,
                                      nil];
     [[self imageBrowserView] setValue:titleAttributes forKey:IKImageBrowserCellsTitleAttributesKey];
+    [[self imageBrowserView] setValue:titleAttributes forKey:IKImageBrowserCellsHighlightedTitleAttributesKey];
     [[self imageBrowserView] setZoomValue:0.92f];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateZoomValue:) name:NSWindowDidResizeNotification object:[self windowController]];
     

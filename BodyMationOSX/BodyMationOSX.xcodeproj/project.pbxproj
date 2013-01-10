@@ -63,6 +63,7 @@
 		0AD79A79169E50A800AACD9D /* BMVideoProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD79A78169E50A600AACD9D /* BMVideoProcessor.m */; };
 		0AD79A80169F5BA200AACD9D /* BMProcessingWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD79A7E169F5B9F00AACD9D /* BMProcessingWindowController.m */; };
 		0AD79A81169F5BA200AACD9D /* BMProcessingWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AD79A7F169F5BA000AACD9D /* BMProcessingWindowController.xib */; };
+		0AD79A85169F828E00AACD9D /* BMMovieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD79A84169F828D00AACD9D /* BMMovieView.m */; };
 		0ADF4E2216866B2F0019DCBD /* play-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ADF4E1A16866B2F0019DCBD /* play-blue.png */; };
 		0ADF4E2316866B2F0019DCBD /* camera-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ADF4E1B16866B2F0019DCBD /* camera-blue.png */; };
 		0ADF4E2416866B2F0019DCBD /* browser-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ADF4E1C16866B2F0019DCBD /* browser-blue.png */; };
@@ -163,6 +164,8 @@
 		0AD79A7D169F5B9E00AACD9D /* BMProcessingWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMProcessingWindowController.h; sourceTree = "<group>"; };
 		0AD79A7E169F5B9F00AACD9D /* BMProcessingWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMProcessingWindowController.m; sourceTree = "<group>"; };
 		0AD79A7F169F5BA000AACD9D /* BMProcessingWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BMProcessingWindowController.xib; sourceTree = "<group>"; };
+		0AD79A83169F828D00AACD9D /* BMMovieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMMovieView.h; sourceTree = "<group>"; };
+		0AD79A84169F828D00AACD9D /* BMMovieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMMovieView.m; sourceTree = "<group>"; };
 		0ADF4E1A16866B2F0019DCBD /* play-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "play-blue.png"; path = "Resources/play-blue.png"; sourceTree = "<group>"; };
 		0ADF4E1B16866B2F0019DCBD /* camera-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera-blue.png"; path = "Resources/camera-blue.png"; sourceTree = "<group>"; };
 		0ADF4E1C16866B2F0019DCBD /* browser-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "browser-blue.png"; path = "Resources/browser-blue.png"; sourceTree = "<group>"; };
@@ -247,22 +250,11 @@
 			children = (
 				0AA296AE1640C27600B2F4FB /* BMAppDelegate.h */,
 				0AA296AF1640C27600B2F4FB /* BMAppDelegate.m */,
-				0AA296BC1640C2C900B2F4FB /* BMWindowController.h */,
-				0AA296BD1640C2C900B2F4FB /* BMWindowController.m */,
-				0AA5EE011650539E009A7AFA /* BMPreferenceWindowController.h */,
-				0AA5EE021650539E009A7AFA /* BMPreferenceWindowController.m */,
-				0A104308168184F500A63E1F /* BMRegisterWindowController.h */,
-				0A104309168184F500A63E1F /* BMRegisterWindowController.m */,
-				0A6099C11686DD9100371707 /* BMSeriesWindowController.h */,
-				0A6099C21686DD9100371707 /* BMSeriesWindowController.m */,
-				0AD79A67169D18E100AACD9D /* BMTutorialWindowController.h */,
-				0AD79A68169D18E100AACD9D /* BMTutorialWindowController.m */,
-				0AD79A7D169F5B9E00AACD9D /* BMProcessingWindowController.h */,
-				0AD79A7E169F5B9F00AACD9D /* BMProcessingWindowController.m */,
 				0AE403CC1690E08E008A57C2 /* BMCaptureController.h */,
 				0AE403CD1690E08E008A57C2 /* BMCaptureController.m */,
 				0AD79A77169E50A600AACD9D /* BMVideoProcessor.h */,
 				0AD79A78169E50A600AACD9D /* BMVideoProcessor.m */,
+				0AD79A82169F7EA600AACD9D /* Window Controllers */,
 				0AA88537164CD51100D0DDDA /* View Controllers */,
 				0AA88538164CD55800D0DDDA /* Nibs */,
 				0AB4048E1688415C00C62EF8 /* CocoaFob */,
@@ -294,6 +286,8 @@
 				0A91238316929E02001E878D /* BMViewWithColor.m */,
 				0AD79A6C169D1E5F00AACD9D /* BMTranslucentWindow.h */,
 				0AD79A6D169D1E5F00AACD9D /* BMTranslucentWindow.m */,
+				0AD79A83169F828D00AACD9D /* BMMovieView.h */,
+				0AD79A84169F828D00AACD9D /* BMMovieView.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -356,6 +350,25 @@
 				0A63F471168FB6AB004C72E2 /* NSString+PECrypt.m */,
 			);
 			name = CocoaFob;
+			sourceTree = "<group>";
+		};
+		0AD79A82169F7EA600AACD9D /* Window Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0AA296BC1640C2C900B2F4FB /* BMWindowController.h */,
+				0AA296BD1640C2C900B2F4FB /* BMWindowController.m */,
+				0AA5EE011650539E009A7AFA /* BMPreferenceWindowController.h */,
+				0AA5EE021650539E009A7AFA /* BMPreferenceWindowController.m */,
+				0A104308168184F500A63E1F /* BMRegisterWindowController.h */,
+				0A104309168184F500A63E1F /* BMRegisterWindowController.m */,
+				0A6099C11686DD9100371707 /* BMSeriesWindowController.h */,
+				0A6099C21686DD9100371707 /* BMSeriesWindowController.m */,
+				0AD79A67169D18E100AACD9D /* BMTutorialWindowController.h */,
+				0AD79A68169D18E100AACD9D /* BMTutorialWindowController.m */,
+				0AD79A7D169F5B9E00AACD9D /* BMProcessingWindowController.h */,
+				0AD79A7E169F5B9F00AACD9D /* BMProcessingWindowController.m */,
+			);
+			name = "Window Controllers";
 			sourceTree = "<group>";
 		};
 		0ADF4E2A16866B560019DCBD /* Resources */ = {
@@ -508,6 +521,7 @@
 				0AD79A6E169D1E5F00AACD9D /* BMTranslucentWindow.m in Sources */,
 				0AD79A79169E50A800AACD9D /* BMVideoProcessor.m in Sources */,
 				0AD79A80169F5BA200AACD9D /* BMProcessingWindowController.m in Sources */,
+				0AD79A85169F828E00AACD9D /* BMMovieView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

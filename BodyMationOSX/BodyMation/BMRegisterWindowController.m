@@ -78,7 +78,7 @@
     BMAppDelegate *delegate = [NSApp delegate];
     NSError *error;
     BOOL valid = [[delegate licenseVerifier] verifyRegCode:keyCleaned forName:emailTrimmed error:&error];
-    NSString *alertMessage = @"Sorry, unable to verify key.";
+    NSString *alertMessage = @"Sorry, but this product key could not be verified. Please try again, or contact support@bodymation.com if you continue to have issues.";
     if (valid) {
         alertMessage = @"You have successfully registered BodyMation! Thank you!";
         [delegate setIsFullVersion:YES];
@@ -86,6 +86,9 @@
     }
     NSAlert *keyAlert = [NSAlert alertWithMessageText:@"Registration Results" defaultButton:@"Okay" alternateButton:nil otherButton:nil informativeTextWithFormat:@"%@", alertMessage];
     [keyAlert runModal];
+    if (valid) {
+        [self close];
+    }
 }
 
 - (void)saveEmail:(NSString *)email andKey:(NSString *)key {

@@ -14,6 +14,7 @@
 #import "BMWindowController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "BMUtilities.h"
+#import "BMMovieView.h"
 
 @interface BMPlayViewController ()
 - (void)updateVideo;
@@ -45,7 +46,7 @@
     // Initialize
     // Set background color to dark gray
     CALayer *backgroundLayer = [[CALayer alloc] init];
-    [backgroundLayer setBackgroundColor:CGColorCreateGenericGray(0.2, 1.0)];
+    [backgroundLayer setBackgroundColor:CGColorCreateGenericGray(0.2f, 1.0f)];
     [[self view] setLayer:backgroundLayer];
     [[self view] setWantsLayer:YES];
     // Hide play/pause buttons to start
@@ -57,11 +58,16 @@
 }
 
 - (void)updateVideo {
+    BMVideoProcessor *videoProcessor = [[NSApp delegate] videoProcessor];
+    if ([videoProcessor isRendering]) {
+        return;
+    }
     [[self movieView] setHidden:YES];
     [[self controllerView] setHidden:YES];
+    [[[self view] layer] setBackgroundColor:CGColorCreateGenericGray(0.2f, 1.0f)];
     [[self progressIndicator] startAnimation:nil];
     [[self renderText] setHidden:NO];
-    [[[NSApp delegate] videoProcessor] updateVideoWithCallbackTarget:self selector:@selector(showVideo) object:nil];
+    [videoProcessor updateVideoWithCallbackTarget:self selector:@selector(showVideo) object:nil];
 }
 
 - (void)showVideo {
@@ -73,8 +79,10 @@
     }
     [[self movie] setAttribute:[NSNumber numberWithBool:YES] forKey:QTMovieLoopsAttribute];
     [[self movieView] setMovie:[self movie]];
+    [[self movieView] setWantsLayer:YES];
     [[self progressIndicator] stopAnimation:nil];
     [[self renderText] setHidden:YES];
+    [[[self view] layer] setBackgroundColor:CGColorCreateGenericGray(0.0f, 1.0f)];
     [[self movieView] setHidden:NO];
     [[self controllerView] setHidden:NO];
     [[self playButton] setHidden:NO];

@@ -171,6 +171,7 @@
 - (void)updateSeries {
     // TODO: validate this
     [self setCurrentSeries:[BMSeries seriesForName:[[[self seriesPopupButton] selectedItem] title]]];
+    [self openBrowserViewController];
 }
 
 // View controller methods
@@ -187,8 +188,13 @@
 - (void)openCaptureViewController {
     [self setActiveButton:[self captureButton]];
     if (![[self currentViewController] isKindOfClass:[BMCaptureViewController class]]) {
+        if (![self currentSeries]) {
+            NSAlert *alert = [NSAlert alertWithMessageText:@"Create a Picture Series" defaultButton:@"Okay" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Please create a picture series before taking a new picture"];
+            [alert runModal];
+            return;
+        }
         if (![self captureViewController]) {
-            [self setCaptureViewController:[[BMCaptureViewController alloc] initWithNibName:@"BMCaptureViewController" bundle:nil]];
+            [self setCaptureViewController:[[BMCaptureViewController alloc] initWithNibName:@"BMCaptureViewController." bundle:nil]];
         }
         else {
             [[self captureViewController] updateBeforeImage];
@@ -201,6 +207,11 @@
 - (void)openPlayViewController {
     [self setActiveButton:[self playButton]];
     if (![[self currentViewController] isKindOfClass:[BMPlayViewController class]]) {
+        if (![self currentSeries]) {
+            NSAlert *alert = [NSAlert alertWithMessageText:@"Create a Picture Series" defaultButton:@"Okay" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Please create a picture series before trying to play your movie."];
+            [alert runModal];
+            return;
+        }
         if (![self playViewController]) {
             [self setPlayViewController:[[BMPlayViewController alloc] initWithNibName:@"BMPlayViewController" bundle:nil]];
         }

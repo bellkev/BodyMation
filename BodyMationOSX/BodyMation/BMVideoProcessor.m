@@ -28,6 +28,7 @@
 
 @implementation BMVideoProcessor
 
+@synthesize isRendering;
 @synthesize tempDir;
 @synthesize movieURL;
 @synthesize callbackTarget;
@@ -52,6 +53,7 @@
 }
 
 - (void)updateVideoWithCallbackTarget:(id)target selector:(SEL)selector object:(id)object {
+    [self setIsRendering:YES];
     NSLog(@"Creating video...");
     [self setCallbackTarget:target];
     [self setCallbackSelector:selector];
@@ -171,6 +173,7 @@
         NSLog(@"Returned early from renderVideo");
     }
     [[self callbackTarget] performSelectorOnMainThread:[self callbackSelector] withObject:[self callbackObject] waitUntilDone:YES];
+    [self setIsRendering:NO];
     NSLog(@"Done with renderVideo");
     return;
 }
