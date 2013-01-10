@@ -10,6 +10,6 @@
 
 @interface BMVideoProcessor : NSObject
 
-- (NSData *)getCurrentMovieData;
+- (void)updateVideoWithCallbackTarget:(id)target selector:(SEL)selector object:(id)object;
 
 @end

@@ -16,7 +16,7 @@
 #import "BMUtilities.h"
 
 @interface BMPlayViewController ()
-- (NSOperation *)renderVideoOperation;
+- (void)updateVideo;
 - (void)showVideo;
 @end
 
@@ -51,23 +51,26 @@
     // Hide play/pause buttons to start
     [[self controllerView] setHidden:YES];
     // Set up movie
-    [self createVideo];
+    [self updateVideo];
+    // Watch for future updates
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateVideo) name:@"MovieIsNotCurrent" object:nil];
 }
 
-- (void)createVideo {
-    NSLog(@"Creating video...");
+- (void)updateVideo {
     [[self movieView] setHidden:YES];
     [[self controllerView] setHidden:YES];
     [[self progressIndicator] startAnimation:nil];
     [[self renderText] setHidden:NO];
-    NSOperation *renderOperation = [self renderVideoOperation];
-    NSOperationQueue *renderQueue = [[NSOperationQueue alloc] init];
-    [renderQueue setName:@"Rendering Queue"];
-    [renderQueue addOperation:renderOperation];
-    NSLog(@"Done with createVideo...");
+    [[[NSApp delegate] videoProcessor] updateVideoWithCallbackTarget:self selector:@selector(showVideo) object:nil];
 }
 
 - (void)showVideo {
+    NSData* movieData = [[[[NSApp delegate] windowController] currentSeries] movieData];
+    NSError *error;
+    [self setMovie:[QTMovie movieWithData:movieData error:&error]];
+    if (error) {
+        NSLog(@"ERROR loading movie from data: %@", error);
+    }
     [[self movie] setAttribute:[NSNumber numberWithBool:YES] forKey:QTMovieLoopsAttribute];
     [[self movieView] setMovie:[self movie]];
     [[self progressIndicator] stopAnimation:nil];
@@ -76,24 +79,6 @@
     [[self controllerView] setHidden:NO];
     [[self playButton] setHidden:NO];
     [[self pauseButton] setHidden:YES];
-}
-
-- (NSOperation*)renderVideoOperation {
-    NSLog(@"Render video operation...");
-    NSInvocationOperation* renderOperation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(renderVideo) object:nil];
-    NSLog(@"Operation: %@", renderOperation);
-    return renderOperation;
-}
-
-- (void)renderVideo {
-    // Update movie
-    NSData *newMovieData = [[[NSApp delegate] videoProcessor] getCurrentMovieData];
-    NSError *error;
-    [self setMovie:[QTMovie movieWithData:newMovieData error:&error]];
-    if (error) {
-        NSLog(@"ERROR: %@", error);
-    }
-    [self performSelectorOnMainThread:@selector(showVideo) withObject:nil waitUntilDone:YES];
 }
 
 - (IBAction)playButtonWasPushed:(id)sender {

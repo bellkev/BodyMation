@@ -12,6 +12,7 @@
 @class BMCaptureViewController;
 @class BMPlayViewController;
 @class BMSeries;
+@class BMProcessingWindowController;
 
 @interface BMWindowController : NSWindowController <NSWindowDelegate>
 
@@ -22,14 +23,16 @@
 @property NSViewController *currentViewController;
 @property BOOL shouldScrollToNewestImage;
 @property NSArray *seriesSortDescriptors;
-@property NSString *currentSeriesName;
 @property BMSeries *currentSeries;
+@property NSInteger currentFramerate;
+@property BOOL currentManualFramerate;
 @property (unsafe_unretained) IBOutlet NSPopUpButton *seriesPopupButton;
 @property (strong) IBOutlet NSArrayController *seriesArrayController;
 @property (weak) IBOutlet NSButton *browseButton;
 @property (weak) IBOutlet NSButton *captureButton;
 @property (weak) IBOutlet NSButton *playButton;
 @property NSArray *buttons;
+@property BMProcessingWindowController *processingWindowController;
 
 // View controller methods
 - (void)openBrowserViewController;

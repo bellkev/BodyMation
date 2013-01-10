@@ -16,14 +16,18 @@
 #import "BMImage.h"
 #import "BMUtilities.h"
 #import "BMCaptureController.h"
+#import "BMVideoProcessor.h"
+#import "BMProcessingWindowController.h"
 
 @interface BMWindowController ()
 - (void)openViewController:(NSViewController *)viewController;
 - (void)setDefaultSeries:(NSNotification *)note;
+- (void)invalidateMovie:(NSNotification *)note;
 - (void)updateSeries;
 - (void)exportPicturesOrMovie;
 - (void)exportPictures;
 - (void)exportMovie;
+- (void)writeMovieFileAtURL:(NSURL *)url;
 @end
 
 @implementation BMWindowController
@@ -39,8 +43,10 @@
 // Other ivars
 @synthesize seriesSortDescriptors;
 @synthesize currentSeries;
-@synthesize currentSeriesName;
+@synthesize currentFramerate;
+@synthesize currentManualFramerate;
 @synthesize seriesArrayController;
+@synthesize processingWindowController;
 
 // Buttons
 @synthesize seriesPopupButton;
@@ -60,11 +66,24 @@
         NSSortDescriptor *sort;
         sort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
         [self setSeriesSortDescriptors:[NSArray arrayWithObject:sort]];
+        
+        // Get some user defaults
+        NSUserDefaults *standardDefaults = [NSUserDefaults standardUserDefaults];
         // Setup updates to series property TODO: Bind this instead
-        NSString *seriesName = [[NSUserDefaults standardUserDefaults] valueForKey:@"DefaultSeriesName"];
+        NSString *seriesName = [standardDefaults valueForKey:@"DefaultSeriesName"];
         [self setCurrentSeries:[BMSeries seriesForName:seriesName]];
-        [self setCurrentSeriesName:seriesName];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setDefaultSeries:) name:NSWindowDidBecomeMainNotification object:[self window]];
+        
+        // Watch for updates that affect movie content
+        [self setCurrentFramerate:[standardDefaults integerForKey:@"FrameRate"]];
+        [self setCurrentManualFramerate:[standardDefaults boolForKey:@"ManualFrameRate"]];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(invalidateMovie:) name:NSManagedObjectContextObjectsDidChangeNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(invalidateMovie:)
+                                                     name:NSUserDefaultsDidChangeNotification
+                                                   object:nil];
+        // FOR TESTING
+        [[self currentSeries] setMovieIsCurrent:NO];
     }
     
     return self;
@@ -86,13 +105,35 @@
 
 - (void)setDefaultSeries:(NSNotification *)note {
     //NSLog(@"Notification: %@", note);
-    [[self seriesPopupButton] selectItemWithTitle:[self currentSeriesName]];
+    [[self seriesPopupButton] selectItemWithTitle:[[self currentSeries] name]];
+}
+
+- (void)invalidateMovie:(NSNotification *)note {
+    NSUserDefaults *standardDefaults = [NSUserDefaults standardUserDefaults];
+    NSSet *insertedObjects = [[note userInfo] objectForKey:NSInsertedObjectsKey];
+    NSInteger newFrameRate = [standardDefaults integerForKey:@"FrameRate"];
+    BOOL newManualFrameRate = [standardDefaults boolForKey:@"ManualFrameRate"];
+    if (insertedObjects) {
+        // New image (or series) was added
+        [[self currentSeries] setMovieIsCurrent:NO];
+    }
+    if (newFrameRate != [self currentFramerate]) {
+        [self setCurrentFramerate:newFrameRate];
+        [[self currentSeries] setMovieIsCurrent:NO];
+    }
+    if (newManualFrameRate != [self currentManualFramerate]) {
+        [self setCurrentManualFramerate:newManualFrameRate];
+        [[self currentSeries] setMovieIsCurrent:NO];
+    }
+    if (![[self currentSeries] movieIsCurrent]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"MovieIsNotCurrent" object:self];
+    }
 }
 
 - (void)createNewSeriesAfterInvalidName:(NSString *)invalidName {
     // Creates new series OPTIONALLY with prompt asking to choose a unique name
     // Workaround to make "New series..." behave like menu item
-    [[self seriesPopupButton] selectItemWithTitle:[self currentSeriesName]];
+    [[self seriesPopupButton] selectItemWithTitle:[[self currentSeries] name]];
     NSAlert *alert = [NSAlert alertWithMessageText: @"Create Series"
                                      defaultButton:@"Create"
                                    alternateButton:@"Cancel"
@@ -123,7 +164,7 @@
         }
     }
     else {
-        [[self seriesPopupButton] selectItemWithTitle:[self currentSeriesName]];
+        [[self seriesPopupButton] selectItemWithTitle:[[self currentSeries] name]];
     }
 }
 
@@ -162,8 +203,8 @@
         if (![self playViewController]) {
             [self setPlayViewController:[[BMPlayViewController alloc] initWithNibName:@"BMPlayViewController" bundle:nil]];
         }
-        else if (![[[NSApp delegate] currentSeries] movieIsCurrent]) {
-            [[self playViewController] createVideo];
+        else if (![[[[NSApp delegate] windowController] currentSeries] movieIsCurrent]) {
+            [[self playViewController] updateVideo];
         }
         [self openViewController:[self playViewController]];
     }
@@ -228,8 +269,8 @@
 
 - (IBAction)manageSeriesMenuItemSelected:(id)sender {
     // Workaround to make "Manage series..." behave like menu item
-    NSLog(@"CurrentSeriesName before manage: %@", [self currentSeriesName]);
-    [[self seriesPopupButton] selectItemWithTitle:[self currentSeriesName]];
+    NSLog(@"CurrentSeriesName before manage: %@", [[self currentSeries] name]);
+    [[self seriesPopupButton] selectItemWithTitle:[[self currentSeries] name]];
     [[NSApp delegate] openSeriesWindowController];
 }
 
@@ -311,4 +352,36 @@
         }
     }
 }
+
+- (void)exportMovie {
+    NSSavePanel *savePanel = [[NSSavePanel alloc] init];
+    [savePanel setTitle:@"Export Movie"];
+    [savePanel setPrompt:@"Export"];
+    [savePanel setAllowedFileTypes:[NSArray arrayWithObject:@"mov"]];
+    [savePanel setNameFieldStringValue:[[[self currentSeries] name] stringByAppendingString:@" Movie"]];
+    NSInteger button = [savePanel runModal];
+    if (button == NSFileHandlingPanelOKButton) {
+        NSURL *exportURL = [savePanel URL];
+        if ([[self currentSeries] movieIsCurrent]) {
+            [self writeMovieFileAtURL:exportURL];
+        }
+        else {
+            [self openProcessingWindow];
+            [[[NSApp delegate] videoProcessor] updateVideoWithCallbackTarget:self selector:@selector(writeMovieFileAtURL:) object:exportURL];
+        }
+    }
+}
+
+- (void)openProcessingWindow {
+    if (![self processingWindowController]) {
+        [self setProcessingWindowController:[[BMProcessingWindowController alloc] initWithWindowNibName:@"BMProcessingWindowController" andParentFrame:[[self window] frame]]];
+    }
+    [[self processingWindowController] showWindow:nil];
+}
+
+- (void)writeMovieFileAtURL:(NSURL *)url {
+    [[[self currentSeries] movieData] writeToURL:url atomically:NO];
+    [[self processingWindowController] close];
+}
+
 @end

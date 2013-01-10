@@ -16,15 +16,23 @@
 @interface BMVideoProcessor ()
 @property NSURL *tempDir;
 @property NSURL *movieURL;
-+ (NSInteger)framesPerSecondForNumberOfFrames:(NSInteger)frames;
-+ (CVPixelBufferRef)bufferFromImageObject:(BMImage *)imageObject;
-+ (NSArray *)getAllImages;
+@property id callbackTarget;
+@property SEL callbackSelector;
+@property id callbackObject;
+- (NSOperation*)renderVideoOperation;
+- (NSInteger)framesPerSecondForNumberOfFrames:(NSInteger)frames;
+- (CVPixelBufferRef)bufferFromImageObject:(BMImage *)imageObject;
+- (NSArray *)getAllImages;
+- (void)renderVideo;
 @end
 
 @implementation BMVideoProcessor
 
 @synthesize tempDir;
 @synthesize movieURL;
+@synthesize callbackTarget;
+@synthesize callbackSelector;
+@synthesize callbackObject;
 
 - (id)init {
     self = [super init];
@@ -41,6 +49,25 @@
         [self setMovieURL:[NSURL URLWithString:@"movie.mov" relativeToURL:[self tempDir]]];
     }
     return self;
+}
+
+- (void)updateVideoWithCallbackTarget:(id)target selector:(SEL)selector object:(id)object {
+    NSLog(@"Creating video...");
+    [self setCallbackTarget:target];
+    [self setCallbackSelector:selector];
+    [self setCallbackObject:object];
+    NSOperation *renderOperation = [self renderVideoOperation];
+    NSOperationQueue *renderQueue = [[NSOperationQueue alloc] init];
+    [renderQueue setName:@"Rendering Queue"];
+    [renderQueue addOperation:renderOperation];
+    NSLog(@"Done with updateVideo...");
+}
+
+- (NSOperation*)renderVideoOperation {
+    NSLog(@"Render video operation...");
+    NSInvocationOperation* renderOperation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(renderVideo) object:nil];
+    NSLog(@"Operation: %@", renderOperation);
+    return renderOperation;
 }
 
 - (NSInteger)framesPerSecondForNumberOfFrames:(NSInteger)frames {
@@ -78,69 +105,74 @@
     return pixelBuffer;
 }
 
-- (NSData *)getCurrentMovieData {
+- (void)renderVideo {
+    NSLog(@"Starting renderVideo...");
     // Check if movie already up to date
     BMSeries *currentSeries = [[[NSApp delegate] windowController] currentSeries];
-    if ([currentSeries movieIsCurrent]) {
-        return [currentSeries movieData];
+    if (![currentSeries movieIsCurrent]) {
+        // Get array of image objects
+        NSArray *images = [self getAllImages];
+        
+        NSInteger frameRate = [self framesPerSecondForNumberOfFrames:10];
+        NSError *error = nil;
+        // Remove movie file if it exists
+        if ([[self movieURL] checkResourceIsReachableAndReturnError:nil]) {
+            [[NSFileManager defaultManager] removeItemAtURL:[self movieURL] error:&error];
+        }
+        if (error) {
+            NSLog(@"%@",error);
+        }
+        
+        // Setup AVAssetWriter
+        AVAssetWriter *writer = [[AVAssetWriter alloc] initWithURL:[self movieURL] fileType:AVFileTypeQuickTimeMovie error:&error];
+        if (error) {
+            NSLog(@"ERROR creating AVAssetWriter: %@", error);
+        }
+        NSDictionary *videoSettings = [NSDictionary dictionaryWithObjectsAndKeys:
+                                       AVVideoCodecH264, AVVideoCodecKey,
+                                       [NSNumber numberWithInt:1920], AVVideoWidthKey,
+                                       [NSNumber numberWithInt:1080], AVVideoHeightKey,
+                                       nil];
+        AVAssetWriterInput* writerInput = [AVAssetWriterInput
+                                           assetWriterInputWithMediaType:AVMediaTypeVideo
+                                           outputSettings:videoSettings];
+        
+        NSParameterAssert(writerInput);
+        NSParameterAssert([writer canAddInput:writerInput]);
+        [writer addInput:writerInput];
+        AVAssetWriterInputPixelBufferAdaptor * avAdaptor = [AVAssetWriterInputPixelBufferAdaptor assetWriterInputPixelBufferAdaptorWithAssetWriterInput:writerInput sourcePixelBufferAttributes:nil];
+        
+        // Start
+        [writer startWriting];
+        
+        // Write each frame to video
+        [writer startSessionAtSourceTime:kCMTimeZero];
+        int frameCount = 0;
+        for (BMImage *image in images) {
+            CVPixelBufferRef pixelBuffer = [self bufferFromImageObject:image];
+            while (![writerInput isReadyForMoreMediaData]) ;//NSLog(@"Not ready for data");
+            [avAdaptor appendPixelBuffer:pixelBuffer withPresentationTime:CMTimeMake(frameCount, (int)frameRate)];
+            frameCount++;
+        }
+        [writerInput markAsFinished];
+        //[videoWriter endSessionAtSourceTime:];
+        
+        // Finish
+        [writer finishWriting];
+        
+        // Update movie data
+        // weird behavior when loading directly from file: http://stackoverflow.com/questions/6263716/qtkit-a-file-or-directory-could-not-be-found/13335557#13335557
+        //[self setMovieData:[NSData dataWithContentsOfURL:[self movieURL]]];
+        [currentSeries setMovieData:[NSData dataWithContentsOfURL:[self movieURL]]];
+        // Indicate that movie is up to date
+        [currentSeries setMovieIsCurrent:YES];
     }
-    // Get array of image objects
-    NSArray *images = [self getAllImages];
-    
-    NSInteger frameRate = [self framesPerSecondForNumberOfFrames:10];
-    NSError *error = nil;
-    // Remove movie file if it exists
-    if ([[self movieURL] checkResourceIsReachableAndReturnError:nil]) {
-        [[NSFileManager defaultManager] removeItemAtURL:[self movieURL] error:&error];
+    else {
+        NSLog(@"Returned early from renderVideo");
     }
-    if (error) {
-        NSLog(@"%@",error);
-    }
-    
-    // Setup AVAssetWriter
-    AVAssetWriter *writer = [[AVAssetWriter alloc] initWithURL:[self movieURL] fileType:AVFileTypeQuickTimeMovie error:&error];
-    if (error) {
-        NSLog(@"ERROR creating AVAssetWriter: %@", error);
-    }
-    NSDictionary *videoSettings = [NSDictionary dictionaryWithObjectsAndKeys:
-                                   AVVideoCodecH264, AVVideoCodecKey,
-                                   [NSNumber numberWithInt:1920], AVVideoWidthKey,
-                                   [NSNumber numberWithInt:1080], AVVideoHeightKey,
-                                   nil];
-    AVAssetWriterInput* writerInput = [AVAssetWriterInput
-                                       assetWriterInputWithMediaType:AVMediaTypeVideo
-                                       outputSettings:videoSettings];
-    
-    NSParameterAssert(writerInput);
-    NSParameterAssert([writer canAddInput:writerInput]);
-    [writer addInput:writerInput];
-    AVAssetWriterInputPixelBufferAdaptor * avAdaptor = [AVAssetWriterInputPixelBufferAdaptor assetWriterInputPixelBufferAdaptorWithAssetWriterInput:writerInput sourcePixelBufferAttributes:nil];
-    
-    // Start
-    [writer startWriting];
-    
-    // Write each frame to video
-    [writer startSessionAtSourceTime:kCMTimeZero];
-    int frameCount = 0;
-    for (BMImage *image in images) {
-        CVPixelBufferRef pixelBuffer = [self bufferFromImageObject:image];
-        while (![writerInput isReadyForMoreMediaData]) ;//NSLog(@"Not ready for data");
-        [avAdaptor appendPixelBuffer:pixelBuffer withPresentationTime:CMTimeMake(frameCount, (int)frameRate)];
-        frameCount++;
-    }
-    [writerInput markAsFinished];
-    //[videoWriter endSessionAtSourceTime:];
-    
-    // Finish
-    [writer finishWriting];
-    
-    // Update movie data
-    // weird behavior when loading directly from file: http://stackoverflow.com/questions/6263716/qtkit-a-file-or-directory-could-not-be-found/13335557#13335557
-    //[self setMovieData:[NSData dataWithContentsOfURL:[self movieURL]]];
-    
-    // Indicate that movie is up to date
-    [currentSeries setMovieIsCurrent:YES];
-    return [NSData dataWithContentsOfURL:movieURL];
+    [[self callbackTarget] performSelectorOnMainThread:[self callbackSelector] withObject:[self callbackObject] waitUntilDone:YES];
+    NSLog(@"Done with renderVideo");
+    return;
 }
 
 - (void)dealloc {

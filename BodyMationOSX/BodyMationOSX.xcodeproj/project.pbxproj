@@ -62,6 +62,8 @@
 		0AD79A6E169D1E5F00AACD9D /* BMTranslucentWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD79A6D169D1E5F00AACD9D /* BMTranslucentWindow.m */; };
 		0AD79A72169D258400AACD9D /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AD79A71169D258400AACD9D /* close.png */; };
 		0AD79A79169E50A800AACD9D /* BMVideoProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD79A78169E50A600AACD9D /* BMVideoProcessor.m */; };
+		0AD79A80169F5BA200AACD9D /* BMProcessingWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD79A7E169F5B9F00AACD9D /* BMProcessingWindowController.m */; };
+		0AD79A81169F5BA200AACD9D /* BMProcessingWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AD79A7F169F5BA000AACD9D /* BMProcessingWindowController.xib */; };
 		0ADF4E2216866B2F0019DCBD /* play-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ADF4E1A16866B2F0019DCBD /* play-blue.png */; };
 		0ADF4E2316866B2F0019DCBD /* camera-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ADF4E1B16866B2F0019DCBD /* camera-blue.png */; };
 		0ADF4E2416866B2F0019DCBD /* browser-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ADF4E1C16866B2F0019DCBD /* browser-blue.png */; };
@@ -161,6 +163,9 @@
 		0AD79A71169D258400AACD9D /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = close.png; path = Resources/close.png; sourceTree = "<group>"; };
 		0AD79A77169E50A600AACD9D /* BMVideoProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMVideoProcessor.h; sourceTree = "<group>"; };
 		0AD79A78169E50A600AACD9D /* BMVideoProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMVideoProcessor.m; sourceTree = "<group>"; };
+		0AD79A7D169F5B9E00AACD9D /* BMProcessingWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMProcessingWindowController.h; sourceTree = "<group>"; };
+		0AD79A7E169F5B9F00AACD9D /* BMProcessingWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMProcessingWindowController.m; sourceTree = "<group>"; };
+		0AD79A7F169F5BA000AACD9D /* BMProcessingWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BMProcessingWindowController.xib; sourceTree = "<group>"; };
 		0ADF4E1A16866B2F0019DCBD /* play-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "play-blue.png"; path = "Resources/play-blue.png"; sourceTree = "<group>"; };
 		0ADF4E1B16866B2F0019DCBD /* camera-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera-blue.png"; path = "Resources/camera-blue.png"; sourceTree = "<group>"; };
 		0ADF4E1C16866B2F0019DCBD /* browser-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "browser-blue.png"; path = "Resources/browser-blue.png"; sourceTree = "<group>"; };
@@ -255,6 +260,8 @@
 				0A6099C21686DD9100371707 /* BMSeriesWindowController.m */,
 				0AD79A67169D18E100AACD9D /* BMTutorialWindowController.h */,
 				0AD79A68169D18E100AACD9D /* BMTutorialWindowController.m */,
+				0AD79A7D169F5B9E00AACD9D /* BMProcessingWindowController.h */,
+				0AD79A7E169F5B9F00AACD9D /* BMProcessingWindowController.m */,
 				0AE403CC1690E08E008A57C2 /* BMCaptureController.h */,
 				0AE403CD1690E08E008A57C2 /* BMCaptureController.m */,
 				0AD79A77169E50A600AACD9D /* BMVideoProcessor.h */,
@@ -334,6 +341,7 @@
 				0A10430A168184F500A63E1F /* BMRegisterWindowController.xib */,
 				0A6099C31686DD9100371707 /* BMSeriesWindowController.xib */,
 				0AD79A69169D18E100AACD9D /* BMTutorialWindowController.xib */,
+				0AD79A7F169F5BA000AACD9D /* BMProcessingWindowController.xib */,
 			);
 			name = Nibs;
 			sourceTree = "<group>";
@@ -466,6 +474,7 @@
 				0AD79A66169BE75A00AACD9D /* BMBrowserViewController.xib in Resources */,
 				0AD79A6B169D18E200AACD9D /* BMTutorialWindowController.xib in Resources */,
 				0AD79A72169D258400AACD9D /* close.png in Resources */,
+				0AD79A81169F5BA200AACD9D /* BMProcessingWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,6 +513,7 @@
 				0AD79A6A169D18E200AACD9D /* BMTutorialWindowController.m in Sources */,
 				0AD79A6E169D1E5F00AACD9D /* BMTranslucentWindow.m in Sources */,
 				0AD79A79169E50A800AACD9D /* BMVideoProcessor.m in Sources */,
+				0AD79A80169F5BA200AACD9D /* BMProcessingWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

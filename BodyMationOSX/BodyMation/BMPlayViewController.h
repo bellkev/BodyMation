@@ -21,8 +21,7 @@
 @property (weak) IBOutlet NSView *controllerView;
 
 
-- (void)createVideo;
-- (void)renderVideo;
+- (void)updateVideo;
 - (IBAction)playButtonWasPushed:(id)sender;
 - (IBAction)pauseButtonWasPushed:(id)sender;
 - (IBAction)firstButtonWasPushed:(id)sender;
