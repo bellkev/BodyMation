@@ -27,4 +27,6 @@
 @property (weak) IBOutlet NSTextField *countDownLabel;
 @property NSView *flashView;
 
+- (void)updateBeforeImage;
+
 @end

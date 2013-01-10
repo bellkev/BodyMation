@@ -7,7 +7,6 @@
 //
 
 #import "BMVideoView.h"
-#import "BMBorderView.h"
 #import "BMUtilities.h"
 #import "BMAppDelegate.h"
 #import "BMCaptureController.h"

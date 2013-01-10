@@ -13,7 +13,6 @@
 #import "BMUtilities.h"
 #import "BMWindowController.h"
 #import "BMBrowserViewController.h"
-#import "BMBorderView.h"
 #import "BMAppDelegate.h"
 #import "BMCaptureController.h"
 
@@ -113,7 +112,9 @@
                    options:nil];
 }
 
-
+- (void)updateBeforeImage {
+    [[self beforeImageView] updateBeforeImage];
+}
 
 - (void)closeCapture:(NSTimer *)timer{
     [[self windowController] openBrowserViewController];

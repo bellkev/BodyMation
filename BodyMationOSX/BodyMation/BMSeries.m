@@ -76,4 +76,15 @@
     }
 }
 
+- (BMImage *)getMostRecentImage {
+    if (![[self images] count]) {
+        return nil;
+    }
+    NSSet *imageSet = [self images];
+    NSSortDescriptor* sort;
+    sort = [NSSortDescriptor sortDescriptorWithKey:@"dateTaken" ascending:NO];
+    NSArray *imageArray = [imageSet sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
+    return [imageArray objectAtIndex:0];
+}
+
 @end

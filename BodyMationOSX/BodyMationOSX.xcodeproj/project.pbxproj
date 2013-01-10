@@ -18,7 +18,6 @@
 		0A398E9C16438F9700829BF9 /* BMBeforeImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A398E9B16438F9700829BF9 /* BMBeforeImageView.m */; };
 		0A398E9E16439FAA00829BF9 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A398E9D16439FAA00829BF9 /* CoreMedia.framework */; };
 		0A398EA21643A00400829BF9 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A398EA11643A00400829BF9 /* CoreVideo.framework */; };
-		0A51D373167E8DD500F471DF /* BMBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A51D372167E8DD500F471DF /* BMBorderView.m */; };
 		0A51D3791680389C00F471DF /* BMKeyChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A51D3781680389C00F471DF /* BMKeyChecker.m */; };
 		0A51D37D168043E100F471DF /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A51D37C168043E100F471DF /* libcrypto.dylib */; };
 		0A6099B6168677F300371707 /* BMVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6099B5168677F300371707 /* BMVideoView.m */; };
@@ -93,8 +92,6 @@
 		0A398E9B16438F9700829BF9 /* BMBeforeImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMBeforeImageView.m; sourceTree = "<group>"; };
 		0A398E9D16439FAA00829BF9 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		0A398EA11643A00400829BF9 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
-		0A51D371167E8DD500F471DF /* BMBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMBorderView.h; sourceTree = "<group>"; };
-		0A51D372167E8DD500F471DF /* BMBorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMBorderView.m; sourceTree = "<group>"; };
 		0A51D3771680389C00F471DF /* BMKeyChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKeyChecker.h; sourceTree = "<group>"; };
 		0A51D3781680389C00F471DF /* BMKeyChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMKeyChecker.m; sourceTree = "<group>"; };
 		0A51D37C168043E100F471DF /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/lib/libcrypto.dylib; sourceTree = DEVELOPER_DIR; };
@@ -284,8 +281,6 @@
 				0A6099B5168677F300371707 /* BMVideoView.m */,
 				0A51D3771680389C00F471DF /* BMKeyChecker.h */,
 				0A51D3781680389C00F471DF /* BMKeyChecker.m */,
-				0A51D371167E8DD500F471DF /* BMBorderView.h */,
-				0A51D372167E8DD500F471DF /* BMBorderView.m */,
 				0A398E9A16438F9700829BF9 /* BMBeforeImageView.h */,
 				0A398E9B16438F9700829BF9 /* BMBeforeImageView.m */,
 				0A240D1A1642362B00BAB392 /* BMUtilities.h */,
@@ -495,7 +490,6 @@
 				0AA8852C164B814400D0DDDA /* BMBrowserViewController.m in Sources */,
 				0AA5EDF5164F4EFB009A7AFA /* BMPlayViewController.m in Sources */,
 				0AA5EE041650539F009A7AFA /* BMPreferenceWindowController.m in Sources */,
-				0A51D373167E8DD500F471DF /* BMBorderView.m in Sources */,
 				0A51D3791680389C00F471DF /* BMKeyChecker.m in Sources */,
 				0A10430B168184F500A63E1F /* BMRegisterWindowController.m in Sources */,
 				0ADF4E2F16866B880019DCBD /* BMImage.m in Sources */,

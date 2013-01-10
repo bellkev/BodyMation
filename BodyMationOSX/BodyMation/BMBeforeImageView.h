@@ -8,13 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class BMBorderView;
-
 @interface BMBeforeImageView : NSView
 
 @property NSImage *beforeImage;
 @property CALayer *beforeImageLayer;
-@property BMBorderView *borderView;
 @property NSColor *borderColor;
 
 - (id)initWithFrame:(NSRect)frameRect andBorderColor:(NSColor *)color;

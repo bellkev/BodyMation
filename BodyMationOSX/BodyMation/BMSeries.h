@@ -30,5 +30,6 @@
 - (void)removeImagesObject:(BMImage *)value;
 - (void)addImages:(NSSet *)values;
 - (void)removeImages:(NSSet *)values;
+- (BMImage *)getMostRecentImage;
 
 @end

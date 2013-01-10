@@ -8,14 +8,15 @@
 
 #import "BMBeforeImageView.h"
 #import "BMUtilities.h"
-#import "BMBorderView.h"
 #import "BMImage.h"
+#import "BMAppDelegate.h"
+#import "BMWindowController.h"
+#import "BMSeries.h"
 
 @implementation BMBeforeImageView
 
 @synthesize beforeImage;
 @synthesize beforeImageLayer;
-@synthesize borderView;
 @synthesize borderColor;
 
 - (id)initWithFrame:(NSRect)frame andBorderColor:(NSColor *)color
@@ -27,14 +28,10 @@
         
         // Set before image to latest image
         [self updateBeforeImage];
-
-        // Add border view
-        [self setBorderColor:color];
-        [self setBorderView:[[BMBorderView alloc] initWithFrame:[self bounds]]];
-        [[self borderView] setBorderColor:[self borderColor]];
-        [[self borderView] setBorderSize:[[self beforeImage] size]];
-        [self addSubview:[self borderView]];
         
+        // Set border color
+        [self setBorderColor:color];
+  
         // Hide for now
         [self setHidden:YES];
     }
@@ -43,39 +40,28 @@
 }
 
 - (void)updateBeforeImage {
-    NSManagedObjectContext *context = [[NSApp delegate] managedObjectContext];
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Image"];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
-                                        initWithKey:@"dateTaken" ascending:NO];
-    [request setSortDescriptors:@[sortDescriptor]];
-    [request setFetchLimit:1];
-    NSError *error = nil;
-    NSArray *fetchedArray = [context executeFetchRequest:request error:&error];
-    if (fetchedArray == nil)
-    {
-        NSLog(@"Error while fetching\n%@",
-              ([error localizedDescription] != nil) ? [error localizedDescription] : @"Unknown Error");
-        return;
+    BMImage *latestImageObject = [[[[NSApp delegate] windowController] currentSeries] getMostRecentImage];
+    if (latestImageObject) {
+        [self setBeforeImage:[[NSImage alloc] initWithData:[latestImageObject imageData]]];
     }
-    else if ([fetchedArray count] == 0) {
+    else {
         [self setBeforeImage:nil];
-        NSLog(@"No before image found");
-        return;
     }
-    BMImage *latestImageObject = [fetchedArray objectAtIndex:0];
-    [self setBeforeImage:[[NSImage alloc] initWithData:[latestImageObject imageData]]];
     NSLog(@"Successfully set before image");
 }
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    // Drawing code here.
-    NSRect destinationRect = [BMUtilities rectWithPreservedAspectRatioForSourceSize:[[self beforeImage] size] andBoundingRect:[self bounds]];
-    NSAffineTransform* transform = [NSAffineTransform transform];
-    [transform scaleXBy:-1.0f yBy:1.0f];
-    [transform translateXBy:-self.bounds.size.width yBy:0.0f];
-    [transform concat];
-    [[self beforeImage] drawInRect:destinationRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
+    if ([self beforeImage]) {
+        // Drawing code here.
+        NSRect destinationRect = [BMUtilities rectWithPreservedAspectRatioForSourceSize:[[self beforeImage] size] andBoundingRect:[self bounds]];
+        NSAffineTransform* transform = [NSAffineTransform transform];
+        [transform scaleXBy:-1.0f yBy:1.0f];
+        [transform translateXBy:-self.bounds.size.width yBy:0.0f];
+        [transform concat];
+        [[self beforeImage] drawInRect:destinationRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
+        [[self borderColor] setFill];
+        NSFrameRectWithWidth(destinationRect, 15);
+    }
 }
-
 @end

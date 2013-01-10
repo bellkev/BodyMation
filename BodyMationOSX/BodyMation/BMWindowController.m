@@ -191,6 +191,7 @@
             [self setCaptureViewController:[[BMCaptureViewController alloc] initWithNibName:@"BMCaptureViewController" bundle:nil]];
         }
         else {
+            [[self captureViewController] updateBeforeImage];
             [[[NSApp delegate] captureController] startCapture];
         }
         [self openViewController:[self captureViewController]];
@@ -362,6 +363,9 @@
     NSInteger button = [savePanel runModal];
     if (button == NSFileHandlingPanelOKButton) {
         NSURL *exportURL = [savePanel URL];
+        // Don't do this because the NSSavePanel warns of overwrite
+//        NSFileManager *fileManager = [[NSFileManager alloc] init];
+//        exportURL = [BMUtilities getUniqueURLFromBaseURL:exportURL withManager:fileManager keepSortable:NO];
         if ([[self currentSeries] movieIsCurrent]) {
             [self writeMovieFileAtURL:exportURL];
         }
