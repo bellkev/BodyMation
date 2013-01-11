@@ -424,4 +424,9 @@ static NSString* const BMTutorialMessage2 = @"Great! Now that you have more than
     return NSTerminateNow;
 }
 
+// Explicitly terminate on close main window instead
+//- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication {
+//    return YES;
+//}
+
 @end

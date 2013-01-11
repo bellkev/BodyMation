@@ -99,7 +99,7 @@
 }
 
 + (void)buyNow {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.google.com/"]];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.bodymation.com/buy-now/"]];
 }
 
 + (NSURL *)getUniqueURLFromBaseURL:(NSURL *)url withManager:(NSFileManager *)manager keepSortable:(BOOL)sortable{

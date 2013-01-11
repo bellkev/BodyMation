@@ -18,6 +18,7 @@
 #import "BMCaptureController.h"
 #import "BMVideoProcessor.h"
 #import "BMProcessingWindowController.h"
+#import "BMTutorialWindowController.h"
 
 @interface BMWindowController ()
 - (void)openViewController:(NSViewController *)viewController;
@@ -89,12 +90,32 @@
     return self;
 }
 
+# pragma mark Window Delegate Methods
 - (NSApplicationPresentationOptions)window:(NSWindow *)window willUseFullScreenPresentationOptions:(NSApplicationPresentationOptions)proposedOptions {
     return proposedOptions | NSApplicationPresentationAutoHideToolbar;
 }
 
-- (void)windowDidLoad
-{
+// Make image buttons gray out when window in background
+- (void)windowDidResignMain:(NSNotification *)notification {
+    for (NSButton *button in [self buttons]) {
+        [button setAlphaValue:0.5f];
+    }
+}
+
+- (void)windowDidBecomeMain:(NSNotification *)notification {
+    for (NSButton *button in [self buttons]) {
+        [button setAlphaValue:1.0f];
+    }
+}
+
+- (void)windowWillClose:(NSNotification *)notification {
+    // Do this so that one tutorial window, etc. won't keep the app running
+    [NSApp terminate:self];
+}
+
+# pragma mark -
+
+- (void)windowDidLoad {
     [super windowDidLoad];
 
     // THIS WAS DUMB!!!://[[self window] setBackgroundColor:[NSColor colorWithCalibratedWhite:0.2 alpha:0]];
@@ -194,7 +215,7 @@
             return;
         }
         if (![self captureViewController]) {
-            [self setCaptureViewController:[[BMCaptureViewController alloc] initWithNibName:@"BMCaptureViewController." bundle:nil]];
+            [self setCaptureViewController:[[BMCaptureViewController alloc] initWithNibName:@"BMCaptureViewController" bundle:nil]];
         }
         else {
             [[self captureViewController] updateBeforeImage];
@@ -207,8 +228,8 @@
 - (void)openPlayViewController {
     [self setActiveButton:[self playButton]];
     if (![[self currentViewController] isKindOfClass:[BMPlayViewController class]]) {
-        if (![self currentSeries]) {
-            NSAlert *alert = [NSAlert alertWithMessageText:@"Create a Picture Series" defaultButton:@"Okay" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Please create a picture series before trying to play your movie."];
+        if (![[[self currentSeries] images] count]) {
+            NSAlert *alert = [NSAlert alertWithMessageText:@"Take Some Pictures" defaultButton:@"Okay" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Please take some pictures before trying to play your movie."];
             [alert runModal];
             return;
         }
