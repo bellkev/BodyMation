@@ -84,7 +84,7 @@
                                                      name:NSUserDefaultsDidChangeNotification
                                                    object:nil];
         // FOR TESTING
-        [[self currentSeries] setMovieIsCurrent:NO];
+        //[[self currentSeries] setMovieIsCurrent:NO];
     }
     
     return self;
