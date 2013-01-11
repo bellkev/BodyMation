@@ -76,12 +76,11 @@
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSButton" id="384509097">
 						<reference key="NSNextResponder" ref="1005"/>
-						<int key="NSvFlags">265</int>
+						<int key="NSvFlags">289</int>
 						<array class="NSMutableArray" key="NSSubviews"/>
 						<string key="NSFrame">{{599, 30}, {28, 27}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="NSViewIsLayerTreeHost">YES</bool>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
@@ -111,7 +110,7 @@
 					</object>
 					<object class="NSCustomView" id="524484311">
 						<reference key="NSNextResponder" ref="1005"/>
-						<int key="NSvFlags">268</int>
+						<int key="NSvFlags">292</int>
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="NSButton" id="664264542">
 								<reference key="NSNextResponder" ref="524484311"/>
@@ -120,7 +119,6 @@
 								<string key="NSFrame">{{224, 8}, {84, 19}}</string>
 								<reference key="NSSuperview" ref="524484311"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="879783221">
@@ -411,7 +409,7 @@
 										<string key="NSFrameSize">{640, 480}</string>
 										<reference key="NSSuperview" ref="637415177"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="1066714793"/>
+										<reference key="NSNextKeyView" ref="184783818"/>
 										<bool key="NSViewWantsBestResolutionOpenGLSurface">YES</bool>
 										<string key="NSReuseIdentifierKey">_NS:24</string>
 										<bool key="constrainsToOriginalSize">NO</bool>
@@ -470,7 +468,7 @@
 						<string key="NSFrameSize">{640, 480}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="184783818"/>
+						<reference key="NSNextKeyView" ref="637415177"/>
 						<bool key="NSViewIsLayerTreeHost">YES</bool>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<int key="NSsFlags">137760</int>
