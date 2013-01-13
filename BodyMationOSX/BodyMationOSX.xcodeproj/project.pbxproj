@@ -55,6 +55,11 @@
 		0AA8852C164B814400D0DDDA /* BMBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA8852A164B814400D0DDDA /* BMBrowserViewController.m */; };
 		0AA8852D164B814400D0DDDA /* BMBrowserViewControllerOld.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AA8852B164B814400D0DDDA /* BMBrowserViewControllerOld.xib */; };
 		0AA88535164B86FB00D0DDDA /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA88534164B86FB00D0DDDA /* Quartz.framework */; };
+		0ABC756616A25DE60025A7E9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA2969C1640C27500B2F4FB /* Cocoa.framework */; };
+		0ABC756C16A25DE60025A7E9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0ABC756A16A25DE60025A7E9 /* InfoPlist.strings */; };
+		0ABC756F16A25DE60025A7E9 /* BodyMationAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC756E16A25DE60025A7E9 /* BodyMationAppTests.m */; };
+		0ABC757916A268C70025A7E9 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ABC757616A262580025A7E9 /* SenTestingKit.framework */; };
+		0ABC757B16A268DF0025A7E9 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ABC757A16A268DF0025A7E9 /* SenTestingKit.framework */; };
 		0AD79A66169BE75A00AACD9D /* BMBrowserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AD79A65169BE75A00AACD9D /* BMBrowserViewController.xib */; };
 		0AD79A6A169D18E200AACD9D /* BMTutorialWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD79A68169D18E100AACD9D /* BMTutorialWindowController.m */; };
 		0AD79A6B169D18E200AACD9D /* BMTutorialWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AD79A69169D18E100AACD9D /* BMTutorialWindowController.xib */; };
@@ -77,6 +82,16 @@
 		0ADF4E3316866BCE0019DCBD /* BMPreviewLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ADF4E3116866BCE0019DCBD /* BMPreviewLayer.m */; };
 		0AE403CE1690E08E008A57C2 /* BMCaptureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE403CD1690E08E008A57C2 /* BMCaptureController.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0ABC757416A261CA0025A7E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0AA2968F1640C27500B2F4FB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0AA296971640C27500B2F4FB;
+			remoteInfo = BodyMation;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0A104308168184F500A63E1F /* BMRegisterWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMRegisterWindowController.h; sourceTree = "<group>"; };
@@ -152,6 +167,15 @@
 		0AA8852A164B814400D0DDDA /* BMBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMBrowserViewController.m; sourceTree = "<group>"; };
 		0AA8852B164B814400D0DDDA /* BMBrowserViewControllerOld.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BMBrowserViewControllerOld.xib; sourceTree = "<group>"; };
 		0AA88534164B86FB00D0DDDA /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		0ABC756316A25DE60025A7E9 /* BodyMationAppTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BodyMationAppTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0ABC756916A25DE60025A7E9 /* BodyMationAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BodyMationAppTests-Info.plist"; sourceTree = "<group>"; };
+		0ABC756B16A25DE60025A7E9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0ABC756D16A25DE60025A7E9 /* BodyMationAppTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BodyMationAppTests.h; sourceTree = "<group>"; };
+		0ABC756E16A25DE60025A7E9 /* BodyMationAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BodyMationAppTests.m; sourceTree = "<group>"; };
+		0ABC757016A25DE60025A7E9 /* BodyMationAppTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BodyMationAppTests-Prefix.pch"; sourceTree = "<group>"; };
+		0ABC757616A262580025A7E9 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		0ABC757A16A268DF0025A7E9 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		0ABC758016A280EB0025A7E9 /* BodyMation 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BodyMation 3.xcdatamodel"; sourceTree = "<group>"; };
 		0AD79A65169BE75A00AACD9D /* BMBrowserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BMBrowserViewController.xib; sourceTree = "<group>"; };
 		0AD79A67169D18E100AACD9D /* BMTutorialWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMTutorialWindowController.h; sourceTree = "<group>"; };
 		0AD79A68169D18E100AACD9D /* BMTutorialWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMTutorialWindowController.m; sourceTree = "<group>"; };
@@ -199,14 +223,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0ABC755F16A25DE60025A7E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0ABC757916A268C70025A7E9 /* SenTestingKit.framework in Frameworks */,
+				0ABC756616A25DE60025A7E9 /* Cocoa.framework in Frameworks */,
+				0ABC757B16A268DF0025A7E9 /* SenTestingKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		0AA2968D1640C27500B2F4FB = {
 			isa = PBXGroup;
 			children = (
+				0ABC757616A262580025A7E9 /* SenTestingKit.framework */,
 				0AA296A21640C27600B2F4FB /* BodyMation */,
 				0ADF4E2A16866B560019DCBD /* Resources */,
+				0ABC756716A25DE60025A7E9 /* BodyMationAppTests */,
 				0AA2969B1640C27500B2F4FB /* Frameworks */,
 				0AA296991640C27500B2F4FB /* Products */,
 			);
@@ -216,6 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				0AA296981640C27500B2F4FB /* BodyMation.app */,
+				0ABC756316A25DE60025A7E9 /* BodyMationAppTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -230,6 +267,7 @@
 				0A398E9D16439FAA00829BF9 /* CoreMedia.framework */,
 				0AA5EDFF164F8FF8009A7AFA /* QTKit.framework */,
 				0AA88534164B86FB00D0DDDA /* Quartz.framework */,
+				0ABC757A16A268DF0025A7E9 /* SenTestingKit.framework */,
 				0AA2969E1640C27600B2F4FB /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -352,6 +390,26 @@
 			name = CocoaFob;
 			sourceTree = "<group>";
 		};
+		0ABC756716A25DE60025A7E9 /* BodyMationAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				0ABC756D16A25DE60025A7E9 /* BodyMationAppTests.h */,
+				0ABC756E16A25DE60025A7E9 /* BodyMationAppTests.m */,
+				0ABC756816A25DE60025A7E9 /* Supporting Files */,
+			);
+			path = BodyMationAppTests;
+			sourceTree = "<group>";
+		};
+		0ABC756816A25DE60025A7E9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0ABC756916A25DE60025A7E9 /* BodyMationAppTests-Info.plist */,
+				0ABC756A16A25DE60025A7E9 /* InfoPlist.strings */,
+				0ABC757016A25DE60025A7E9 /* BodyMationAppTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		0AD79A82169F7EA600AACD9D /* Window Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -418,6 +476,25 @@
 			productReference = 0AA296981640C27500B2F4FB /* BodyMation.app */;
 			productType = "com.apple.product-type.application";
 		};
+		0ABC756216A25DE60025A7E9 /* BodyMationAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0ABC757116A25DE60025A7E9 /* Build configuration list for PBXNativeTarget "BodyMationAppTests" */;
+			buildPhases = (
+				0ABC755E16A25DE60025A7E9 /* Sources */,
+				0ABC755F16A25DE60025A7E9 /* Frameworks */,
+				0ABC756016A25DE60025A7E9 /* Resources */,
+				0ABC756116A25DE60025A7E9 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0ABC757516A261CA0025A7E9 /* PBXTargetDependency */,
+			);
+			name = BodyMationAppTests;
+			productName = BodyMationAppTests;
+			productReference = 0ABC756316A25DE60025A7E9 /* BodyMationAppTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -441,6 +518,7 @@
 			projectRoot = "";
 			targets = (
 				0AA296971640C27500B2F4FB /* BodyMation */,
+				0ABC756216A25DE60025A7E9 /* BodyMationAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -486,7 +564,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0ABC756016A25DE60025A7E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0ABC756C16A25DE60025A7E9 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0ABC756116A25DE60025A7E9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0AA296941640C27500B2F4FB /* Sources */ = {
@@ -525,7 +627,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0ABC755E16A25DE60025A7E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0ABC756F16A25DE60025A7E9 /* BodyMationAppTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0ABC757516A261CA0025A7E9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0AA296971640C27500B2F4FB /* BodyMation */;
+			targetProxy = 0ABC757416A261CA0025A7E9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		0AA296A51640C27600B2F4FB /* InfoPlist.strings */ = {
@@ -550,6 +668,14 @@
 				0AA296B21640C27600B2F4FB /* en */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		0ABC756A16A25DE60025A7E9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0ABC756B16A25DE60025A7E9 /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -619,6 +745,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BodyMation/BodyMation-Prefix.pch";
@@ -637,6 +764,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BodyMation/BodyMation-Prefix.pch";
@@ -645,6 +773,40 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.8;
 				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		0ABC757216A25DE60025A7E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BodyMation.app/Contents/MacOS/BodyMation";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BodyMationAppTests/BodyMationAppTests-Prefix.pch";
+				INFOPLIST_FILE = "BodyMationAppTests/BodyMationAppTests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		0ABC757316A25DE60025A7E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BodyMation.app/Contents/MacOS/BodyMation";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BodyMationAppTests/BodyMationAppTests-Prefix.pch";
+				INFOPLIST_FILE = "BodyMationAppTests/BodyMationAppTests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
@@ -669,6 +831,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		0ABC757116A25DE60025A7E9 /* Build configuration list for PBXNativeTarget "BodyMationAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0ABC757216A25DE60025A7E9 /* Debug */,
+				0ABC757316A25DE60025A7E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
@@ -676,9 +846,10 @@
 			isa = XCVersionGroup;
 			children = (
 				0A6124891690033600101647 /* BodyMation 2.xcdatamodel */,
+				0ABC758016A280EB0025A7E9 /* BodyMation 3.xcdatamodel */,
 				0AA296B51640C27600B2F4FB /* BodyMation.xcdatamodel */,
 			);
-			currentVersion = 0A6124891690033600101647 /* BodyMation 2.xcdatamodel */;
+			currentVersion = 0ABC758016A280EB0025A7E9 /* BodyMation 3.xcdatamodel */;
 			path = BodyMation.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

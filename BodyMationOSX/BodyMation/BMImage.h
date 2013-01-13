@@ -16,6 +16,7 @@
 @property (nonatomic, retain) NSDate * dateTaken;
 @property (nonatomic, retain) NSData * imageData;
 @property (nonatomic, retain) BMSeries *series;
+@property (nonatomic, retain) NSString *uniqueID;
 
 + (id)imageInDefaultContext;
 - (NSString *)imageTitle;

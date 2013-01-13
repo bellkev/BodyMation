@@ -28,6 +28,16 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0ABC756216A25DE60025A7E9"
+               BuildableName = "BodyMationAppTests.octest"
+               BlueprintName = "BodyMationAppTests"
+               ReferencedContainer = "container:BodyMationOSX.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

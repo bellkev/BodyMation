@@ -9,10 +9,20 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>BodyMationAppTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>0AA296971640C27500B2F4FB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0ABC756216A25DE60025A7E9</key>
 		<dict>
 			<key>primary</key>
 			<true/>

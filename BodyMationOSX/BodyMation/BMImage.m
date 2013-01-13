@@ -10,11 +10,16 @@
 #import "BMSeries.h"
 #import <Quartz/Quartz.h>
 
+@interface BMImage ()
+- (void) generateUniqueID;
+@end
+
 @implementation BMImage
 
 @dynamic dateTaken;
 @dynamic imageData;
 @dynamic series;
+@dynamic uniqueID;
 
 + (id)imageInDefaultContext {
     NSManagedObjectContext *context = [[NSApp delegate] managedObjectContext];
@@ -46,16 +51,25 @@
 }
 
 - (NSString *)imageUID {
-    // Note: The image browser appears to only look at the beginning of the string
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateStyle:NSDateFormatterNoStyle];
-    [formatter setTimeStyle:NSDateFormatterLongStyle];
-    NSString *dateString = [formatter stringFromDate:[self dateTaken]];
-    return dateString;
+    // return uniqueID if it exists.
+    NSString* uniqueID = [self uniqueID];
+    if (uniqueID) {
+        return uniqueID;
+    }
+    [self generateUniqueID];
+    return [self uniqueID];
 }
 
 - (id)imageRepresentation {
     return [self imageData];
+}
+
+- (void) generateUniqueID {
+    NSString* uniqueID = [self uniqueID];
+    if (uniqueID != nil) {
+        return;
+    }
+    [self setUniqueID:[[NSProcessInfo processInfo] globallyUniqueString]];
 }
 
 @end
