@@ -175,7 +175,7 @@
 		0ABC757016A25DE60025A7E9 /* BodyMationAppTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BodyMationAppTests-Prefix.pch"; sourceTree = "<group>"; };
 		0ABC757616A262580025A7E9 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		0ABC757A16A268DF0025A7E9 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		0ABC758016A280EB0025A7E9 /* BodyMation 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BodyMation 3.xcdatamodel"; sourceTree = "<group>"; };
+		0ABC758016A280EB0025A7E9 /* BodyMation 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "BodyMation 3.xcdatamodel"; sourceTree = "<group>"; };
 		0AD79A65169BE75A00AACD9D /* BMBrowserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BMBrowserViewController.xib; sourceTree = "<group>"; };
 		0AD79A67169D18E100AACD9D /* BMTutorialWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMTutorialWindowController.h; sourceTree = "<group>"; };
 		0AD79A68169D18E100AACD9D /* BMTutorialWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMTutorialWindowController.m; sourceTree = "<group>"; };
@@ -838,6 +838,7 @@
 				0ABC757316A25DE60025A7E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

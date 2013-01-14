@@ -54,15 +54,6 @@
     completionBlock();
 }
 
-+ (CGImageRef)CGImageFromNSImage:(NSImage *)image {
-        NSData * imageData = [image TIFFRepresentation];
-        CGImageRef imageRef;
-        if(!imageData) return nil;
-        CGImageSourceRef imageSource = CGImageSourceCreateWithData((__bridge CFDataRef)imageData, NULL);
-        imageRef = CGImageSourceCreateImageAtIndex(imageSource, 0, NULL);
-        return imageRef;
-}
-
 + (NSRect)rectWithPreservedAspectRatioForSourceSize:(NSSize)source andBoundingRect:(NSRect)bounds {
     NSRect destinationRect;
     int padding;
@@ -156,27 +147,14 @@
     return rotatedImage;
 }
 
-+ (NSImage *)resizeImageForVideo:(NSImage *)image {
-    NSSize size = NSMakeSize(1920.0f, 1080.0f);
-    NSRect imageRect = NSMakeRect(0.0f, 0.0f, 1920.0f, 1080.0f);
-    NSImage *resizedImage = [[NSImage alloc] initWithSize:size];
-    NSRect destinationRect = [BMUtilities rectWithPreservedAspectRatioForSourceSize:[image size] andBoundingRect:imageRect];
-    [resizedImage lockFocus];
-    [[NSColor blackColor] setFill];
-    NSRectFill(imageRect);
-    [image drawInRect:destinationRect fromRect:NSZeroRect operation:NSCompositeCopy fraction:1.0];
-    [resizedImage unlockFocus];
-    return resizedImage;
-}
-
 + (CVPixelBufferRef)fastImageFromNSImage:(NSImage *)image
 {
     CVPixelBufferRef buffer = NULL;
     
     
     // config
-    size_t width = [image size].width;
-    size_t height = [image size].height;
+    size_t width = 1920.0f;
+    size_t height = 1080.0f;
     size_t bitsPerComponent = 8; // *not* CGImageGetBitsPerComponent(image);
     CGColorSpaceRef cs = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
     CGBitmapInfo bi = kCGImageAlphaNoneSkipFirst; // *not* CGImageGetBitmapInfo(image);
@@ -192,6 +170,7 @@
     CGContextRef ctxt = CGBitmapContextCreate(rasterData, width, height, bitsPerComponent, bytesPerRow, cs, bi);
     if(ctxt == NULL){
         NSLog(@"could not create context");
+        CGColorSpaceRelease(cs);
         return NULL;
     }
     
@@ -199,12 +178,19 @@
     NSGraphicsContext *nsctxt = [NSGraphicsContext graphicsContextWithGraphicsPort:ctxt flipped:NO];
     [NSGraphicsContext saveGraphicsState];
     [NSGraphicsContext setCurrentContext:nsctxt];
-    [image compositeToPoint:NSMakePoint(0.0, 0.0) operation:NSCompositeCopy];
+    
+    NSRect imageRect = NSMakeRect(0.0f, 0.0f, width, height);
+    NSRect destinationRect = [BMUtilities rectWithPreservedAspectRatioForSourceSize:[image size] andBoundingRect:imageRect];
+    [[NSColor blackColor] setFill];
+    NSRectFill(imageRect);
+    [image drawInRect:destinationRect fromRect:NSZeroRect operation:NSCompositeCopy fraction:1.0f];
+    
     [NSGraphicsContext restoreGraphicsState];
-    
     CVPixelBufferUnlockBaseAddress(buffer, 0);
+    // have to do this even though ARC?
+    //CVPixelBufferRelease(buffer);
+    CGColorSpaceRelease(cs);
     CFRelease(ctxt);
-    
     return buffer;
 }
 @end

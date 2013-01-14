@@ -101,9 +101,10 @@
 - (CVPixelBufferRef)bufferFromImageObject:(BMImage *)imageObject {
     // Get resized NSImage from BMImage
     NSImage *imageOriginal = [[NSImage alloc] initWithData:[imageObject imageData]];
-    NSImage *imageResized = [BMUtilities resizeImageForVideo:imageOriginal];
+    [imageOriginal setCacheMode:NSImageCacheNever];
+    //NSImage *imageResized = [BMUtilities resizeImageForVideo:imageOriginal];
     // Get pixel buffer
-    CVPixelBufferRef pixelBuffer = [BMUtilities fastImageFromNSImage:imageResized];
+    CVPixelBufferRef pixelBuffer = [BMUtilities fastImageFromNSImage:imageOriginal];
     return pixelBuffer;
 }
 
@@ -115,7 +116,7 @@
         // Get array of image objects
         NSArray *images = [self getAllImages];
         
-        NSInteger frameRate = [self framesPerSecondForNumberOfFrames:10];
+        NSInteger frameRate = [self framesPerSecondForNumberOfFrames:[images count]];
         NSError *error = nil;
         // Remove movie file if it exists
         if ([[self movieURL] checkResourceIsReachableAndReturnError:nil]) {
@@ -151,11 +152,20 @@
         [writer startSessionAtSourceTime:kCMTimeZero];
         int frameCount = 0;
         for (BMImage *image in images) {
-            CVPixelBufferRef pixelBuffer = [self bufferFromImageObject:image];
-            while (![writerInput isReadyForMoreMediaData]) ;//NSLog(@"Not ready for data");
-            [avAdaptor appendPixelBuffer:pixelBuffer withPresentationTime:CMTimeMake(frameCount, (int)frameRate)];
-            frameCount++;
+            @autoreleasepool {
+                CVPixelBufferRef pixelBuffer = [self bufferFromImageObject:image];
+                while (![writerInput isReadyForMoreMediaData]) {
+                    // Wait a minute to allow writing
+                    [NSThread sleepForTimeInterval:0.1f];
+                }
+                [avAdaptor appendPixelBuffer:pixelBuffer withPresentationTime:CMTimeMake(frameCount, (int)frameRate)];
+                frameCount++;
+                NSLog(@"Wrote frame %d", frameCount);
+                // Added this while profiling
+                CVPixelBufferRelease(pixelBuffer);
+            }
         }
+        
         [writerInput markAsFinished];
         //[videoWriter endSessionAtSourceTime:];
         

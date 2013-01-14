@@ -23,7 +23,7 @@
                  completion:(void (^)(void))completionBlock;
 + (NSRect)rectWithPreservedAspectRatioForSourceSize:(NSSize)source andBoundingRect:(NSRect)bounds;
 
-+ (CGImageRef)CGImageFromNSImage:(NSImage *)image;
+//+ (CGImageRef)CGImageFromNSImage:(NSImage *)image;
 
 + (void)buyNow;
 
