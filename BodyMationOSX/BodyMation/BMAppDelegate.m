@@ -84,14 +84,8 @@ static NSString* const BMTutorialMessage2 = @"Great! Now that you have more than
         NSLog(@"%@", error);
     }
     
-    // Check stored license
-    NSString *email = [[NSUserDefaults standardUserDefaults] valueForKey:@"email"];
-    NSString *license = [[NSUserDefaults standardUserDefaults] valueForKey:@"license"];
-    [self setIsFullVersion:[[self licenseVerifier] verifyRegCode:license forName:email error:&error]];
-    if (error)
-    {
-        NSLog(@"%@", error);
-    }
+    // Always enable full version
+    [self setIsFullVersion:true];
     
     // Setup capture controller and video processor
     [self setCaptureController:[[BMCaptureController alloc] init]];
